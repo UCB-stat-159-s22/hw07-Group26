@@ -1,0 +1,13 @@
+name: hw07
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python
+  - ipykernel
+  - pandas
+  - matplotlib
+  - scikit-learn
+  - pip
+  - pip:
+    - -r requirements.txt

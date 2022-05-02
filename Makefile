@@ -1,0 +1,33 @@
+# creates and configures the environment
+.PHONY: env
+env:
+	bash -i envsetup.sh
+
+# remove the environment
+.PHONY: remove-env
+remove-env:
+	mamba env remove -n hw07
+
+# update the environment
+.PHONY: update-env
+update-env:
+	bash -i envupdate.sh
+    
+# build the JupyterBook normally
+.PHONY: html
+html:
+	jupyter-book build .
+
+# build the JupyterBook so that you can view it on the hub with the URL proxy trick as indicated above
+.PHONY: html-hub
+html-hub:
+	bash -i html_hub.sh
+
+# clean up the generated figures, tables and _build folders.
+.PHONY: clean
+clean:
+	rm -rf figures/* tables/* _build/*
+
+# run all the notebooks
+.PHONY: all
+all:
