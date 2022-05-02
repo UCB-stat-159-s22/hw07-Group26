@@ -16,7 +16,26 @@ TODO
 
 ## Repository Structure
 
-TODO
+- `data/` contains different datasets in csv formats
+  - `raw_data.csv` is the original data downloaded from Kaggle
+  - `clean.csv` is the cleaned version of `raw_data.csv`
+  - `train.csv` is the training dataset 
+  - `val.csv` is the validation dataset
+  - `test.csv` is the testing dataset
+- `figures/` contains generated figures
+- `tables/` contains generated tables
+- `codes/` contains codes for data analysis
+  - `prepare.ipynb` prepares the data for later analysis
+  - `EDA.ipynb` conducts EDA 
+- `environment.yml`
+- `envsetup.sh`
+- `envupdate.sh`
+- `html_hub.sh`
+- `LICENSE`
+- `Makefile`
+- `README.md`
+- `requirements.txt`
+- `main.ipynb` summarizes and discusses the findings and outcomes of our analysis
 
 ## Makefile Commands
 
