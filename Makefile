@@ -6,7 +6,7 @@ env:
 # remove the environment
 .PHONY: remove-env
 remove-env:
-	mamba env remove -n hw07
+	bash -i envremove.sh
 
 # update the environment
 .PHONY: update-env
