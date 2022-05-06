@@ -9,3 +9,5 @@ diagnosis.egg-info/SOURCES.txt
 diagnosis.egg-info/dependency_links.txt
 diagnosis.egg-info/requires.txt
 diagnosis.egg-info/top_level.txt
+diagnosis/tests/__init__.py
+diagnosis/tests/test_twosample.py
