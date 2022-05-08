@@ -26,7 +26,8 @@ TODO
 - `tables/` contains generated tables
 - `codes/` contains codes for data analysis
   - `prepare.ipynb` prepares the data for later analysis
-  - `EDA.ipynb` conducts EDA 
+  - `EDA.ipynb` conducts EDA
+  - `logistic-reg` conducts logistic regression analysis
 - `environment.yml`
 - `envsetup.sh`
 - `envupdate.sh`
