@@ -27,6 +27,7 @@ TODO
 - `codes/` contains codes for data analysis
   - `prepare.ipynb` prepares the data for later analysis
   - `EDA.ipynb` conducts EDA 
+  - `Decision Tree and Random Forest.ipynb` conducts decision tree and random forest modeling and comparison.
 - `environment.yml`
 - `envsetup.sh`
 - `envupdate.sh`
