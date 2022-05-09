@@ -4,8 +4,8 @@ import sklearn
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import accuracy_score
 
-train_data = pd.read_csv('../data/train.csv')
-val_data = pd.read_csv('../data/val.csv')
+train_data = pd.read_csv('data/train.csv')
+val_data = pd.read_csv('data/val.csv')
 
 X_train = train_data.drop(['diagnosis','id'], 1)
 X_val = val_data.drop(['diagnosis','id'],1)
