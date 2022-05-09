@@ -1,3 +1,19 @@
+Metadata-Version: 2.1
+Name: diagnosis
+Version: 0.0.1
+Summary: A Python library to import diagnosis methods
+Author: Ligo Scientific Collaboration (LSC) and Neha Haq
+Author-email: nwhaq1@berkeley.edu
+License: BSD 3-Clause License
+Keywords: tools,ligotools
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: BSD License
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3
+Description-Content-Type: text/markdown
+License-File: LICENSE
+
 # A Study of a Breast Cancer Dataset
 
 TODO: Binder
@@ -26,10 +42,7 @@ TODO
 - `tables/` contains generated tables
 - `codes/` contains codes for data analysis
   - `prepare.ipynb` prepares the data for later analysis
-  - `EDA.ipynb` conducts EDA
-  - `logistic-reg.ipynb` conducts logistic regression analysis
   - `EDA.ipynb` conducts EDA 
-  - `Decision Tree and Random Forest.ipynb` conducts decision tree and random forest modeling and comparison.
 - `environment.yml`
 - `envsetup.sh`
 - `envupdate.sh`
@@ -47,3 +60,5 @@ TODO
 ## Notes
 
 TODO
+
+
