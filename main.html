@@ -37,20 +37,24 @@
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
-    <script src="_static/togglebutton.js"></script>
     <script src="_static/clipboard.min.js"></script>
     <script src="_static/copybutton.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
     <script src="_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
-    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
-    <script>
-        const thebe_selector = ".thebe"
-        const thebe_selector_input = "pre"
-        const thebe_selector_output = ".output"
-    </script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
     <script async="async" src="_static/sphinx-thebe.js"></script>
+    <link rel="canonical" href="/user/nwhaq1//proxy/absolute/8000/main.html" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Data Preparation" href="code/prepare.html" />
     <link rel="prev" title="A Study of a Breast Cancer Dataset" href="README.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
@@ -73,11 +77,6 @@
         <div class="navbar-brand-box">
     <a class="navbar-brand text-wrap" href="index.html">
       
-        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
-        
-      
-      
-      <img src="_static/logo.png" class="logo" alt="logo">
       
       
       <h1 class="site-logo" id="site-title">My STAT 159 Homework 7 Book</h1>
@@ -99,6 +98,16 @@
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
    Breast Cancer Wisconsin (Diagnostic) Data Set
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="code/prepare.html">
+   Data Preparation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="code/two-populations-analysis.html">
+   Two Populations Comparative Statistical Analysis
   </a>
  </li>
 </ul>
@@ -411,16 +420,16 @@
         },
         codeMirrorConfig: {
             theme: "abcdef",
-            mode: "python"
+            mode: "hw07"
         },
         kernelOptions: {
-            kernelName: "python3",
+            kernelName: "hw07",
             path: "./."
         },
         predefinedOutput: true
     }
     </script>
-    <script>kernelName = 'python3'</script>
+    <script>kernelName = 'hw07'</script>
 
               </div>
               
@@ -433,6 +442,13 @@
             <p class="prev-next-subtitle">previous</p>
             <p class="prev-next-title">A Study of a Breast Cancer Dataset</p>
         </div>
+    </a>
+    <a class='right-next' id="next-link" href="code/prepare.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Data Preparation</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
     </a>
 </div>
             
