@@ -37,24 +37,22 @@
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
+    <script src="_static/togglebutton.js"></script>
     <script src="_static/clipboard.min.js"></script>
     <script src="_static/copybutton.js"></script>
-    <script>let toggleHintShow = 'Click to show';</script>
-    <script>let toggleHintHide = 'Click to hide';</script>
-    <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="_static/togglebutton.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
     <script src="_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
-const thebe_selector = ".thebe,.cell"
-const thebe_selector_input = "pre"
-const thebe_selector_output = ".output, .cell_output"
-</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script>
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
     <script async="async" src="_static/sphinx-thebe.js"></script>
-    <link rel="canonical" href="/user/nwhaq1//proxy/absolute/8000/main.html" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Data Preparation" href="code/prepare.html" />
     <link rel="prev" title="A Study of a Breast Cancer Dataset" href="README.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
@@ -77,6 +75,11 @@ const thebe_selector_output = ".output, .cell_output"
         <div class="navbar-brand-box">
     <a class="navbar-brand text-wrap" href="index.html">
       
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="_static/logo.png" class="logo" alt="logo">
       
       
       <h1 class="site-logo" id="site-title">My STAT 159 Homework 7 Book</h1>
@@ -98,16 +101,6 @@ const thebe_selector_output = ".output, .cell_output"
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
    Breast Cancer Wisconsin (Diagnostic) Data Set
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="code/prepare.html">
-   Data Preparation
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="code/two-populations-analysis.html">
-   Two Populations Comparative Statistical Analysis
   </a>
  </li>
 </ul>
@@ -375,9 +368,188 @@ const thebe_selector_output = ".output, .cell_output"
 <h1>Breast Cancer Wisconsin (Diagnostic) Data Set<a class="headerlink" href="#breast-cancer-wisconsin-diagnostic-data-set" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="introduction">
 <h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<p>For our project, we wanted to focus on the health industry. We wanted to find a dataset where we could apply predictions to give a diagnosis to the patient. As we were browsing for datasets, we had to decide which disease we wanted to study. We decided to look at cancer, as cancer is a widely studied disease today. This motivated us to analyze the breast cancer dataset publicly available on Kaggle. We believe that our analysis of this dataset would be helpful to doctors and patients, who want to find out whether the cancer is benign or malignant.</p>
+<p>For our model, we decided to choose to use a classification/prediction model as our goal is to classify whether the cancer is benign or malignant. To do this, we ran different models including logistic regression, decision trees and random forests and then, based on the performance on the vailidation set, we picked the best one. After that, we evaluated our final model on the test set. Furthermore, we looked at the significance of our model parameters using confidence intervals and did a hypothesis test using a two-sample t-test to see whether if our results are significant enough by choosing a significance level of 5%. Based on our final model, we hope that our model can serve as a strong basis for predicting whether the cancer is benign or malignant based on its characteristics.</p>
 </div>
 <div class="section" id="data-description">
 <h2>Data Description<a class="headerlink" href="#data-description" title="Permalink to this headline">¶</a></h2>
+<p>The raw data is from Kaggle, which can be found <a class="reference external" href="https://www.kaggle.com/datasets/uciml/breast-cancer-wisconsin-data">here</a>. The data was given to us in a csv file with 569 observations, so it was hard to interpret. To better interpret the data, we converted the data into a pandas dataframe. Each row of the data represents a specific patient. 357 patients have malignant cancer and 212 have benign cancer. The dataset contains 33 columns with 31 features representing the tumor’s characteristics. We treated the diagnosis column as our response variable. All of the features are quantitative (float64) except for the id column (int64) and the diagnosis (‘M’ or ‘B’).  To combat this issue, we One Hot Encoded the diagnosis to convert it to 1s and 0s, which would allow us to run our classification model. The diagnosis is read as follows: 0 for benign and 1 for malignant. We also dropped the last column as it was empty. Below is the cleaned dataset that we generated:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;data/clean.csv&#39;</span><span class="p">)</span>
+<span class="n">data</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>id</th>
+      <th>diagnosis</th>
+      <th>radius_mean</th>
+      <th>texture_mean</th>
+      <th>perimeter_mean</th>
+      <th>area_mean</th>
+      <th>smoothness_mean</th>
+      <th>compactness_mean</th>
+      <th>concavity_mean</th>
+      <th>concave points_mean</th>
+      <th>...</th>
+      <th>radius_worst</th>
+      <th>texture_worst</th>
+      <th>perimeter_worst</th>
+      <th>area_worst</th>
+      <th>smoothness_worst</th>
+      <th>compactness_worst</th>
+      <th>concavity_worst</th>
+      <th>concave points_worst</th>
+      <th>symmetry_worst</th>
+      <th>fractal_dimension_worst</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>842302</td>
+      <td>1.0</td>
+      <td>17.99</td>
+      <td>10.38</td>
+      <td>122.80</td>
+      <td>1001.0</td>
+      <td>0.11840</td>
+      <td>0.27760</td>
+      <td>0.3001</td>
+      <td>0.14710</td>
+      <td>...</td>
+      <td>25.38</td>
+      <td>17.33</td>
+      <td>184.60</td>
+      <td>2019.0</td>
+      <td>0.1622</td>
+      <td>0.6656</td>
+      <td>0.7119</td>
+      <td>0.2654</td>
+      <td>0.4601</td>
+      <td>0.11890</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>842517</td>
+      <td>1.0</td>
+      <td>20.57</td>
+      <td>17.77</td>
+      <td>132.90</td>
+      <td>1326.0</td>
+      <td>0.08474</td>
+      <td>0.07864</td>
+      <td>0.0869</td>
+      <td>0.07017</td>
+      <td>...</td>
+      <td>24.99</td>
+      <td>23.41</td>
+      <td>158.80</td>
+      <td>1956.0</td>
+      <td>0.1238</td>
+      <td>0.1866</td>
+      <td>0.2416</td>
+      <td>0.1860</td>
+      <td>0.2750</td>
+      <td>0.08902</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>84300903</td>
+      <td>1.0</td>
+      <td>19.69</td>
+      <td>21.25</td>
+      <td>130.00</td>
+      <td>1203.0</td>
+      <td>0.10960</td>
+      <td>0.15990</td>
+      <td>0.1974</td>
+      <td>0.12790</td>
+      <td>...</td>
+      <td>23.57</td>
+      <td>25.53</td>
+      <td>152.50</td>
+      <td>1709.0</td>
+      <td>0.1444</td>
+      <td>0.4245</td>
+      <td>0.4504</td>
+      <td>0.2430</td>
+      <td>0.3613</td>
+      <td>0.08758</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>84348301</td>
+      <td>1.0</td>
+      <td>11.42</td>
+      <td>20.38</td>
+      <td>77.58</td>
+      <td>386.1</td>
+      <td>0.14250</td>
+      <td>0.28390</td>
+      <td>0.2414</td>
+      <td>0.10520</td>
+      <td>...</td>
+      <td>14.91</td>
+      <td>26.50</td>
+      <td>98.87</td>
+      <td>567.7</td>
+      <td>0.2098</td>
+      <td>0.8663</td>
+      <td>0.6869</td>
+      <td>0.2575</td>
+      <td>0.6638</td>
+      <td>0.17300</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>84358402</td>
+      <td>1.0</td>
+      <td>20.29</td>
+      <td>14.34</td>
+      <td>135.10</td>
+      <td>1297.0</td>
+      <td>0.10030</td>
+      <td>0.13280</td>
+      <td>0.1980</td>
+      <td>0.10430</td>
+      <td>...</td>
+      <td>22.54</td>
+      <td>16.67</td>
+      <td>152.20</td>
+      <td>1575.0</td>
+      <td>0.1374</td>
+      <td>0.2050</td>
+      <td>0.4000</td>
+      <td>0.1625</td>
+      <td>0.2364</td>
+      <td>0.07678</td>
+    </tr>
+  </tbody>
+</table>
+<p>5 rows × 32 columns</p>
+</div></div></div>
+</div>
 <div class="section" id="exploratory-data-analysis">
 <h3>Exploratory Data Analysis<a class="headerlink" href="#exploratory-data-analysis" title="Permalink to this headline">¶</a></h3>
 </div>
@@ -389,6 +561,31 @@ const thebe_selector_output = ".output, .cell_output"
 <h2>Prediction<a class="headerlink" href="#prediction" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="logistic-regression">
 <h3>Logistic Regression<a class="headerlink" href="#logistic-regression" title="Permalink to this headline">¶</a></h3>
+<p>In this section, we will perform logistic regression analysis.</p>
+<p>Description: Logistic Regression works by calculating posterior probabilies for the data by using the logistic function and based on those probablities it classifies the data point.Given below is the logistic function:</p>
+<div class="math notranslate nohighlight">
+\[ s(x) = \frac{1}{1+ e^{-x}} \]</div>
+<p>Limitations and Assumptions: An important thing to note about logistic regression is that it can only be used for binary classifiation and not multiclass classification. This is because it follows the rule that any point whose probability of being in a class is more than 50% is assigned to that class. If not, it is assigned to the other class.</p>
+<p>Preprocessing: For the preprocessing, we dropped the diagnosis column (since we don’t want to see the labels) and the id column (since it is not a very predictive feature) to create our feature matrix. Then we evaluated the model using various metrics. The calculated metrics and the preprocessing can be found in the logistic_reg.ipynb. Here are the plots:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">Image</span>
+<span class="n">conf_image</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">&#39;figures/confusion_matrix_logistic.png&#39;</span><span class="p">)</span>
+<span class="n">prec_recall_image</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">&#39;figures/precision_recall_curve_logistic.png&#39;</span><span class="p">)</span>
+<span class="n">roc_curve_image</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">&#39;figures/roc_curve_logistic.png&#39;</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">conf_image</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">prec_recall_image</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">roc_curve_image</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/main_18_0.png" src="_images/main_18_0.png" />
+<img alt="_images/main_18_1.png" src="_images/main_18_1.png" />
+<img alt="_images/main_18_2.png" src="_images/main_18_2.png" />
+</div>
+</div>
+<p>Evaluation: The classifier seems to performing well with a very few false positive (falsely classifying cancer as malignant) and false negatives (falsely classfying the cancer as benign). In addition, the AUC of the classifier is 0.92, which means that the classifier is getting the correct answer 92% of the time.</p>
 </div>
 <div class="section" id="decision-tree">
 <h3>Decision Tree<a class="headerlink" href="#decision-tree" title="Permalink to this headline">¶</a></h3>
@@ -408,6 +605,7 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 <div class="section" id="author-contributions">
 <h2>Author Contributions<a class="headerlink" href="#author-contributions" title="Permalink to this headline">¶</a></h2>
+<p>Kshitij Chauhan (TJ): Created the logistic_reg.ipynb notebook to conduct logistic regression analysis and tests in test_logistic_reg.py file to test the functions. Also did the introduction, data description and logistic regression sections of this notebook.</p>
 </div>
 </div>
 
@@ -442,13 +640,6 @@ const thebe_selector_output = ".output, .cell_output"
             <p class="prev-next-subtitle">previous</p>
             <p class="prev-next-title">A Study of a Breast Cancer Dataset</p>
         </div>
-    </a>
-    <a class='right-next' id="next-link" href="code/prepare.html" title="next page">
-    <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Data Preparation</p>
-    </div>
-    <i class="fas fa-angle-right"></i>
     </a>
 </div>
             
