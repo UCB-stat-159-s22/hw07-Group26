@@ -24,8 +24,8 @@ Run `make env` to setup the conda environment and install the required dependenc
   - `train.csv` is the training dataset 
   - `val.csv` is the validation dataset
   - `test.csv` is the testing dataset
-- `figures/` contains generated figures from `codes/`
-- `tables/` contains generated tables from `codes/`
+- `figures/` contains generated figures from running`codes/`
+- `tables/` contains generated tables from runninng `codes/`
 - `codes/` contains codes for data analysis
   - `prepare.ipynb` prepares the data for later analysis
   - `EDA.ipynb` conducts EDA
