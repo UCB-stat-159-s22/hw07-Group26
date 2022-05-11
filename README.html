@@ -233,11 +233,6 @@
    Makefile Commands
   </a>
  </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#notes">
-   Notes
-  </a>
- </li>
 </ul>
 
             </nav>
@@ -278,11 +273,6 @@
    Makefile Commands
   </a>
  </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#notes">
-   Notes
-  </a>
- </li>
 </ul>
 
                         </nav>
@@ -299,11 +289,12 @@
 <div class="section" id="introduction">
 <h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
 <p>This repository includes a study of a breast bancer dataset that is downloaded from <a class="reference external" href="https://www.kaggle.com/datasets/uciml/breast-cancer-wisconsin-data">Kaggle</a></p>
-<p>TODO</p>
+<p>As a group, we wanted to focus on the health industry. We decided to look at cancer, as cancer is a widely studied disease today. This motivated us to analyze the breast cancer dataset publicly available on Kaggle. We believe that our analysis of this dataset would be helpful to doctors and patients, who want to find out whether the cancer is benign or malignant.</p>
+<p>For our model, we decided to choose to use a classification model as our goal is to classify whether the cancer is benign or malignant. To do this, we ran different models including logistic regression, decision trees and random forests and then, based on the performance on the vailidation set, we picked the best one. Based on our final model, we hope that our model can serve as a strong basis for predicting whether the cancer is benign or malignant based on its characteristics. Furthermore, we performed hypothesis testing using the parametric Two-Sample T-Test and the non-parametric Wilcoxian Rank Sumt Test to see whether our results are statistically significant at a significance level of 5%.</p>
 </div>
 <div class="section" id="installation">
 <h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
-<p>TODO</p>
+<p>Run <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">env</span></code> to setup the conda environment and install the required dependencies. Use <code class="docutils literal notranslate"><span class="pre">hw07</span></code> kernel to execute the Jupyter Notebook.</p>
 </div>
 <div class="section" id="repository-structure">
 <h2>Repository Structure<a class="headerlink" href="#repository-structure" title="Permalink to this headline">¶</a></h2>
@@ -317,35 +308,63 @@
 <li><p><code class="docutils literal notranslate"><span class="pre">test.csv</span></code> is the testing dataset</p></li>
 </ul>
 </li>
-<li><p><code class="docutils literal notranslate"><span class="pre">figures/</span></code> contains generated figures</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">tables/</span></code> contains generated tables</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">figures/</span></code> contains generated figures from <code class="docutils literal notranslate"><span class="pre">codes/</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">tables/</span></code> contains generated tables from <code class="docutils literal notranslate"><span class="pre">codes/</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">codes/</span></code> contains codes for data analysis</p>
 <ul>
 <li><p><code class="docutils literal notranslate"><span class="pre">prepare.ipynb</span></code> prepares the data for later analysis</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">EDA.ipynb</span></code> conducts EDA</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">logistic-reg.ipynb</span></code> conducts logistic regression analysis</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">EDA.ipynb</span></code> conducts EDA</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">Decision</span> <span class="pre">Tree</span> <span class="pre">and</span> <span class="pre">Random</span> <span class="pre">Forest.ipynb</span></code> conducts decision tree and random forest modeling and comparison.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">decision_tree_and_random_forest.ipynb</span></code> conducts decision tree and random forest modeling and comparison</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">final_model_selection.ipynb</span></code> chooses final model between LR and RF</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">two_populations_analysis.ipynb</span></code> conducts two sample hypothesis testing</p></li>
 </ul>
 </li>
-<li><p><code class="docutils literal notranslate"><span class="pre">environment.yml</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">envsetup.sh</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">envupdate.sh</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">html_hub.sh</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">LICENSE</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">Makefile</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">README.md</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">requirements.txt</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">diagnosis/</span></code> contains required files for package creation purposes.</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">README.md</span></code> info of package</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">setup.py</span></code> required to create python package</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pyproj.tml</span></code> required to create python package</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">setup.cfg</span></code> required to create python package</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">LICENSE</span></code> info of package</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">diagnsis/</span></code> contains content of package</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">tests/</span></code> tests for created methods</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">__init__.py</span></code> required to create python package</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">modelmake.py</span></code> methods for decision tree modeling</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">twosample.py</span></code> methods for hypothesis testing</p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">_config.yml</span></code> required for JupyterBook</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">conf.py</span></code> required for JupyterBook</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">_toc.yml</span></code> TOC for JupyterBook</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">book-requirements.txt</span></code> packages for the book build in Github Actions</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">environment.yml</span></code> hw07 conda environment installation</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">envsetup.sh</span></code> utilized by make env</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">envupdate.sh</span></code> utilized by make update</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">envremove.sh</span></code> utilized by make remove</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">html_hub.sh</span></code> build JupyterBook to view it on the hub with the URL proxy trick</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Makefile</span></code> make commands for easy execution</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">README.md</span></code> current document</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">requirements.txt</span></code> command to install diagnosis python package</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">main.ipynb</span></code> summarizes and discusses the findings and outcomes of our analysis</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">hw07-description.ipynb</span></code> Stat 159 HW7 assignment desctiption</p></li>
 </ul>
 </div>
 <div class="section" id="makefile-commands">
 <h2>Makefile Commands<a class="headerlink" href="#makefile-commands" title="Permalink to this headline">¶</a></h2>
-<p>TODO</p>
-</div>
-<div class="section" id="notes">
-<h2>Notes<a class="headerlink" href="#notes" title="Permalink to this headline">¶</a></h2>
-<p>TODO</p>
+<p><code class="docutils literal notranslate"><span class="pre">make</span></code></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">env</span></code> creates and configures the environment</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">remove-env</span></code> remove the environment</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">update-env</span></code> update the environment</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">html</span></code> build the JupyterBook normally</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">html-hub</span></code> build the JupyterBook so that you can view it on the hub with the URL proxy trick</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">clean</span></code> clean up the generated figures, tables and _build folders.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">all</span></code> run all the notebooks</p></li>
+</ul>
 </div>
 <div class="toctree-wrapper compound">
 </div>
