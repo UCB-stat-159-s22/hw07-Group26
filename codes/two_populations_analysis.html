@@ -51,6 +51,7 @@
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="Logistic Regression" href="logistic_reg.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -94,10 +95,25 @@
   </a>
  </li>
 </ul>
-<ul class="nav bd-sidenav">
+<ul class="current nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../main.html">
    Breast Cancer Wisconsin (Diagnostic) Data Set
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="prepare.html">
+   Data Preparation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="logistic_reg.html">
+   Logistic Regression
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Two Populations Comparative Statistical Analysis
   </a>
  </li>
 </ul>
@@ -219,11 +235,10 @@
                 
   <div class="section" id="two-populations-comparative-statistical-analysis">
 <h1>Two Populations Comparative Statistical Analysis<a class="headerlink" href="#two-populations-comparative-statistical-analysis" title="Permalink to this headline">¶</a></h1>
-<p>This notebook explores the differences between two populations: patients with breast cancer and those without. We have a sample of 357 patients with malignant cancer and 212 patients with benign cancer consisting of 30 key variables that may help distinguish key features between these two populations which may help to better identify cancer in patients. We will utilize hypothesis testing to see whether the two groups do indeed differ in some key features which is not due to chance.</p>
+<p>This notebook explores the differences between two populations: patients with malignant breast cancer and those with benign breast cancer. We have a sample of 357 patients with benign cancer and 212 patients with malignant cancer consisting of 30 key variables that may help distinguish key features between these two populations which may help to better identify cancer in patients. We will utilize hypothesis testing to see whether the two groups do indeed differ in some key features which is not due to chance.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">stats</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="kn">from</span> <span class="nn">diagnosis.twosample</span> <span class="kn">import</span> <span class="n">plt_by_diagnosis</span><span class="p">,</span> <span class="n">two_sample_t_test</span>
 </pre></div>
@@ -407,6 +422,7 @@
 </div></div></div>
 </div>
 <p>Below we see all of the features that are included in the data in regards to each patient. While we may conduct a hypothesis test for each of the features, instead we will choose a few so that we do not run into the issue of multiple testing which though may be corrected by using certain techniques. I specifically want to conduct a two sample t test on the feature that differs the most in the patients that are diagnosed vs. those that are not, and the feature that differs the least. We are using the average oberved value in the two samples as the measurement of difference in the two populations. Additionally, we have also computed the standard deviation for each feature in the two populations, as the two sample t test differs for whether the two populations are assumed to have the same variance or not.</p>
+<p>There are two assumptions that must be met in order to properly conduct a two sample t test which are (1) independent observations and (2) the data must be sampled from a Gaussian distribution. The first condition is true as we have independent observations of patients which are not influenced by other observations’ conditions. We will see in a bit whether the second assumption is met or not. If it is not, then we will conduct both the parametric two sample t test and the non-parametric Wilcoxon rank sum test.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dat</span><span class="o">.</span><span class="n">columns</span>
@@ -682,7 +698,7 @@
 <p>2 rows × 30 columns</p>
 </div></div></div>
 </div>
-<p>In the below table, we see that the ‘area worst’ feature has the minimum difference and the ‘texture_se’ has the maximum difference. More so, it appears that ‘area worst’ has a different variance in the population while ‘texture se’ has thee same population variance.</p>
+<p>In the below table, we see that the ‘area worst’, which is the average of the three highest values of area for each patient, feature has the minimum difference and the ‘texture_se’, which is the stanadrd error of the texture variable for each patient, has the maximum difference. More so, it appears that ‘area worst’ has a different variance in the population while ‘texture se’ has thee same population variance.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dat__diagnosis_mean</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s2">&quot;diff&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">dat__diagnosis_mean</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">dat__diagnosis_mean</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> 
@@ -927,7 +943,7 @@ Name: texture_se, dtype: float64
 </div>
 </div>
 </div>
-<p>The below plot depicts the count distribution of ‘Worst Area’ for patients with malignant cancer and for those with benign cancer. We see that the patients with malignant cancer have a distribution with a higher variance, while those with benign cancer have a lower variance. We see that patients with benign cancer have a lower mean than those with malignant cancer.</p>
+<p>The below plot depicts the count distribution of ‘Worst Area’ for patients with malignant cancer and for those with benign cancer. We see that the patients with malignant cancer have a distribution with a higher variance, while those with benign cancer have a lower variance. We see that patients with benign cancer have a lower mean than those with malignant cancer. The distribution for the malignant cancer in blue below appears to be somewhat normally distrtibuted with a bit of a right tail; however, for th benign cancer patients, the worst area variable is concentrated to th left with a right tail. Overall, both distributions are not normally distributed. To combat this issue, we will perform both the parametric and the non-parametric hypothesis tests.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt_by_diagnosis</span><span class="p">(</span><span class="n">dat</span><span class="p">,</span> <span class="s2">&quot;area_worst&quot;</span><span class="p">,</span> <span class="s2">&quot;Worst Area&quot;</span><span class="p">)</span>
@@ -938,7 +954,7 @@ Name: texture_se, dtype: float64
 <img alt="../_images/two_populations_analysis_18_0.png" src="../_images/two_populations_analysis_18_0.png" />
 </div>
 </div>
-<p>The below plot depicts the count distribution of ‘Texture SE for patients with malignant cancer and for those with benign cancer. We see that the patients with malignant cancer have a very similar to those with benign cancer We see that patients with benign cancer have a slighlty longer right tail than those with malignant cancer.</p>
+<p>The below plot depicts the count distribution of ‘Texture SE for patients with malignant cancer and for those with benign cancer. We see that the patients with malignant cancer have a very similar to those with benign cancer We see that patients with benign cancer have a slighlty longer right tail than those with malignant cancer. Both distributions depictted below appear to be approximately normally distributed, though they do have a right-skewed tail. Though one may argue that the distributions below are approximately normally distributed and that the two sample t test will work, either way, we will perform both the parametric and the non-parametric hypothesis tests.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt_by_diagnosis</span><span class="p">(</span><span class="n">dat</span><span class="p">,</span> <span class="s2">&quot;texture_se&quot;</span><span class="p">,</span> <span class="s2">&quot;Texture SE&quot;</span><span class="p">)</span>
@@ -949,10 +965,12 @@ Name: texture_se, dtype: float64
 <img alt="../_images/two_populations_analysis_20_0.png" src="../_images/two_populations_analysis_20_0.png" />
 </div>
 </div>
-<p>We see that the two sample t test for ‘area worst’ is statistically highly significant at alpha = 0.05 with a p-value very close to zero. This means that we reject the null hypothesis that the two populations have a different area worst mean, which means that doctors may utilize this variable as an indicator of benign vs malignant cancer.</p>
+<p>We are perforrming the below hypothesis tests with an alpha of 0.05.</p>
+<p>We see that the two sample t test for ‘area worst’ is statistically highly significant at alpha = 0.05 with a p-value very close to zero. More so, the non-parametric Wilcoxian rank sum test agrees with the outcome of the parametriic test. This means that we reject the null hypothesis that the two populations have a different area worst mean, which means that doctors may utilize this variable as an indicator of benign vs malignant cancer.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">two_sample_t_test</span><span class="p">(</span><span class="n">dat</span><span class="p">,</span> <span class="s2">&quot;diagnosis&quot;</span><span class="p">,</span> <span class="s2">&quot;area_worst&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">area_worst_ht_p</span> <span class="o">=</span> <span class="n">two_sample_t_test</span><span class="p">(</span><span class="n">dat</span><span class="p">,</span> <span class="s2">&quot;diagnosis&quot;</span><span class="p">,</span> <span class="s2">&quot;area_worst&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+<span class="n">area_worst_ht_p</span>
 </pre></div>
 </div>
 </div>
@@ -965,10 +983,27 @@ Name: texture_se, dtype: float64
 </div>
 </div>
 </div>
-<p>We see that the two sample t test for ‘texture se’ is not statistically  significant at alpha = 0.05 with a p-value of approximately 0.84. This means that we fail to reject the null hypothesis that the two populations have the same area worst mean, which means that doctors may not find utilizing this variable as an indicator of benign vs malignant cancer too helpful.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">two_sample_t_test</span><span class="p">(</span><span class="n">dat</span><span class="p">,</span> <span class="s2">&quot;diagnosis&quot;</span><span class="p">,</span> <span class="s2">&quot;texture_se&quot;</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">area_worst_ht_np</span> <span class="o">=</span> <span class="n">two_sample_t_test</span><span class="p">(</span><span class="n">dat</span><span class="p">,</span> <span class="s2">&quot;diagnosis&quot;</span><span class="p">,</span> <span class="s2">&quot;area_worst&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+<span class="n">area_worst_ht_np</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Statistically Highly Significant, Reject Null Hypohesis
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>RanksumsResult(statistic=-18.75402925190002, pvalue=1.7946452985715502e-78)
+</pre></div>
+</div>
+</div>
+</div>
+<p>We see that the two sample t test for ‘texture se’ is not statistically  significant at alpha = 0.05 with a p-value of approximately 0.84. More so, the non-parametric Wilcoxian rank sum test agrees with the outcome of the parametriic test. This means that we fail to reject the null hypothesis that the two populations have the same area worst mean, which means that doctors may not find utilizing this variable as an indicator of benign vs malignant cancer too helpful.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">texture_se_ht_p</span> <span class="o">=</span> <span class="n">two_sample_t_test</span><span class="p">(</span><span class="n">dat</span><span class="p">,</span> <span class="s2">&quot;diagnosis&quot;</span><span class="p">,</span> <span class="s2">&quot;texture_se&quot;</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+<span class="n">texture_se_ht_p</span>
 </pre></div>
 </div>
 </div>
@@ -977,6 +1012,31 @@ Name: texture_se, dtype: float64
 </pre></div>
 </div>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Ttest_indResult(statistic=0.1977238031013334, pvalue=0.8433320287670163)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">texture_se_ht_np</span> <span class="o">=</span> <span class="n">two_sample_t_test</span><span class="p">(</span><span class="n">dat</span><span class="p">,</span> <span class="s2">&quot;diagnosis&quot;</span><span class="p">,</span> <span class="s2">&quot;texture_se&quot;</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+<span class="n">texture_se_ht_np</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Fail to Reject Null Hypohesis
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>RanksumsResult(statistic=-0.46280525524255145, pvalue=0.6435039640045692)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ht_dt</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">&quot;area worst parametric&quot;</span><span class="p">:</span> <span class="n">area_worst_ht_p</span><span class="p">,</span> <span class="s2">&quot;area worst non-parametric&quot;</span><span class="p">:</span> <span class="n">area_worst_ht_np</span><span class="p">,</span> <span class="s2">&quot;texture se parametric&quot;</span><span class="p">:</span> <span class="n">texture_se_ht_p</span><span class="p">,</span> <span class="s2">&quot;texture se non-parametric&quot;</span><span class="p">:</span> <span class="n">texture_se_ht_np</span><span class="p">})</span><span class="o">.</span><span class="n">T</span>
+<span class="n">ht_dt</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;T Statistic&quot;</span><span class="p">,</span> <span class="s2">&quot;P Value&quot;</span><span class="p">]</span>
+<span class="n">ht_dt</span><span class="o">.</span><span class="n">to_pickle</span><span class="p">(</span><span class="s2">&quot;../tables/ht_results.pkl&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1007,7 +1067,14 @@ Name: texture_se, dtype: float64
               
             
                 <!-- Previous / next buttons -->
-<div class='prev-next-area'>
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="logistic_reg.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Logistic Regression</p>
+        </div>
+    </a>
 </div>
             
         </div>
