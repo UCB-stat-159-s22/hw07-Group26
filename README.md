@@ -2,6 +2,7 @@
 
 [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/UCB-stat-159-s22/hw07-Group26/main?labpath=main.ipynb)
 
+Github Pages [here](https://ucb-stat-159-s22.github.io/hw07-Group26/)
 Authors: Kshitij (TJ) Chauhan, Neha Haq, Wenhao Pan, Jiaji Wu
 
 ## Introduction
