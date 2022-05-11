@@ -359,6 +359,8 @@
 <span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LogisticRegression</span>
 <span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">accuracy_score</span><span class="p">,</span><span class="n">precision_score</span><span class="p">,</span><span class="n">recall_score</span><span class="p">,</span><span class="n">f1_score</span><span class="p">,</span><span class="n">ConfusionMatrixDisplay</span><span class="p">,</span> <span class="n">RocCurveDisplay</span><span class="p">,</span><span class="n">PrecisionRecallDisplay</span>
 <span class="kn">import</span> <span class="nn">pickle</span>
+
+<span class="kn">import</span> <span class="nn">diagnosis</span>
 </pre></div>
 </div>
 </div>
@@ -380,28 +382,7 @@
 <h2>Preparing for training and validation<a class="headerlink" href="#preparing-for-training-and-validation" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">preprocessing</span><span class="p">(</span><span class="n">train_data</span><span class="p">,</span><span class="n">val_data</span><span class="p">):</span>
-    <span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">    Does some preprocessing of the data before performing logistic regression.</span>
-<span class="sd">    ---</span>
-<span class="sd">    Arguments: </span>
-<span class="sd">    train_data (DataFrame): training data </span>
-<span class="sd">    val_data (DataFrame): validation data</span>
-<span class="sd">    </span>
-<span class="sd">    Returns: </span>
-<span class="sd">    X_train (DataFrame): preprocessed training feature matrix</span>
-<span class="sd">    X_val (DataFrame): preprocessed validation feature matrix</span>
-<span class="sd">    y_train (Series): training labels</span>
-<span class="sd">    y_val (Series): validation labels</span>
-<span class="sd">    </span>
-<span class="sd">    &#39;&#39;&#39;</span>
-    <span class="n">X_train</span> <span class="o">=</span> <span class="n">train_data</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;diagnosis&#39;</span><span class="p">,</span><span class="s1">&#39;id&#39;</span><span class="p">],</span><span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span> <span class="c1"># drop labels and less predictive features for feature matrix</span>
-    <span class="n">y_train</span> <span class="o">=</span> <span class="n">train_data</span><span class="p">[</span><span class="s1">&#39;diagnosis&#39;</span><span class="p">]</span>
-    <span class="n">X_val</span> <span class="o">=</span> <span class="n">val_data</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;diagnosis&#39;</span><span class="p">,</span><span class="s1">&#39;id&#39;</span><span class="p">],</span><span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
-    <span class="n">y_val</span> <span class="o">=</span> <span class="n">val_data</span><span class="p">[</span><span class="s1">&#39;diagnosis&#39;</span><span class="p">]</span>
-    <span class="k">return</span> <span class="n">X_train</span><span class="p">,</span><span class="n">X_val</span><span class="p">,</span><span class="n">y_train</span><span class="p">,</span><span class="n">y_val</span>
-
-<span class="n">X_train</span><span class="p">,</span><span class="n">X_val</span><span class="p">,</span><span class="n">y_train</span><span class="p">,</span><span class="n">y_val</span> <span class="o">=</span> <span class="n">preprocessing</span><span class="p">(</span><span class="n">train_data</span><span class="p">,</span> <span class="n">val_data</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X_train</span><span class="p">,</span><span class="n">X_val</span><span class="p">,</span><span class="n">y_train</span><span class="p">,</span><span class="n">y_val</span> <span class="o">=</span> <span class="n">diagnosis</span><span class="o">.</span><span class="n">preprocessing</span><span class="p">(</span><span class="n">train_data</span><span class="p">,</span> <span class="n">val_data</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -411,40 +392,11 @@
 <h2>Built the model and training<a class="headerlink" href="#built-the-model-and-training" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model</span> <span class="o">=</span> <span class="n">LogisticRegression</span><span class="p">(</span><span class="n">max_iter</span> <span class="o">=</span> <span class="mi">5000</span><span class="p">)</span>
-
-<span class="k">def</span> <span class="nf">logistic_regression</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">y</span><span class="p">):</span>
-    <span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">    Fits a logistic regression model to a feature matrix and labels.</span>
-<span class="sd">    ---</span>
-<span class="sd">    Arguments: </span>
-<span class="sd">    X (DataFrame): feature matrix</span>
-<span class="sd">    y (Series): feature labels</span>
-<span class="sd">    </span>
-<span class="sd">    Returns: </span>
-<span class="sd">    fitted logistic regression model to X and y</span>
-<span class="sd">    </span>
-<span class="sd">    &#39;&#39;&#39;</span>
-    <span class="k">return</span> <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
-
-<span class="k">def</span> <span class="nf">logistic_regression_predict</span><span class="p">(</span><span class="n">X</span><span class="p">):</span>
-    <span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">    Outputs logistic regression labels given a feature matrix X.</span>
-<span class="sd">    ---</span>
-<span class="sd">    Arguments: </span>
-<span class="sd">    X (DataFrame): feature matrix</span>
-<span class="sd">    </span>
-<span class="sd">    Returns:</span>
-<span class="sd">    y_preds (array): predicted labels for the feature matrix</span>
-<span class="sd">    </span>
-<span class="sd">    &#39;&#39;&#39;</span>
-    <span class="k">return</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
-
-<span class="c1"># Built the model</span>
-<span class="n">logistic_regression</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span><span class="n">y_train</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Built the model</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">diagnosis</span><span class="o">.</span><span class="n">logistic_regression</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span><span class="n">y_train</span><span class="p">)</span>
 
 <span class="c1"># get the predictions</span>
-<span class="n">y_preds</span> <span class="o">=</span> <span class="n">logistic_regression_predict</span><span class="p">(</span><span class="n">X_val</span><span class="p">)</span>
+<span class="n">y_preds</span> <span class="o">=</span> <span class="n">diagnosis</span><span class="o">.</span><span class="n">logistic_regression_predict</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">X_val</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -454,28 +406,8 @@
 <h2>Function for all the measured metrics<a class="headerlink" href="#function-for-all-the-measured-metrics" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_metrics</span><span class="p">(</span><span class="n">y_preds</span><span class="p">,</span><span class="n">y_val</span><span class="p">):</span>
-    <span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">    Gets all the measured metrics including accuracy, precision, recall and F1 score.</span>
-<span class="sd">    ---</span>
-<span class="sd">    Arguments:</span>
-<span class="sd">    y_preds (array): predictions labels</span>
-<span class="sd">    y_vals (Series): validation labels</span>
-<span class="sd">    </span>
-<span class="sd">    Returns: </span>
-<span class="sd">    Accuracy (float):Accuracy of the classifier</span>
-<span class="sd">    Precision (float): Precision of the classifier</span>
-<span class="sd">    Recall (float): Recall of the classifier</span>
-<span class="sd">    F1 score (float): F1 score of the classifier</span>
-
-<span class="sd">    &#39;&#39;&#39;</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Accuracy is:&#39;</span><span class="p">,</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="n">y_preds</span><span class="p">,</span><span class="n">y_val</span><span class="p">))</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Precision is:&#39;</span><span class="p">,</span> <span class="n">precision_score</span><span class="p">(</span><span class="n">y_preds</span><span class="p">,</span><span class="n">y_val</span><span class="p">))</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Recall is:&#39;</span><span class="p">,</span> <span class="n">recall_score</span><span class="p">(</span><span class="n">y_preds</span><span class="p">,</span><span class="n">y_val</span><span class="p">))</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;F1 score is:&#39;</span> <span class="p">,</span> <span class="n">f1_score</span><span class="p">(</span><span class="n">y_preds</span><span class="p">,</span><span class="n">y_val</span><span class="p">))</span>
-
-<span class="c1"># get the necessary metrics</span>
-<span class="n">get_metrics</span><span class="p">(</span><span class="n">y_preds</span><span class="p">,</span><span class="n">y_val</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># get the necessary metrics</span>
+<span class="n">diagnosis</span><span class="o">.</span><span class="n">get_metrics</span><span class="p">(</span><span class="n">y_preds</span><span class="p">,</span><span class="n">y_val</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
