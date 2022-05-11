@@ -1,0 +1,28 @@
+LICENSE
+README.md
+setup.cfg
+setup.py
+diagnosis/__init__.py
+<<<<<<< HEAD
+=======
+diagnosis/modelmake.py
+>>>>>>> 13b7418971d57be2da2ed1b7cba28b3519c69ac5
+diagnosis/twosample.py
+diagnosis.egg-info/PKG-INFO
+diagnosis.egg-info/SOURCES.txt
+diagnosis.egg-info/dependency_links.txt
+diagnosis.egg-info/requires.txt
+diagnosis.egg-info/top_level.txt
+<<<<<<< HEAD
+diagnosis.egg-info/.ipynb_checkpoints/PKG-INFO-checkpoint
+diagnosis.egg-info/.ipynb_checkpoints/SOURCES-checkpoint.txt
+diagnosis.egg-info/.ipynb_checkpoints/dependency_links-checkpoint.txt
+diagnosis.egg-info/.ipynb_checkpoints/requires-checkpoint.txt
+diagnosis.egg-info/.ipynb_checkpoints/top_level-checkpoint.txt
+diagnosis/tests/__init__.py
+diagnosis/tests/test_logistic_reg.py
+=======
+diagnosis/tests/__init__.py
+diagnosis/tests/test_modelmake.py
+>>>>>>> 13b7418971d57be2da2ed1b7cba28b3519c69ac5
+diagnosis/tests/test_twosample.py
