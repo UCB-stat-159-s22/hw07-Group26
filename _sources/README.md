@@ -1,6 +1,6 @@
 # A Study of a Breast Cancer Dataset
 
-TODO: Binder
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/UCB-stat-159-s22/hw07-Group26/main?labpath=main.ipynb)
 
 Authors: Kshitij (TJ) Chauhan, Neha Haq, Wenhao Pan, Jiaji Wu
 
