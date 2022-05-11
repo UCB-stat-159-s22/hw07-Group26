@@ -53,6 +53,8 @@
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Two Populations Comparative Statistical Analysis" href="two_populations_analysis.html" />
+    <link rel="prev" title="Decision Tree and Random Forest" href="decision_tree_and_random_forest.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -96,7 +98,7 @@
   </a>
  </li>
 </ul>
-<ul class="nav bd-sidenav">
+<ul class="current nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../main.html">
    Breast Cancer Wisconsin (Diagnostic) Data Set
@@ -110,6 +112,16 @@
  <li class="toctree-l1">
   <a class="reference internal" href="logistic_reg.html">
    Logistic Regression
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="decision_tree_and_random_forest.html">
+   Decision Tree and Random Forest
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Final Model Selection and Evaluation
   </a>
  </li>
  <li class="toctree-l1">
@@ -227,8 +239,8 @@
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#load-two-models-from-disk">
-   Load Two Models from Disk
+  <a class="reference internal nav-link" href="#load-three-models-from-disk">
+   Load Three Models from Disk
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
@@ -294,8 +306,8 @@
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#load-two-models-from-disk">
-   Load Two Models from Disk
+  <a class="reference internal nav-link" href="#load-three-models-from-disk">
+   Load Three Models from Disk
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
@@ -346,7 +358,7 @@
                 
   <div class="tex2jax_ignore mathjax_ignore section" id="final-model-selection-and-evaluation">
 <h1>Final Model Selection and Evaluation<a class="headerlink" href="#final-model-selection-and-evaluation" title="Permalink to this headline">¶</a></h1>
-<p>After selecting Random Forest model over Decision Tree model, in this notebook, we perform the model selection process between Logistic Regression model and Random Forest model. Then, we evaluate the final model using the testing set and do the prediction analysis.</p>
+<p>In this notebook, we perform the model selection process between Logistic Regression model, Decision Tree model, and Random Forest model. Then, we evaluate the final model using the testing set and do the prediction analysis.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
@@ -376,13 +388,15 @@
 </div>
 </div>
 </div>
-<div class="section" id="load-two-models-from-disk">
-<h2>Load Two Models from Disk<a class="headerlink" href="#load-two-models-from-disk" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="load-three-models-from-disk">
+<h2>Load Three Models from Disk<a class="headerlink" href="#load-three-models-from-disk" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># load logistic model</span>
 <span class="n">model_lg</span> <span class="o">=</span> <span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="s1">&#39;lg_model.sav&#39;</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">))</span>
-<span class="c1">#load random forest model</span>
+<span class="c1">#  load random forest model</span>
+<span class="n">model_dt</span> <span class="o">=</span> <span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="s1">&#39;dt_model.sav&#39;</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">))</span>
+<span class="c1"># load random forest model</span>
 <span class="n">model_rf</span> <span class="o">=</span> <span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="s1">&#39;rf_model.sav&#39;</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">))</span>
 </pre></div>
 </div>
@@ -391,7 +405,7 @@
 </div>
 <div class="section" id="compare-metrics">
 <h2>Compare Metrics<a class="headerlink" href="#compare-metrics" title="Permalink to this headline">¶</a></h2>
-<p>We use validation data to obtain metrics that measure two models’ performance. We used the following metrics:</p>
+<p>We use validation data to obtain metrics that measure three models’ performance. We used the following metrics:</p>
 <ul class="simple">
 <li><p>Accuracy: The accuray of a model is the fraction of correct predictions: <span class="math notranslate nohighlight">\(\frac{\text{correct predictions}}{\text{total number of data points}}\)</span></p></li>
 <li><p>Confusion Matrix: A confusion matrix is a table that is used to visualize the performance of a classification algorithm, with four elements: True Positive, True Negative, False Positve (Type I Error), False Negative (Type II Error)</p></li>
@@ -406,31 +420,45 @@
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># accuracy of decision tree model and logistic regression model</span>
 <span class="n">rf_score</span> <span class="o">=</span> <span class="n">model_rf</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X_val</span><span class="p">,</span> <span class="n">y_val</span><span class="p">)</span>
 <span class="n">lg_score</span> <span class="o">=</span> <span class="n">model_lg</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X_val</span><span class="p">,</span> <span class="n">y_val</span><span class="p">)</span>
+<span class="n">dt_score</span> <span class="o">=</span> <span class="n">model_lg</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X_val</span><span class="p">,</span> <span class="n">y_val</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Decision Tree Model Accuracy: &quot;</span><span class="p">,</span> <span class="n">dt_score</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Random Forest Model Accuracy: &quot;</span><span class="p">,</span> <span class="n">rf_score</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Logistic Regression Accuracy: &quot;</span><span class="p">,</span> <span class="n">lg_score</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Random Forest Model Accuracy:  0.9587628865979382
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Decision Tree Model Accuracy:  0.9278350515463918
+Random Forest Model Accuracy:  0.9587628865979382
 Logistic Regression Accuracy:  0.9278350515463918
 </pre></div>
 </div>
 </div>
 </div>
-<p>Random Forest Model does better than Logistic Regression in terms of accuracy.</p>
+<p>Random Forest Model does the best among three models in terms of accuracy.</p>
 </div>
 <div class="section" id="confusion-matrix">
 <h3>Confusion Matrix<a class="headerlink" href="#confusion-matrix" title="Permalink to this headline">¶</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Random Forest Condusion Matrix</span>
-<span class="n">Image</span><span class="p">(</span><span class="s1">&#39;../figures/confusion_matrix_rf.png&#39;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Decision Tree Confusion Matrix</span>
+<span class="n">Image</span><span class="p">(</span><span class="s1">&#39;../figures/confusion_matrix_dt.png&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <img alt="../_images/final_model_selection_12_0.png" src="../_images/final_model_selection_12_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Random Forest Confusion Matrix</span>
+<span class="n">Image</span><span class="p">(</span><span class="s1">&#39;../figures/confusion_matrix_rf.png&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/final_model_selection_13_0.png" src="../_images/final_model_selection_13_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -454,13 +482,24 @@ Logistic Regression Accuracy:  0.9278350515463918
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/final_model_selection_13_0.png" src="../_images/final_model_selection_13_0.png" />
+<img alt="../_images/final_model_selection_14_0.png" src="../_images/final_model_selection_14_0.png" />
 </div>
 </div>
-<p>From the above confusion matrices, Random Forest Model gets higher TPR and TNR as well as lower FPR and FNR than Logistic Regression.</p>
+<p>From the above confusion matrices, Random Forest Model gets the highest TPR and TNR as well as the lowest FPR and FNR among three models.</p>
 </div>
 <div class="section" id="roc-curve">
 <h3>ROC Curve<a class="headerlink" href="#roc-curve" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Decision Tree ROC Curve</span>
+<span class="n">Image</span><span class="p">(</span><span class="s1">&#39;../figures/roc_curve_dt.png&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/final_model_selection_17_0.png" src="../_images/final_model_selection_17_0.png" />
+</div>
+</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Random Forest ROC Curve</span>
@@ -469,7 +508,7 @@ Logistic Regression Accuracy:  0.9278350515463918
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/final_model_selection_16_0.png" src="../_images/final_model_selection_16_0.png" />
+<img alt="../_images/final_model_selection_18_0.png" src="../_images/final_model_selection_18_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -480,14 +519,25 @@ Logistic Regression Accuracy:  0.9278350515463918
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/final_model_selection_17_0.png" src="../_images/final_model_selection_17_0.png" />
+<img alt="../_images/final_model_selection_19_0.png" src="../_images/final_model_selection_19_0.png" />
 </div>
 </div>
 <p>Here we compare the AUC of two ROC curves. AUC stands for the area under an ROC curve, and it is a measure of the accuracy of a diagnostic test. AUC is the average true positive rate (average sensitivity) across all possible false positive rates. In general, higher
-AUC values indicate better test performance. In our case, Random Forest model has a higher AUC than Logistic Model.</p>
+AUC values indicate better test performance. In our case, Random Forest model has the highest AUC among three models.</p>
 </div>
 <div class="section" id="precision-recall-curve">
 <h3>Precision Recall Curve<a class="headerlink" href="#precision-recall-curve" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Decision Tree Precision Recall Curve</span>
+<span class="n">Image</span><span class="p">(</span><span class="s1">&#39;../figures/precision_recall_curve_dt.png&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/final_model_selection_22_0.png" src="../_images/final_model_selection_22_0.png" />
+</div>
+</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Random Forest Precision Recall Curve</span>
@@ -496,7 +546,7 @@ AUC values indicate better test performance. In our case, Random Forest model ha
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/final_model_selection_20_0.png" src="../_images/final_model_selection_20_0.png" />
+<img alt="../_images/final_model_selection_23_0.png" src="../_images/final_model_selection_23_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -507,10 +557,10 @@ AUC values indicate better test performance. In our case, Random Forest model ha
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/final_model_selection_21_0.png" src="../_images/final_model_selection_21_0.png" />
+<img alt="../_images/final_model_selection_24_0.png" src="../_images/final_model_selection_24_0.png" />
 </div>
 </div>
-<p>We can observe that there is a larger area under Random Forest’s Precision Recall Curve than Logistic Regression’s curve. Random Forest Model has both high recall and high precision.</p>
+<p>We can observe that there is a larger area under Random Forest’s Precision Recall Curve than Logistic Regression’s curve and Decision Tree’s curve. Random Forest Model has both high recall and high precision.</p>
 </div>
 <div class="section" id="f1-score">
 <h3>F1 Score<a class="headerlink" href="#f1-score" title="Permalink to this headline">¶</a></h3>
@@ -518,20 +568,118 @@ AUC values indicate better test performance. In our case, Random Forest model ha
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">f1_score_rf</span> <span class="o">=</span> <span class="n">f1_score</span><span class="p">(</span><span class="n">y_val</span><span class="p">,</span> <span class="n">model_rf</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_val</span><span class="p">))</span>
 <span class="n">f1_score_lg</span> <span class="o">=</span> <span class="n">f1_score</span><span class="p">(</span><span class="n">y_val</span><span class="p">,</span> <span class="n">model_lg</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_val</span><span class="p">))</span>
+<span class="n">f1_score_dt</span> <span class="o">=</span> <span class="n">f1_score</span><span class="p">(</span><span class="n">y_val</span><span class="p">,</span> <span class="n">model_dt</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_val</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Decision Tree F1 Score: &quot;</span><span class="p">,</span> <span class="n">f1_score_dt</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Random Forest Model F1 Score: &quot;</span><span class="p">,</span> <span class="n">f1_score_rf</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Logistic Regression F1 Score: &quot;</span><span class="p">,</span> <span class="n">f1_score_lg</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Random Forest Model F1 Score:  0.9411764705882354
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Decision Tree F1 Score:  0.9411764705882354
+Random Forest Model F1 Score:  0.9411764705882354
 Logistic Regression F1 Score:  0.8985507246376812
 </pre></div>
 </div>
 </div>
 </div>
-<p>Random Forest Model has a higher F1 score.</p>
-<p>By comparing metrices, Random Forest Model performs better than Logisitc Regression in validation dataset. Therefore, we will select Random Forest Model as our final prediction model and use the test set to evaluate its performance.</p>
+<p>Random Forest Model has the highest F1 score.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># showing the summary table of metrics</span>
+<span class="n">d</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;Metrics&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Accuracy&#39;</span><span class="p">,</span> <span class="s1">&#39;FPR&#39;</span><span class="p">,</span> <span class="s1">&#39;FNR&#39;</span><span class="p">,</span> <span class="s1">&#39;TPR&#39;</span><span class="p">,</span> <span class="s1">&#39;TNR&#39;</span><span class="p">,</span> <span class="s1">&#39;AUC&#39;</span><span class="p">,</span> <span class="s1">&#39;F1 Score&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;Logistic Regression&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;0.9278&#39;</span><span class="p">,</span> <span class="s1">&#39;0.0309&#39;</span><span class="p">,</span> <span class="s1">&#39;0.0412&#39;</span><span class="p">,</span> <span class="s1">&#39;0.3196&#39;</span><span class="p">,</span> <span class="s1">&#39;0.6082&#39;</span><span class="p">,</span> <span class="s1">&#39;0.92&#39;</span><span class="p">,</span> <span class="s1">&#39;0.8986&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;Decision Tree&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;0.9381&#39;</span><span class="p">,</span> <span class="s1">&#39;0.0309&#39;</span><span class="p">,</span> <span class="s1">&#39;0.0309&#39;</span><span class="p">,</span> <span class="s1">&#39;0.3299&#39;</span><span class="p">,</span> <span class="s1">&#39;0.6082&#39;</span><span class="p">,</span> <span class="s1">&#39;0.95&#39;</span><span class="p">,</span> <span class="s1">&#39;0.9143&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;Random Forest&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;0.9588&#39;</span><span class="p">,</span> <span class="s1">&#39;0.0103&#39;</span><span class="p">,</span> <span class="s1">&#39;0.0309&#39;</span><span class="p">,</span> <span class="s1">&#39;0.3299&#39;</span><span class="p">,</span> <span class="s1">&#39;0.6289&#39;</span><span class="p">,</span> <span class="s1">&#39;0.95&#39;</span><span class="p">,</span> <span class="s1">&#39;0.9412&#39;</span><span class="p">]</span>
+<span class="p">}</span>
+<span class="n">d</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;Model&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Logistic Regression&#39;</span><span class="p">,</span> <span class="s1">&#39;Decision Tree&#39;</span><span class="p">,</span> <span class="s1">&#39;Random Forest&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;Accuracy&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;0.9278&#39;</span><span class="p">,</span> <span class="s1">&#39;0.9381&#39;</span><span class="p">,</span> <span class="s1">&#39;0.9588&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;FPR&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;0.0309&#39;</span><span class="p">,</span> <span class="s1">&#39;0.0309&#39;</span><span class="p">,</span> <span class="s1">&#39;0.0103&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;FNR&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;0.0412&#39;</span><span class="p">,</span> <span class="s1">&#39;0.0309&#39;</span><span class="p">,</span> <span class="s1">&#39;0.0309&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;TPR&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;0.3196&#39;</span><span class="p">,</span> <span class="s1">&#39;0.3299&#39;</span><span class="p">,</span> <span class="s1">&#39;0.3299&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;TNR&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;0.6082&#39;</span><span class="p">,</span> <span class="s1">&#39;0.6082&#39;</span><span class="p">,</span> <span class="s1">&#39;0.6289&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;AUC&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;0.92&#39;</span><span class="p">,</span> <span class="s1">&#39;0.93&#39;</span><span class="p">,</span> <span class="s1">&#39;0.95&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;F1 Score&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;0.8986&#39;</span><span class="p">,</span> <span class="s1">&#39;0.9143&#39;</span><span class="p">,</span> <span class="s1">&#39;0.9412&#39;</span><span class="p">]</span>
+<span class="p">}</span>
+<span class="n">metrics_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">d</span><span class="p">)</span>
+
+<span class="c1"># save the table to pickle file</span>
+<span class="n">metrics_df</span><span class="o">.</span><span class="n">to_pickle</span><span class="p">(</span><span class="s1">&#39;metrics_df.pkl&#39;</span><span class="p">)</span>
+
+<span class="n">metrics_df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Model</th>
+      <th>Accuracy</th>
+      <th>FPR</th>
+      <th>FNR</th>
+      <th>TPR</th>
+      <th>TNR</th>
+      <th>AUC</th>
+      <th>F1 Score</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Logistic Regression</td>
+      <td>0.9278</td>
+      <td>0.0309</td>
+      <td>0.0412</td>
+      <td>0.3196</td>
+      <td>0.6082</td>
+      <td>0.92</td>
+      <td>0.8986</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Decision Tree</td>
+      <td>0.9381</td>
+      <td>0.0309</td>
+      <td>0.0309</td>
+      <td>0.3299</td>
+      <td>0.6082</td>
+      <td>0.93</td>
+      <td>0.9143</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Random Forest</td>
+      <td>0.9588</td>
+      <td>0.0103</td>
+      <td>0.0309</td>
+      <td>0.3299</td>
+      <td>0.6289</td>
+      <td>0.95</td>
+      <td>0.9412</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>By comparing metrices, Random Forest Model performs the best among three models in validation dataset. Therefore, we will select Random Forest Model as our final prediction model and use the test set to evaluate its performance.</p>
 </div>
 </div>
 <div class="section" id="evaluation">
@@ -572,7 +720,7 @@ Logistic Regression F1 Score:  0.8985507246376812
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/final_model_selection_29_0.png" src="../_images/final_model_selection_29_0.png" />
+<img alt="../_images/final_model_selection_33_0.png" src="../_images/final_model_selection_33_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -590,7 +738,7 @@ Logistic Regression F1 Score:  0.8985507246376812
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/final_model_selection_30_0.png" src="../_images/final_model_selection_30_0.png" />
+<img alt="../_images/final_model_selection_34_0.png" src="../_images/final_model_selection_34_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -607,7 +755,7 @@ Logistic Regression F1 Score:  0.8985507246376812
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/final_model_selection_31_0.png" src="../_images/final_model_selection_31_0.png" />
+<img alt="../_images/final_model_selection_35_0.png" src="../_images/final_model_selection_35_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -652,7 +800,21 @@ Logistic Regression F1 Score:  0.8985507246376812
               
             
                 <!-- Previous / next buttons -->
-<div class='prev-next-area'>
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="decision_tree_and_random_forest.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Decision Tree and Random Forest</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="two_populations_analysis.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Two Populations Comparative Statistical Analysis</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
 </div>
             
         </div>

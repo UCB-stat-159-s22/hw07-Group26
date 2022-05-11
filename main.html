@@ -115,6 +115,16 @@
   </a>
  </li>
  <li class="toctree-l1">
+  <a class="reference internal" href="codes/decision_tree_and_random_forest.html">
+   Decision Tree and Random Forest
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="codes/final_model_selection.html">
+   Final Model Selection and Evaluation
+  </a>
+ </li>
+ <li class="toctree-l1">
   <a class="reference internal" href="codes/two_populations_analysis.html">
    Two Populations Comparative Statistical Analysis
   </a>
@@ -405,7 +415,37 @@
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">Image</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">matplotlib.image</span> <span class="k">as</span> <span class="nn">mpimg</span>
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">rcParams</span>
+
+<span class="c1"># define a function to help plot metrics</span>
+<span class="k">def</span> <span class="nf">plot_three_metrics_horizontally</span><span class="p">(</span><span class="n">file_list</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Display confusion matrix, Precision Recall curve, and ROC curve horizontally</span>
+<span class="sd">    ---</span>
+<span class="sd">    Arguments:</span>
+<span class="sd">    file_list (list): a list includes file names of confusion matrix, Precision and Recall curve, and ROC curve figures in order</span>
+<span class="sd">   </span>
+<span class="sd">    Returns:</span>
+<span class="sd">    three horizontally displayed images</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># figure size in inches optional</span>
+    <span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;figure.figsize&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">30</span> <span class="p">,</span><span class="mi">8</span>
+
+    <span class="c1"># read images</span>
+    <span class="n">img_cm</span> <span class="o">=</span> <span class="n">mpimg</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="n">file_list</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="n">img_prc</span> <span class="o">=</span> <span class="n">mpimg</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="n">file_list</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="n">img_roc</span> <span class="o">=</span>  <span class="n">mpimg</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="n">file_list</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+
+    <span class="c1"># display images</span>
+    <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">img_cm</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">img_prc</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">img_roc</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span> 
+    <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span> 
+    <span class="n">ax</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">);</span>
 
 <span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;data/clean.csv&#39;</span><span class="p">)</span>
 <span class="n">data</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
@@ -608,19 +648,13 @@
 <p>Preprocessing: For the preprocessing, we dropped the diagnosis column (since we don’t want to see the labels) and the id column (since it is not a very predictive feature) to create our feature matrix. Then we evaluated the model using various metrics. The calculated metrics and the preprocessing can be found in the logistic_reg.ipynb. Here are the plots:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">conf_image</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">&#39;figures/confusion_matrix_logistic.png&#39;</span><span class="p">)</span>
-<span class="n">prec_recall_image</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">&#39;figures/precision_recall_curve_logistic.png&#39;</span><span class="p">)</span>
-<span class="n">roc_curve_image</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">&#39;figures/roc_curve_logistic.png&#39;</span><span class="p">)</span>
-<span class="n">display</span><span class="p">(</span><span class="n">conf_image</span><span class="p">)</span>
-<span class="n">display</span><span class="p">(</span><span class="n">prec_recall_image</span><span class="p">)</span>
-<span class="n">display</span><span class="p">(</span><span class="n">roc_curve_image</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">file_list_lg</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;figures/confusion_matrix_logistic.png&#39;</span><span class="p">,</span> <span class="s1">&#39;figures/precision_recall_curve_logistic.png&#39;</span><span class="p">,</span> <span class="s1">&#39;figures/roc_curve_logistic.png&#39;</span><span class="p">]</span>
+<span class="n">plot_three_metrics_horizontally</span><span class="p">(</span><span class="n">file_list_lg</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <img alt="_images/main_19_0.png" src="_images/main_19_0.png" />
-<img alt="_images/main_19_1.png" src="_images/main_19_1.png" />
-<img alt="_images/main_19_2.png" src="_images/main_19_2.png" />
 </div>
 </div>
 <p>Evaluation: The classifier seems to performing well with a very few false positive (falsely classifying cancer as malignant) and false negatives (falsely classfying the cancer as benign). In addition, the AUC of the classifier is 0.92, which means that the classifier is getting the correct answer 92% of the time.</p>
@@ -629,22 +663,16 @@
 <h3>Decision Tree<a class="headerlink" href="#decision-tree" title="Permalink to this headline">¶</a></h3>
 <p>The Decision tree algorithm is a supervised learning algorithm that continuously splits data points to form predictions. Every decision tree includes a root node, branches, and leaf nodes. The internal leaf nodes are decision points that describe various test cases whereas the branches represent the outcomes of those decisions. The very bottom nodes in a decision tree give prediction values to the data. A decision tree is an appropriate model for this data as it can be used to solve classification problems such as this one where we are trying to identify whether the cancer is benign or malignant.</p>
 <p>The accuracy of the Decision Tree model is about 0.9381, and its F1 score is about 0.9143. The  confusion matrix, ROC curve, and Precision Recall Curve are below.</p>
+<p>The accuracy of the Decision Tree model is about 0.9381, and its F1 score is about 0.9143. The  confusion matrix, ROC curve, and Precision Recall Curve are below.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">Image</span>
-<span class="n">conf_image_dt</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">&#39;figures/confusion_matrix_dt.png&#39;</span><span class="p">)</span>
-<span class="n">prec_recall_image_dt</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">&#39;figures/precision_recall_curve_dt.png&#39;</span><span class="p">)</span>
-<span class="n">roc_curve_image_dt</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">&#39;figures/roc_curve_dt.png&#39;</span><span class="p">)</span>
-<span class="n">display</span><span class="p">(</span><span class="n">conf_image_dt</span><span class="p">)</span>
-<span class="n">display</span><span class="p">(</span><span class="n">prec_recall_image_dt</span><span class="p">)</span>
-<span class="n">display</span><span class="p">(</span><span class="n">roc_curve_image_dt</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">file_list_dt</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;figures/confusion_matrix_dt.png&#39;</span><span class="p">,</span> <span class="s1">&#39;figures/precision_recall_curve_dt.png&#39;</span><span class="p">,</span> <span class="s1">&#39;figures/roc_curve_dt.png&#39;</span><span class="p">]</span>
+<span class="n">plot_three_metrics_horizontally</span><span class="p">(</span><span class="n">file_list_dt</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/main_23_0.png" src="_images/main_23_0.png" />
-<img alt="_images/main_23_1.png" src="_images/main_23_1.png" />
-<img alt="_images/main_23_2.png" src="_images/main_23_2.png" />
+<img alt="_images/main_24_0.png" src="_images/main_24_0.png" />
 </div>
 </div>
 </div>
@@ -654,19 +682,13 @@
 <p>The accuracy of the Random Forest model is about 0.9588, and its F1 score is about 0.9412. The  confusion matrix, ROC curve, and Precision Recall Curve are below.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">conf_image_rf</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">&#39;figures/confusion_matrix_rf.png&#39;</span><span class="p">)</span>
-<span class="n">prec_recall_image_rf</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">&#39;figures/precision_recall_curve_rf.png&#39;</span><span class="p">)</span>
-<span class="n">roc_curve_image_rf</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">&#39;figures/roc_curve_rf.png&#39;</span><span class="p">)</span>
-<span class="n">display</span><span class="p">(</span><span class="n">conf_image_rf</span><span class="p">)</span>
-<span class="n">display</span><span class="p">(</span><span class="n">prec_recall_image_rf</span><span class="p">)</span>
-<span class="n">display</span><span class="p">(</span><span class="n">roc_curve_image_rf</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">file_list_rf</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;figures/confusion_matrix_rf.png&#39;</span><span class="p">,</span> <span class="s1">&#39;figures/precision_recall_curve_rf.png&#39;</span><span class="p">,</span> <span class="s1">&#39;figures/roc_curve_rf.png&#39;</span><span class="p">]</span>
+<span class="n">plot_three_metrics_horizontally</span><span class="p">(</span><span class="n">file_list_rf</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/main_26_0.png" src="_images/main_26_0.png" />
-<img alt="_images/main_26_1.png" src="_images/main_26_1.png" />
-<img alt="_images/main_26_2.png" src="_images/main_26_2.png" />
+<img alt="_images/main_27_0.png" src="_images/main_27_0.png" />
 </div>
 </div>
 </div>
@@ -674,25 +696,8 @@
 <h3>Final Model<a class="headerlink" href="#final-model" title="Permalink to this headline">¶</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="n">d</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s1">&#39;Metrics&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Accuracy&#39;</span><span class="p">,</span> <span class="s1">&#39;FPR&#39;</span><span class="p">,</span> <span class="s1">&#39;FNR&#39;</span><span class="p">,</span> <span class="s1">&#39;TPR&#39;</span><span class="p">,</span> <span class="s1">&#39;TNR&#39;</span><span class="p">,</span> <span class="s1">&#39;AUC&#39;</span><span class="p">,</span> <span class="s1">&#39;F1 Score&#39;</span><span class="p">],</span>
-    <span class="s1">&#39;Logistic Regression&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;0.9278&#39;</span><span class="p">,</span> <span class="s1">&#39;0.0309&#39;</span><span class="p">,</span> <span class="s1">&#39;0.0412&#39;</span><span class="p">,</span> <span class="s1">&#39;0.3196&#39;</span><span class="p">,</span> <span class="s1">&#39;0.6082&#39;</span><span class="p">,</span> <span class="s1">&#39;0.92&#39;</span><span class="p">,</span> <span class="s1">&#39;0.8986&#39;</span><span class="p">],</span>
-    <span class="s1">&#39;Decision Tree&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;0.9381&#39;</span><span class="p">,</span> <span class="s1">&#39;0.0309&#39;</span><span class="p">,</span> <span class="s1">&#39;0.0309&#39;</span><span class="p">,</span> <span class="s1">&#39;0.3299&#39;</span><span class="p">,</span> <span class="s1">&#39;0.6082&#39;</span><span class="p">,</span> <span class="s1">&#39;0.95&#39;</span><span class="p">,</span> <span class="s1">&#39;0.9143&#39;</span><span class="p">],</span>
-    <span class="s1">&#39;Random Forest&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;0.9588&#39;</span><span class="p">,</span> <span class="s1">&#39;0.0103&#39;</span><span class="p">,</span> <span class="s1">&#39;0.0309&#39;</span><span class="p">,</span> <span class="s1">&#39;0.3299&#39;</span><span class="p">,</span> <span class="s1">&#39;0.6289&#39;</span><span class="p">,</span> <span class="s1">&#39;0.95&#39;</span><span class="p">,</span> <span class="s1">&#39;0.9412&#39;</span><span class="p">]</span>
-<span class="p">}</span>
-<span class="n">d</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s1">&#39;Model&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Logistic Regression&#39;</span><span class="p">,</span> <span class="s1">&#39;Decision Tree&#39;</span><span class="p">,</span> <span class="s1">&#39;Random Forest&#39;</span><span class="p">],</span>
-    <span class="s1">&#39;Accuracy&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;0.9278&#39;</span><span class="p">,</span> <span class="s1">&#39;0.9381&#39;</span><span class="p">,</span> <span class="s1">&#39;0.9588&#39;</span><span class="p">],</span>
-    <span class="s1">&#39;FPR&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;0.0309&#39;</span><span class="p">,</span> <span class="s1">&#39;0.0309&#39;</span><span class="p">,</span> <span class="s1">&#39;0.0103&#39;</span><span class="p">],</span>
-    <span class="s1">&#39;FNR&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;0.0412&#39;</span><span class="p">,</span> <span class="s1">&#39;0.0309&#39;</span><span class="p">,</span> <span class="s1">&#39;0.0309&#39;</span><span class="p">],</span>
-    <span class="s1">&#39;TPR&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;0.3196&#39;</span><span class="p">,</span> <span class="s1">&#39;0.3299&#39;</span><span class="p">,</span> <span class="s1">&#39;0.3299&#39;</span><span class="p">],</span>
-    <span class="s1">&#39;TNR&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;0.6082&#39;</span><span class="p">,</span> <span class="s1">&#39;0.6082&#39;</span><span class="p">,</span> <span class="s1">&#39;0.6289&#39;</span><span class="p">],</span>
-    <span class="s1">&#39;AUC&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;0.92&#39;</span><span class="p">,</span> <span class="s1">&#39;0.93&#39;</span><span class="p">,</span> <span class="s1">&#39;0.95&#39;</span><span class="p">],</span>
-    <span class="s1">&#39;F1 Score&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;0.8986&#39;</span><span class="p">,</span> <span class="s1">&#39;0.9143&#39;</span><span class="p">,</span> <span class="s1">&#39;0.9412&#39;</span><span class="p">]</span>
-<span class="p">}</span>
-<span class="n">metrics_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">d</span><span class="p">)</span>
-<span class="n">metrics_df</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_metrics</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_pickle</span><span class="p">(</span><span class="s1">&#39;codes/metrics_df.pkl&#39;</span><span class="p">)</span>
+<span class="n">df_metrics</span>
 </pre></div>
 </div>
 </div>
@@ -766,19 +771,13 @@
 <p>Random Forest Model performs better than Logistic Regression and Decision Tree in validation set since it gets higher accuracy, higher TPR and TNR as well as lower FPR and FNR, higher AUC, and higher F1 Score. Therefore, we select Random Forest Model as our final model and use the test set to evaluate its performance. The performance of our final model is plotted below.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">conf_image_final</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">&#39;figures/confusion_matrix_final.png&#39;</span><span class="p">)</span>
-<span class="n">prec_recall_image_final</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">&#39;figures/precision_recall_curve_final.png&#39;</span><span class="p">)</span>
-<span class="n">roc_curve_image_final</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">&#39;figures/roc_curve_final.png&#39;</span><span class="p">)</span>
-<span class="n">display</span><span class="p">(</span><span class="n">conf_image_final</span><span class="p">)</span>
-<span class="n">display</span><span class="p">(</span><span class="n">prec_recall_image_final</span><span class="p">)</span>
-<span class="n">display</span><span class="p">(</span><span class="n">roc_curve_image_final</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">file_list_final</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;figures/confusion_matrix_final.png&#39;</span><span class="p">,</span> <span class="s1">&#39;figures/precision_recall_curve_final.png&#39;</span><span class="p">,</span> <span class="s1">&#39;figures/roc_curve_final.png&#39;</span><span class="p">]</span>
+<span class="n">plot_three_metrics_horizontally</span><span class="p">(</span><span class="n">file_list_final</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/main_30_0.png" src="_images/main_30_0.png" />
-<img alt="_images/main_30_1.png" src="_images/main_30_1.png" />
-<img alt="_images/main_30_2.png" src="_images/main_30_2.png" />
+<img alt="_images/main_31_0.png" src="_images/main_31_0.png" />
 </div>
 </div>
 <p>The accuracy of final model is 0.9535, and the F1 score is 0.9412. Overall, we are able to build a prediction model that has high accuracy and balances precision and recall. One notable thing of our model is that it has a relatively higher False Negative Rate than False Positive Rate, which means it is more likely to identifiy a patient who actually has benign breast cancer as having malignant breast cancer. In future studies, we might focus on how to lower the FNR when building the predictive model.</p>

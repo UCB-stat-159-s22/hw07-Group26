@@ -53,6 +53,8 @@
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Final Model Selection and Evaluation" href="final_model_selection.html" />
+    <link rel="prev" title="Logistic Regression" href="logistic_reg.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -96,7 +98,7 @@
   </a>
  </li>
 </ul>
-<ul class="nav bd-sidenav">
+<ul class="current nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../main.html">
    Breast Cancer Wisconsin (Diagnostic) Data Set
@@ -110,6 +112,16 @@
  <li class="toctree-l1">
   <a class="reference internal" href="logistic_reg.html">
    Logistic Regression
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Decision Tree and Random Forest
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="final_model_selection.html">
+   Final Model Selection and Evaluation
   </a>
  </li>
  <li class="toctree-l1">
@@ -715,13 +727,14 @@
 </div>
 </div>
 </div>
-<p>By comparing metrics of two models, the random forest model has higher accuracy and f1 score. Therefore, we will pick random forest model as a better one using non-parametric method.</p>
-<p>We save the random forest model in order to compare it with parametric model.</p>
+<p>We save two models in order to compare it with the parametric model.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># save the model to disk</span>
-<span class="n">filename</span> <span class="o">=</span> <span class="s1">&#39;rf_model.sav&#39;</span>
-<span class="n">pickle</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">model_rf</span><span class="p">,</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s1">&#39;wb&#39;</span><span class="p">))</span>
+<span class="n">filename_rf</span> <span class="o">=</span> <span class="s1">&#39;rf_model.sav&#39;</span>
+<span class="n">pickle</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">model_rf</span><span class="p">,</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename_rf</span><span class="p">,</span> <span class="s1">&#39;wb&#39;</span><span class="p">))</span>
+<span class="n">filename_dt</span> <span class="o">=</span> <span class="s1">&#39;dt_model.sav&#39;</span>
+<span class="n">pickle</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">model_rf</span><span class="p">,</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename_dt</span><span class="p">,</span> <span class="s1">&#39;wb&#39;</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -755,7 +768,21 @@
               
             
                 <!-- Previous / next buttons -->
-<div class='prev-next-area'>
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="logistic_reg.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Logistic Regression</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="final_model_selection.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Final Model Selection and Evaluation</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
 </div>
             
         </div>
