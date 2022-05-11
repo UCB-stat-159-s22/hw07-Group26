@@ -245,8 +245,13 @@
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#final-mode">
-     Final Mode
+    <a class="reference internal nav-link" href="#random-forest">
+     Random Forest
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#final-model">
+     Final Model
     </a>
    </li>
   </ul>
@@ -329,8 +334,13 @@
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#final-mode">
-     Final Mode
+    <a class="reference internal nav-link" href="#random-forest">
+     Random Forest
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#final-model">
+     Final Model
     </a>
    </li>
   </ul>
@@ -559,6 +569,15 @@
 </div>
 <div class="section" id="prediction">
 <h2>Prediction<a class="headerlink" href="#prediction" title="Permalink to this headline">¶</a></h2>
+<p>In our research, we wish to build a model that can identify whether the cancer is benign or malignant. To build a model with the best predictive power, we tried both parametric and nonparametric models, including Logistic Regression, Decision Tree, and Random Forest. Before develop models, we split our data into the training, validation, and test sets, and the breakdown is 68% for training, 17% for validation ,and 15% for testing.</p>
+<p>After training models, we used validation data to obtain metrics that measure models’ performance. We used the following metrics:</p>
+<ul class="simple">
+<li><p>Accuracy: The accuray of a model is the fraction of correct predictions: <span class="math notranslate nohighlight">\(\frac{\text{correct predictions}}{\text{total number of data points}}\)</span></p></li>
+<li><p>Confusion Matrix: A confusion matrix is a table that is used to visualize the performance of a classification algorithm, with four elements: True Positive, True Negative, False Positve (Type I Error), False Negative (Type II Error).</p></li>
+<li><p>ROC Curve: ROC curve is a graphical plot that illustrates the diagnostic ability of a binary classifier system as its discrimination threshold is varied. It shows the trade-off between sensitivity (or TPR) and specificity (1 – FPR). When we read ROC curves, we compare the AUC ROC curves. AUC stands for the area under an ROC curve, and it is a measure of the accuracy of a diagnostic test. AUC is the average true positive rate (average sensitivity) across all possible false positive rates. In general, higher AUC values indicate better test performance.</p></li>
+<li><p>Precision Recall Curve: The precision-recall curve is a graph with Precision values (<span class="math notranslate nohighlight">\(\frac{TP}{TP+FN}\)</span>) on the y-axis and Recall values (<span class="math notranslate nohighlight">\(\frac{TP}{TP+FP}\)</span>) on the x-axis. It shows the tradeoff between precision and recall for different threshold.</p></li>
+<li><p>F1 score: F1 score combines the precision and recall of a classifier into a single metric by taking their harmonic mean. It is the weighted average of Precision and Recall. Therefore, this score takes both false positives and false negatives into account.</p></li>
+</ul>
 <div class="section" id="logistic-regression">
 <h3>Logistic Regression<a class="headerlink" href="#logistic-regression" title="Permalink to this headline">¶</a></h3>
 <p>In this section, we will perform logistic regression analysis.</p>
@@ -580,18 +599,170 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/main_18_0.png" src="_images/main_18_0.png" />
-<img alt="_images/main_18_1.png" src="_images/main_18_1.png" />
-<img alt="_images/main_18_2.png" src="_images/main_18_2.png" />
+<img alt="_images/main_19_0.png" src="_images/main_19_0.png" />
+<img alt="_images/main_19_1.png" src="_images/main_19_1.png" />
+<img alt="_images/main_19_2.png" src="_images/main_19_2.png" />
 </div>
 </div>
 <p>Evaluation: The classifier seems to performing well with a very few false positive (falsely classifying cancer as malignant) and false negatives (falsely classfying the cancer as benign). In addition, the AUC of the classifier is 0.92, which means that the classifier is getting the correct answer 92% of the time.</p>
 </div>
 <div class="section" id="decision-tree">
 <h3>Decision Tree<a class="headerlink" href="#decision-tree" title="Permalink to this headline">¶</a></h3>
+<p>The Decision tree algorithm is a supervised learning algorithm that continuously splits data points to form predictions. Every decision tree includes a root node, branches, and leaf nodes. The internal leaf nodes are decision points that describe various test cases whereas the branches represent the outcomes of those decisions. The very bottom nodes in a decision tree give prediction values to the data. A decision tree is an appropriate model for this data as it can be used to solve classification problems such as this one where we are trying to identify whether the cancer is benign or malignant.</p>
+<p>The accuracy of the Decision Tree model is about 0.9381, and its F1 score is about 0.9143. The  confusion matrix, ROC curve, and Precision Recall Curve are below.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">Image</span>
+<span class="n">conf_image_dt</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">&#39;figures/confusion_matrix_dt.png&#39;</span><span class="p">)</span>
+<span class="n">prec_recall_image_dt</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">&#39;figures/precision_recall_curve_dt.png&#39;</span><span class="p">)</span>
+<span class="n">roc_curve_image_dt</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">&#39;figures/roc_curve_dt.png&#39;</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">conf_image_dt</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">prec_recall_image_dt</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">roc_curve_image_dt</span><span class="p">)</span>
+</pre></div>
 </div>
-<div class="section" id="final-mode">
-<h3>Final Mode<a class="headerlink" href="#final-mode" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/main_23_0.png" src="_images/main_23_0.png" />
+<img alt="_images/main_23_1.png" src="_images/main_23_1.png" />
+<img alt="_images/main_23_2.png" src="_images/main_23_2.png" />
+</div>
+</div>
+</div>
+<div class="section" id="random-forest">
+<h3>Random Forest<a class="headerlink" href="#random-forest" title="Permalink to this headline">¶</a></h3>
+<p>The Random Forest algorithm builds on the decision tree algorithm by creating multiple decision trees. Each tree is then trained on a randomly drawn sample from the data. Each tree constructed does not consider every feature as a potential split point. The algorithm then averages the predictions across all the decision trees. Random Forest is an appropriate model for this data because like a decision tree, it can be used for classification problems. Furthermore, it can be a better fit than a single decision tree because random sampling and averaging across models help overcome overfitting and allows for more generalization.</p>
+<p>The accuracy of the Random Forest model is about 0.9588, and its F1 score is about 0.9412. The  confusion matrix, ROC curve, and Precision Recall Curve are below.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">conf_image_rf</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">&#39;figures/confusion_matrix_rf.png&#39;</span><span class="p">)</span>
+<span class="n">prec_recall_image_rf</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">&#39;figures/precision_recall_curve_rf.png&#39;</span><span class="p">)</span>
+<span class="n">roc_curve_image_rf</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">&#39;figures/roc_curve_rf.png&#39;</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">conf_image_rf</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">prec_recall_image_rf</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">roc_curve_image_rf</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/main_26_0.png" src="_images/main_26_0.png" />
+<img alt="_images/main_26_1.png" src="_images/main_26_1.png" />
+<img alt="_images/main_26_2.png" src="_images/main_26_2.png" />
+</div>
+</div>
+</div>
+<div class="section" id="final-model">
+<h3>Final Model<a class="headerlink" href="#final-model" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="n">d</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;Metrics&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Accuracy&#39;</span><span class="p">,</span> <span class="s1">&#39;FPR&#39;</span><span class="p">,</span> <span class="s1">&#39;FNR&#39;</span><span class="p">,</span> <span class="s1">&#39;TPR&#39;</span><span class="p">,</span> <span class="s1">&#39;TNR&#39;</span><span class="p">,</span> <span class="s1">&#39;AUC&#39;</span><span class="p">,</span> <span class="s1">&#39;F1 Score&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;Logistic Regression&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;0.9278&#39;</span><span class="p">,</span> <span class="s1">&#39;0.0309&#39;</span><span class="p">,</span> <span class="s1">&#39;0.0412&#39;</span><span class="p">,</span> <span class="s1">&#39;0.3196&#39;</span><span class="p">,</span> <span class="s1">&#39;0.6082&#39;</span><span class="p">,</span> <span class="s1">&#39;0.92&#39;</span><span class="p">,</span> <span class="s1">&#39;0.8986&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;Decision Tree&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;0.9381&#39;</span><span class="p">,</span> <span class="s1">&#39;0.0309&#39;</span><span class="p">,</span> <span class="s1">&#39;0.0309&#39;</span><span class="p">,</span> <span class="s1">&#39;0.3299&#39;</span><span class="p">,</span> <span class="s1">&#39;0.6082&#39;</span><span class="p">,</span> <span class="s1">&#39;0.95&#39;</span><span class="p">,</span> <span class="s1">&#39;0.9143&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;Random Forest&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;0.9588&#39;</span><span class="p">,</span> <span class="s1">&#39;0.0103&#39;</span><span class="p">,</span> <span class="s1">&#39;0.0309&#39;</span><span class="p">,</span> <span class="s1">&#39;0.3299&#39;</span><span class="p">,</span> <span class="s1">&#39;0.6289&#39;</span><span class="p">,</span> <span class="s1">&#39;0.95&#39;</span><span class="p">,</span> <span class="s1">&#39;0.9412&#39;</span><span class="p">]</span>
+<span class="p">}</span>
+<span class="n">d</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;Model&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Logistic Regression&#39;</span><span class="p">,</span> <span class="s1">&#39;Decision Tree&#39;</span><span class="p">,</span> <span class="s1">&#39;Random Forest&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;Accuracy&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;0.9278&#39;</span><span class="p">,</span> <span class="s1">&#39;0.9381&#39;</span><span class="p">,</span> <span class="s1">&#39;0.9588&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;FPR&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;0.0309&#39;</span><span class="p">,</span> <span class="s1">&#39;0.0309&#39;</span><span class="p">,</span> <span class="s1">&#39;0.0103&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;FNR&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;0.0412&#39;</span><span class="p">,</span> <span class="s1">&#39;0.0309&#39;</span><span class="p">,</span> <span class="s1">&#39;0.0309&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;TPR&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;0.3196&#39;</span><span class="p">,</span> <span class="s1">&#39;0.3299&#39;</span><span class="p">,</span> <span class="s1">&#39;0.3299&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;TNR&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;0.6082&#39;</span><span class="p">,</span> <span class="s1">&#39;0.6082&#39;</span><span class="p">,</span> <span class="s1">&#39;0.6289&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;AUC&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;0.92&#39;</span><span class="p">,</span> <span class="s1">&#39;0.93&#39;</span><span class="p">,</span> <span class="s1">&#39;0.95&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;F1 Score&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;0.8986&#39;</span><span class="p">,</span> <span class="s1">&#39;0.9143&#39;</span><span class="p">,</span> <span class="s1">&#39;0.9412&#39;</span><span class="p">]</span>
+<span class="p">}</span>
+<span class="n">metrics_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">d</span><span class="p">)</span>
+<span class="n">metrics_df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Model</th>
+      <th>Accuracy</th>
+      <th>FPR</th>
+      <th>FNR</th>
+      <th>TPR</th>
+      <th>TNR</th>
+      <th>AUC</th>
+      <th>F1 Score</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Logistic Regression</td>
+      <td>0.9278</td>
+      <td>0.0309</td>
+      <td>0.0412</td>
+      <td>0.3196</td>
+      <td>0.6082</td>
+      <td>0.92</td>
+      <td>0.8986</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Decision Tree</td>
+      <td>0.9381</td>
+      <td>0.0309</td>
+      <td>0.0309</td>
+      <td>0.3299</td>
+      <td>0.6082</td>
+      <td>0.93</td>
+      <td>0.9143</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Random Forest</td>
+      <td>0.9588</td>
+      <td>0.0103</td>
+      <td>0.0309</td>
+      <td>0.3299</td>
+      <td>0.6289</td>
+      <td>0.95</td>
+      <td>0.9412</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Random Forest Model performs better than Logistic Regression and Decision Tree in validation set since it gets higher accuracy, higher TPR and TNR as well as lower FPR and FNR, higher AUC, and higher F1 Score. Therefore, we select Random Forest Model as our final model and use the test set to evaluate its performance. The performance of our final model is plotted below.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">conf_image_final</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">&#39;figures/confusion_matrix_final.png&#39;</span><span class="p">)</span>
+<span class="n">prec_recall_image_final</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">&#39;figures/precision_recall_curve_final.png&#39;</span><span class="p">)</span>
+<span class="n">roc_curve_image_final</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">&#39;figures/roc_curve_final.png&#39;</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">conf_image_final</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">prec_recall_image_final</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">roc_curve_image_final</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/main_30_0.png" src="_images/main_30_0.png" />
+<img alt="_images/main_30_1.png" src="_images/main_30_1.png" />
+<img alt="_images/main_30_2.png" src="_images/main_30_2.png" />
+</div>
+</div>
+<p>The accuracy of final model is 0.9535, and the F1 score is 0.9412. Overall, we are able to build a prediction model that has high accuracy and balances precision and recall. One notable thing of our model is that it has a relatively higher False Negative Rate than False Positive Rate, which means it is more likely to identifiy a patient who actually has benign breast cancer as having malignant breast cancer. In future studies, we might focus on how to lower the FNR when building the predictive model.</p>
 </div>
 </div>
 <div class="section" id="assess-significance-of-features-using-lr">
@@ -606,6 +777,7 @@
 <div class="section" id="author-contributions">
 <h2>Author Contributions<a class="headerlink" href="#author-contributions" title="Permalink to this headline">¶</a></h2>
 <p>Kshitij Chauhan (TJ): Created the logistic_reg.ipynb notebook to conduct logistic regression analysis and tests in test_logistic_reg.py file to test the functions. Also did the introduction, data description and logistic regression sections of this notebook.</p>
+<p>Jiaji Wu: created decision_tree_and_random_forest.ipynb and final_model_selection.ipynb to construct the decision tree and random forest and select the final model; contributed on the Prediction section in main.ipynb; added helper functions in <a class="reference external" href="http://modelmake.py">modelmake.py</a> and corresponding testing functions.</p>
 </div>
 </div>
 

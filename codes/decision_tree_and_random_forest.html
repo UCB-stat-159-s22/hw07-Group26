@@ -143,7 +143,7 @@
         <!-- ipynb file if we had a myst markdown file -->
         
         <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../_sources/codes/Decision Tree and Random Forest.ipynb"><button type="button"
+        <a class="dropdown-buttons" href="../_sources/codes/decision_tree_and_random_forest.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
                 data-placement="left">.ipynb</button></a>
         <!-- Download PDF via print -->
@@ -163,7 +163,7 @@
                 data-toggle="tooltip" data-placement="left" title="Source repository"><i
                     class="fab fa-github"></i>repository</button></a>
         <a class="issues-button"
-            href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fcodes/Decision Tree and Random Forest.html&body=Your%20issue%20content%20here."><button
+            href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fcodes/decision_tree_and_random_forest.html&body=Your%20issue%20content%20here."><button
                 type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
                 title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
         
@@ -184,7 +184,7 @@
         aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
     <div class="dropdown-buttons">
         
-        <a class="binder-button" href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/docs/codes/Decision Tree and Random Forest.ipynb"><button type="button"
+        <a class="binder-button" href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/docs/codes/decision_tree_and_random_forest.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
                 data-placement="left"><img class="binder-button-logo"
                     src="../_static/images/logo_binder.svg"
@@ -437,11 +437,10 @@
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">from</span> <span class="nn">sklearn.tree</span> <span class="kn">import</span> <span class="n">DecisionTreeClassifier</span>
-<span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="kn">import</span> <span class="n">RandomForestClassifier</span>
 <span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
 <span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">confusion_matrix</span><span class="p">,</span> <span class="n">ConfusionMatrixDisplay</span><span class="p">,</span> <span class="n">roc_curve</span><span class="p">,</span> <span class="n">RocCurveDisplay</span><span class="p">,</span> <span class="n">auc</span><span class="p">,</span> <span class="n">precision_recall_curve</span><span class="p">,</span> <span class="n">PrecisionRecallDisplay</span><span class="p">,</span> <span class="n">f1_score</span>
 <span class="kn">import</span> <span class="nn">pickle</span>
+<span class="kn">from</span> <span class="nn">diagnosis.modelmake</span> <span class="kn">import</span> <span class="n">decision_tree</span><span class="p">,</span> <span class="n">random_forest</span>
 </pre></div>
 </div>
 </div>
@@ -463,8 +462,6 @@
 <span class="n">y_train</span> <span class="o">=</span> <span class="n">train_data</span><span class="p">[</span><span class="s1">&#39;diagnosis&#39;</span><span class="p">]</span>
 <span class="n">X_val</span> <span class="o">=</span> <span class="n">val_data</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;diagnosis&#39;</span><span class="p">,</span><span class="s1">&#39;id&#39;</span><span class="p">],</span><span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
 <span class="n">y_val</span> <span class="o">=</span> <span class="n">val_data</span><span class="p">[</span><span class="s1">&#39;diagnosis&#39;</span><span class="p">]</span>
-<span class="n">X_test</span> <span class="o">=</span> <span class="n">test_data</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;diagnosis&#39;</span><span class="p">,</span><span class="s1">&#39;id&#39;</span><span class="p">],</span><span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
-<span class="n">y_test</span> <span class="o">=</span> <span class="n">test_data</span><span class="p">[</span><span class="s1">&#39;diagnosis&#39;</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
@@ -472,43 +469,13 @@
 </div>
 <div class="section" id="decision-tree">
 <h2>Decision Tree<a class="headerlink" href="#decision-tree" title="Permalink to this headline">¶</a></h2>
-<p>The Decision tree algorithm is a supervised learning algorithm that continuously splits data points to form predictions. Every decision tree includes a root node, branches, and leaf nodes. The internal leaf nodes are decision points that describe various test cases whereas the branches represent the outcomes of those decisions. The very bottom nodes in a decision tree give prediction values to the data. A decision tree is an appropriate model for this data as it can be used to solve classification problems such as this one where we are trying to predict whether a patient got breast cancer.</p>
+<p>The Decision tree algorithm is a supervised learning algorithm that continuously splits data points to form predictions. Every decision tree includes a root node, branches, and leaf nodes. The internal leaf nodes are decision points that describe various test cases whereas the branches represent the outcomes of those decisions. The very bottom nodes in a decision tree give prediction values to the data. A decision tree is an appropriate model for this data as it can be used to solve classification problems such as this one where we are trying to identify whether the cancer is benign or malignant.</p>
 <div class="section" id="set-model">
 <h3>Set Model<a class="headerlink" href="#set-model" title="Permalink to this headline">¶</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># function to fit Decision Tree model</span>
-<span class="k">def</span> <span class="nf">decision_tree</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">seed_value</span> <span class="o">=</span> <span class="mi">10</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Fit a decision tree model and predict y values on train and validation data</span>
-<span class="sd">    ---</span>
-<span class="sd">    Arguments:</span>
-<span class="sd">    X_train (pandas.DataFrame): the training data containing features used to predict Y</span>
-<span class="sd">    y_train (pandas.Series): the training data containing result of diagnosis</span>
-<span class="sd">    seed_value (int): the random seed set to control stochastic results</span>
-<span class="sd">    </span>
-<span class="sd">    Returns:</span>
-<span class="sd">    model (sklearn.DecisionTreeClassifier): the decision tree model trained by training set</span>
-<span class="sd">    y_pred_train (array): the prediction of y using training data</span>
-<span class="sd">    y_pred_val (array): the prediction of y using validation data</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="c1"># set random seed</span>
-    <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">seed_value</span><span class="p">)</span>
-    <span class="c1"># set the model</span>
-    <span class="n">model</span> <span class="o">=</span> <span class="n">DecisionTreeClassifier</span><span class="p">()</span>
-    <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
-    <span class="c1"># predict the values for the training and validation sets</span>
-    <span class="n">y_pred_train</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
-    <span class="n">y_pred_val</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_val</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">model</span><span class="p">,</span> <span class="n">y_pred_train</span><span class="p">,</span> <span class="n">y_pred_val</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># set the model and get the prediction</span>
-<span class="n">model_dt</span><span class="p">,</span> <span class="n">y_pred_train_dt</span><span class="p">,</span> <span class="n">y_pred_val_dt</span> <span class="o">=</span> <span class="n">decision_tree</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+<span class="n">model_dt</span><span class="p">,</span> <span class="n">y_pred_train_dt</span><span class="p">,</span> <span class="n">y_pred_val_dt</span> <span class="o">=</span> <span class="n">decision_tree</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">X_val</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -551,16 +518,13 @@
 <span class="n">ax2</span><span class="o">.</span><span class="n">xaxis</span><span class="o">.</span><span class="n">set_ticklabels</span><span class="p">([</span><span class="s1">&#39;False&#39;</span><span class="p">,</span><span class="s1">&#39;True&#39;</span><span class="p">])</span>
 <span class="n">ax2</span><span class="o">.</span><span class="n">yaxis</span><span class="o">.</span><span class="n">set_ticklabels</span><span class="p">([</span><span class="s1">&#39;False&#39;</span><span class="p">,</span><span class="s1">&#39;True&#39;</span><span class="p">])</span>
 
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;../figures/confusion_matrix_dt.png&#39;</span><span class="p">,</span> <span class="n">bbox_inches</span> <span class="o">=</span> <span class="s1">&#39;tight&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;../figures/confusion_matrix_dt.png&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/Decision Tree and Random Forest_15_0.png" src="../_images/Decision Tree and Random Forest_15_0.png" />
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Figure size 432x288 with 0 Axes&gt;
-</pre></div>
-</div>
+<img alt="../_images/decision_tree_and_random_forest_14_0.png" src="../_images/decision_tree_and_random_forest_14_0.png" />
 </div>
 </div>
 </div>
@@ -573,16 +537,14 @@
 <span class="n">display</span> <span class="o">=</span> <span class="n">RocCurveDisplay</span><span class="p">(</span><span class="n">fpr</span><span class="o">=</span><span class="n">fpr</span><span class="p">,</span> <span class="n">tpr</span><span class="o">=</span><span class="n">tpr</span><span class="p">,</span> <span class="n">roc_auc</span><span class="o">=</span><span class="n">roc_auc</span><span class="p">)</span>
 <span class="n">display</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;ROC Curve for Decision Tree Model&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;../figures/roc_curve_dt.png&#39;</span><span class="p">);</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;../figures/roc_curve_dt.png&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">();</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/Decision Tree and Random Forest_17_0.png" src="../_images/Decision Tree and Random Forest_17_0.png" />
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Figure size 432x288 with 0 Axes&gt;
-</pre></div>
-</div>
+<img alt="../_images/decision_tree_and_random_forest_16_0.png" src="../_images/decision_tree_and_random_forest_16_0.png" />
 </div>
 </div>
 </div>
@@ -594,16 +556,14 @@
 <span class="n">disp</span> <span class="o">=</span> <span class="n">PrecisionRecallDisplay</span><span class="p">(</span><span class="n">precision</span><span class="o">=</span><span class="n">precision</span><span class="p">,</span> <span class="n">recall</span><span class="o">=</span><span class="n">recall</span><span class="p">)</span>
 <span class="n">disp</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Precision Recall Curve for Decision Tree Model&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;../figures/precision_recall_curve_dt.png&#39;</span><span class="p">);</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;../figures/precision_recall_curve_dt.png&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">();</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/Decision Tree and Random Forest_19_0.png" src="../_images/Decision Tree and Random Forest_19_0.png" />
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Figure size 432x288 with 0 Axes&gt;
-</pre></div>
-</div>
+<img alt="../_images/decision_tree_and_random_forest_18_0.png" src="../_images/decision_tree_and_random_forest_18_0.png" />
 </div>
 </div>
 </div>
@@ -627,43 +587,13 @@
 </div>
 <div class="section" id="random-forest">
 <h2>Random Forest<a class="headerlink" href="#random-forest" title="Permalink to this headline">¶</a></h2>
+<p>The Random Forest algorithm builds on the decision tree algorithm by creating multiple decision trees. Each tree is then trained on a randomly drawn sample from the data. Each tree constructed does not consider every feature as a potential split point. The algorithm then averages the predictions across all the decision trees. Random Forest is an appropriate model for this data because like a decision tree, it can be used for classification problems. Furthermore, it can be a better fit than a single decision tree because random sampling and averaging across models help overcome overfitting and allows for more generalization.</p>
 <div class="section" id="id1">
 <h3>Set Model<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># function to fit Decision Tree model</span>
-<span class="k">def</span> <span class="nf">random_forest</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">max_feature</span><span class="p">,</span> <span class="n">seed_value</span> <span class="o">=</span> <span class="mi">10</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Fit a random forest model and predict y values on train and validation data</span>
-<span class="sd">    ---</span>
-<span class="sd">    Arguments:</span>
-<span class="sd">    X_train (pandas.DataFrame): the training data containing features used to predict Y</span>
-<span class="sd">    y_train (pandas.Series): the training data containing result of diagnosis</span>
-<span class="sd">    max_feature (int): the maximum number of features Random Forest is allowed to try in individual tree</span>
-<span class="sd">    seed_value (int): the random seed set to control stochastic results</span>
-<span class="sd">    </span>
-<span class="sd">    Returns:</span>
-<span class="sd">    model (sklearn.RandomForestClassifier): the random forest model trained by training set</span>
-<span class="sd">    y_pred_train (array): the prediction of y using training data</span>
-<span class="sd">    y_pred_val (array): the prediction of y using validation data</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="c1"># set random seed</span>
-    <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">seed_value</span><span class="p">)</span>
-    <span class="c1"># set the model</span>
-    <span class="n">model</span> <span class="o">=</span> <span class="n">RandomForestClassifier</span><span class="p">(</span><span class="n">max_features</span> <span class="o">=</span> <span class="n">max_feature</span><span class="p">)</span>
-    <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
-    <span class="c1"># predict the values for the training and validation sets</span>
-    <span class="n">y_pred_train</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
-    <span class="n">y_pred_val</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_val</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">model</span><span class="p">,</span> <span class="n">y_pred_train</span><span class="p">,</span> <span class="n">y_pred_val</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># set the model and get the prediction</span>
-<span class="n">model_rf</span><span class="p">,</span> <span class="n">y_pred_train_rf</span><span class="p">,</span> <span class="n">y_pred_val_rf</span> <span class="o">=</span> <span class="n">random_forest</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="n">model_rf</span><span class="p">,</span> <span class="n">y_pred_train_rf</span><span class="p">,</span> <span class="n">y_pred_val_rf</span> <span class="o">=</span> <span class="n">random_forest</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">X_val</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -706,16 +636,13 @@
 <span class="n">ax2</span><span class="o">.</span><span class="n">xaxis</span><span class="o">.</span><span class="n">set_ticklabels</span><span class="p">([</span><span class="s1">&#39;False&#39;</span><span class="p">,</span><span class="s1">&#39;True&#39;</span><span class="p">])</span>
 <span class="n">ax2</span><span class="o">.</span><span class="n">yaxis</span><span class="o">.</span><span class="n">set_ticklabels</span><span class="p">([</span><span class="s1">&#39;False&#39;</span><span class="p">,</span><span class="s1">&#39;True&#39;</span><span class="p">])</span>
 
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;../figures/confusion_matrix_rf.png&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;../figures/confusion_matrix_rf.png&#39;</span><span class="p">,</span> <span class="n">bbox_inches</span> <span class="o">=</span> <span class="s1">&#39;tight&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">();</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/Decision Tree and Random Forest_30_0.png" src="../_images/Decision Tree and Random Forest_30_0.png" />
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Figure size 432x288 with 0 Axes&gt;
-</pre></div>
-</div>
+<img alt="../_images/decision_tree_and_random_forest_29_0.png" src="../_images/decision_tree_and_random_forest_29_0.png" />
 </div>
 </div>
 </div>
@@ -727,17 +654,15 @@
 <span class="n">roc_auc</span> <span class="o">=</span> <span class="n">auc</span><span class="p">(</span><span class="n">fpr</span><span class="p">,</span> <span class="n">tpr</span><span class="p">)</span>
 <span class="n">display</span> <span class="o">=</span> <span class="n">RocCurveDisplay</span><span class="p">(</span><span class="n">fpr</span><span class="o">=</span><span class="n">fpr</span><span class="p">,</span> <span class="n">tpr</span><span class="o">=</span><span class="n">tpr</span><span class="p">,</span> <span class="n">roc_auc</span><span class="o">=</span><span class="n">roc_auc</span><span class="p">)</span>
 <span class="n">display</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;ROC Curve for Decision Tree Model&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;../figures/roc_curve_rf.png&#39;</span><span class="p">);</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;ROC Curve for Random Forest Model&quot;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;../figures/roc_curve_rf.png&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">();</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/Decision Tree and Random Forest_32_0.png" src="../_images/Decision Tree and Random Forest_32_0.png" />
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Figure size 432x288 with 0 Axes&gt;
-</pre></div>
-</div>
+<img alt="../_images/decision_tree_and_random_forest_31_0.png" src="../_images/decision_tree_and_random_forest_31_0.png" />
 </div>
 </div>
 </div>
@@ -748,17 +673,15 @@
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">precision</span><span class="p">,</span> <span class="n">recall</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">precision_recall_curve</span><span class="p">(</span><span class="n">y_val</span><span class="p">,</span> <span class="n">y_pred_val_rf</span><span class="p">)</span>
 <span class="n">disp</span> <span class="o">=</span> <span class="n">PrecisionRecallDisplay</span><span class="p">(</span><span class="n">precision</span><span class="o">=</span><span class="n">precision</span><span class="p">,</span> <span class="n">recall</span><span class="o">=</span><span class="n">recall</span><span class="p">)</span>
 <span class="n">disp</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Precision Recall Curve for Decision Tree Model&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;../figures/precision_recall_curve_rf.png&#39;</span><span class="p">);</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Precision Recall Curve for Random Forest Model&quot;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;../figures/precision_recall_curve_rf.png&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">();</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/Decision Tree and Random Forest_34_0.png" src="../_images/Decision Tree and Random Forest_34_0.png" />
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Figure size 432x288 with 0 Axes&gt;
-</pre></div>
-</div>
+<img alt="../_images/decision_tree_and_random_forest_33_0.png" src="../_images/decision_tree_and_random_forest_33_0.png" />
 </div>
 </div>
 </div>
