@@ -53,7 +53,7 @@
     <script async="async" src="_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Data Preparation" href="codes/prepare.html" />
+    <link rel="next" title="Logistic Regression" href="codes/logistic_reg.html" />
     <link rel="prev" title="A Study of a Breast Cancer Dataset" href="README.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
@@ -102,11 +102,6 @@
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
    Breast Cancer Wisconsin (Diagnostic) Data Set
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="codes/prepare.html">
-   Data Preparation
   </a>
  </li>
  <li class="toctree-l1">
@@ -242,22 +237,39 @@
   <a class="reference internal nav-link" href="#data-description">
    Data Description
   </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#exploratory-data-analysis">
+   Exploratory Data Analysis
+  </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#exploratory-data-analysis">
-     Exploratory Data Analysis
+    <a class="reference internal nav-link" href="#data-preparation">
+     Data Preparation
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#data-analysis">
-     Data Analysis
+    <a class="reference internal nav-link" href="#data-visualization">
+     Data Visualization
     </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#general">
+       General
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#belign-vs-malignant">
+       Belign vs Malignant
+      </a>
+     </li>
+    </ul>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#prediction">
-   Prediction
+  <a class="reference internal nav-link" href="#prediction-model-construction">
+   Prediction Model Construction
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
@@ -276,16 +288,16 @@
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#model-selection-and-final-model-evaluation">
+     Model Selection and Final Model Evaluation
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#final-model">
      Final Model
     </a>
    </li>
   </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#assess-significance-of-features-using-lr">
-   Assess significance of features using LR
-  </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#hypothesis-testing">
@@ -331,22 +343,39 @@
   <a class="reference internal nav-link" href="#data-description">
    Data Description
   </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#exploratory-data-analysis">
+   Exploratory Data Analysis
+  </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#exploratory-data-analysis">
-     Exploratory Data Analysis
+    <a class="reference internal nav-link" href="#data-preparation">
+     Data Preparation
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#data-analysis">
-     Data Analysis
+    <a class="reference internal nav-link" href="#data-visualization">
+     Data Visualization
     </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#general">
+       General
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#belign-vs-malignant">
+       Belign vs Malignant
+      </a>
+     </li>
+    </ul>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#prediction">
-   Prediction
+  <a class="reference internal nav-link" href="#prediction-model-construction">
+   Prediction Model Construction
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
@@ -365,16 +394,16 @@
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#model-selection-and-final-model-evaluation">
+     Model Selection and Final Model Evaluation
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#final-model">
      Final Model
     </a>
    </li>
   </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#assess-significance-of-features-using-lr">
-   Assess significance of features using LR
-  </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#hypothesis-testing">
@@ -402,53 +431,31 @@
                 
   <div class="tex2jax_ignore mathjax_ignore section" id="breast-cancer-wisconsin-diagnostic-data-set">
 <h1>Breast Cancer Wisconsin (Diagnostic) Data Set<a class="headerlink" href="#breast-cancer-wisconsin-diagnostic-data-set" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="introduction">
-<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
-<p>For our project, we as a group wanted to focus on the health industry. We wanted to find a dataset where we could apply predictions to give a diagnosis to the patient. As we were browsing for datasets, we had to decide which disease we wanted to study. We decided to look at cancer, as cancer is a widely studied disease today. This motivated us to analyze the breast cancer dataset publicly available on Kaggle. We believe that our analysis of this dataset would be helpful to doctors and patients, who want to find out whether the cancer is benign or malignant.</p>
-<p>For our model, we decided to choose to use a classification model as our goal is to classify whether the cancer is benign or malignant. To do this, we ran different models including logistic regression, decision trees and random forests and then, based on the performance on the vailidation set, we picked the best one. After that, we evaluated our final model on the test set. Furthermore, we looked at the significance of our model parameters using confidence intervals and performede hypothesis testing using the parametric Two-Sample T-Test and the non-parametric Wilcoxian Rank Sumt Test to see whether our results are statistically significant at a significance level of 5%. We would like the results of our hypothesis testing to serve as initial indicators of potentical cancer diagnosis for the doctors. Based on our final model, we hope that our model can serve as a strong basis for predicting whether the cancer is benign or malignant based on its characteristics.</p>
-</div>
-<div class="section" id="data-description">
-<h2>Data Description<a class="headerlink" href="#data-description" title="Permalink to this headline">¶</a></h2>
-<p>The raw data is from Kaggle, which can be found <a class="reference external" href="https://www.kaggle.com/datasets/uciml/breast-cancer-wisconsin-data">here</a>. The data was given to us in a csv file with 569 observations, so it was hard to interpret. To better interpret the data, we converted the data into a pandas dataframe. Each row of the data represents a specific patient. 357 patients have benign cancer and 212 have malignant cancer. The dataset contains 32 columns with 30 features representing the tumor’s characteristics. We treated the diagnosis column as our response variable. All of the features are quantitative (float64) except for the id column (int64) and the diagnosis (‘M’ or ‘B’).  To combat this issue, we One Hot Encoded the diagnosis to convert it to 1s and 0s, which would allow us to run our classification model. The diagnosis is read as follows: 0 for benign and 1 for malignant. We also dropped the last column as it was empty.</p>
-<p>For each patient, a digitized image depicting the fine needle aspirate (FNA) of a breast mass is taken. Ten real-valued features are then computed for each cell nuclei present in the image. To summarize the findings for each patient, the table below contains the mean, the standard error, and the “worst” (mean of the three largest values) for each of the ten features, generating a total of thirty features for each patient.</p>
-<p>Below is the cleaned dataset that we generated:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">diagnosis</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="kn">import</span> <span class="nn">matplotlib.image</span> <span class="k">as</span> <span class="nn">mpimg</span>
 <span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">rcParams</span>
-
-<span class="c1"># define a function to help plot metrics</span>
-<span class="k">def</span> <span class="nf">plot_three_metrics_horizontally</span><span class="p">(</span><span class="n">file_list</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Display confusion matrix, Precision Recall curve, and ROC curve horizontally</span>
-<span class="sd">    ---</span>
-<span class="sd">    Arguments:</span>
-<span class="sd">    file_list (list): a list includes file names of confusion matrix, Precision and Recall curve, and ROC curve figures in order</span>
-<span class="sd">   </span>
-<span class="sd">    Returns:</span>
-<span class="sd">    three horizontally displayed images</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="c1"># figure size in inches optional</span>
-    <span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;figure.figsize&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">30</span> <span class="p">,</span><span class="mi">8</span>
-
-    <span class="c1"># read images</span>
-    <span class="n">img_cm</span> <span class="o">=</span> <span class="n">mpimg</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="n">file_list</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-    <span class="n">img_prc</span> <span class="o">=</span> <span class="n">mpimg</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="n">file_list</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
-    <span class="n">img_roc</span> <span class="o">=</span>  <span class="n">mpimg</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="n">file_list</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
-
-    <span class="c1"># display images</span>
-    <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
-    <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">img_cm</span><span class="p">)</span>
-    <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">img_prc</span><span class="p">)</span>
-    <span class="n">ax</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">img_roc</span><span class="p">)</span>
-    <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span> 
-    <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span> 
-    <span class="n">ax</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">);</span>
-
-<span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;data/clean.csv&#39;</span><span class="p">)</span>
-<span class="n">data</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<p>For our project, we as a group wanted to focus on the health industry. We wanted to find a dataset where we could apply predictions to give a diagnosis to the patient. As we were browsing for datasets, we had to decide which disease we wanted to study. We decided to look at cancer, as cancer is a widely studied disease today. This motivated us to analyze the breast cancer dataset publicly available on Kaggle. We believe that our analysis of this dataset would be helpful to doctors and patients, who want to find out whether the cancer is benign or malignant.</p>
+<p>For our model, we decided to choose to use a classification/prediction model as our goal is to classify whether the cancer is benign or malignant. To do this, we ran different models including logistic regression, decision trees and random forests on the training set and then, based on the performance on the vailidation set, we picked the best one. After that, we evaluated our final model on the testing set. Furthermore, we performed hypothesis testing using the parametric Two-Sample T-Test and the non-parametric Wilcoxian Rank Sumt Test to see whether our results are statistically significant at a significance level of 5%. We would like the results of our hypothesis testing to serve as initial indicators of potentical cancer diagnosis for the doctors. Based on our final model, we hope that our model can serve as a strong basis for predicting whether the cancer is benign or malignant based on its characteristics.</p>
+</div>
+<div class="section" id="data-description">
+<h2>Data Description<a class="headerlink" href="#data-description" title="Permalink to this headline">¶</a></h2>
+<p>The raw data is from Kaggle, which can be found <a class="reference external" href="https://www.kaggle.com/datasets/uciml/breast-cancer-wisconsin-data">here</a>. The data was given to us in a csv file with 569 observations, so it was hard to interpret. To better interpret the data, we converted the data into a pandas dataframe. Each row of the data represents a specific patient. 357 patients have benign cancer and 212 have malignant cancer. The dataset contains 32 columns with 30 features representing the tumor’s characteristics. We treated the <code class="docutils literal notranslate"><span class="pre">diagnosis</span></code> column as our response variable. All of the features are quantitative (<code class="docutils literal notranslate"><span class="pre">float64</span></code>) except for the id column (<code class="docutils literal notranslate"><span class="pre">int64</span></code>) and the diagnosis (<code class="docutils literal notranslate"><span class="pre">str</span></code> - <code class="docutils literal notranslate"><span class="pre">'M'</span></code> or <code class="docutils literal notranslate"><span class="pre">'B'</span></code>).</p>
+<p>For each patient, a digitized image depicting the fine needle aspirate (FNA) of a breast mass is taken. Ten real-valued features are then computed for each cell nuclei present in the image. To summarize the findings for each patient, the table below contains the mean, the standard error, and the “worst” (mean of the three largest values) for each of the ten features, generating a total of thirty features for each patient.</p>
+<p>Below is the raw dataset that we have from Kaggle:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">raw_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;data/raw_data.csv&#39;</span><span class="p">)</span>
+<span class="n">raw_data</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -482,6 +489,241 @@
       <th>concavity_mean</th>
       <th>concave points_mean</th>
       <th>...</th>
+      <th>texture_worst</th>
+      <th>perimeter_worst</th>
+      <th>area_worst</th>
+      <th>smoothness_worst</th>
+      <th>compactness_worst</th>
+      <th>concavity_worst</th>
+      <th>concave points_worst</th>
+      <th>symmetry_worst</th>
+      <th>fractal_dimension_worst</th>
+      <th>Unnamed: 32</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>842302</td>
+      <td>M</td>
+      <td>17.99</td>
+      <td>10.38</td>
+      <td>122.80</td>
+      <td>1001.0</td>
+      <td>0.11840</td>
+      <td>0.27760</td>
+      <td>0.3001</td>
+      <td>0.14710</td>
+      <td>...</td>
+      <td>17.33</td>
+      <td>184.60</td>
+      <td>2019.0</td>
+      <td>0.1622</td>
+      <td>0.6656</td>
+      <td>0.7119</td>
+      <td>0.2654</td>
+      <td>0.4601</td>
+      <td>0.11890</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>842517</td>
+      <td>M</td>
+      <td>20.57</td>
+      <td>17.77</td>
+      <td>132.90</td>
+      <td>1326.0</td>
+      <td>0.08474</td>
+      <td>0.07864</td>
+      <td>0.0869</td>
+      <td>0.07017</td>
+      <td>...</td>
+      <td>23.41</td>
+      <td>158.80</td>
+      <td>1956.0</td>
+      <td>0.1238</td>
+      <td>0.1866</td>
+      <td>0.2416</td>
+      <td>0.1860</td>
+      <td>0.2750</td>
+      <td>0.08902</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>84300903</td>
+      <td>M</td>
+      <td>19.69</td>
+      <td>21.25</td>
+      <td>130.00</td>
+      <td>1203.0</td>
+      <td>0.10960</td>
+      <td>0.15990</td>
+      <td>0.1974</td>
+      <td>0.12790</td>
+      <td>...</td>
+      <td>25.53</td>
+      <td>152.50</td>
+      <td>1709.0</td>
+      <td>0.1444</td>
+      <td>0.4245</td>
+      <td>0.4504</td>
+      <td>0.2430</td>
+      <td>0.3613</td>
+      <td>0.08758</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>84348301</td>
+      <td>M</td>
+      <td>11.42</td>
+      <td>20.38</td>
+      <td>77.58</td>
+      <td>386.1</td>
+      <td>0.14250</td>
+      <td>0.28390</td>
+      <td>0.2414</td>
+      <td>0.10520</td>
+      <td>...</td>
+      <td>26.50</td>
+      <td>98.87</td>
+      <td>567.7</td>
+      <td>0.2098</td>
+      <td>0.8663</td>
+      <td>0.6869</td>
+      <td>0.2575</td>
+      <td>0.6638</td>
+      <td>0.17300</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>84358402</td>
+      <td>M</td>
+      <td>20.29</td>
+      <td>14.34</td>
+      <td>135.10</td>
+      <td>1297.0</td>
+      <td>0.10030</td>
+      <td>0.13280</td>
+      <td>0.1980</td>
+      <td>0.10430</td>
+      <td>...</td>
+      <td>16.67</td>
+      <td>152.20</td>
+      <td>1575.0</td>
+      <td>0.1374</td>
+      <td>0.2050</td>
+      <td>0.4000</td>
+      <td>0.1625</td>
+      <td>0.2364</td>
+      <td>0.07678</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+<p>5 rows × 33 columns</p>
+</div></div></div>
+</div>
+</div>
+<div class="section" id="exploratory-data-analysis">
+<h2>Exploratory Data Analysis<a class="headerlink" href="#exploratory-data-analysis" title="Permalink to this headline">¶</a></h2>
+<p>Before diving into statistical modelling and analysis, we first generally explored our data to obtain a quick but comprehensive understanding of it. By doing so, we can not only fix problems in our data, such as missing values and duplicated observations, but also be more directed when we build any statistical model and conduct any statistical testing on our data.</p>
+<div class="section" id="data-preparation">
+<h3>Data Preparation<a class="headerlink" href="#data-preparation" title="Permalink to this headline">¶</a></h3>
+<p>We first noticed that the last column was empty in the data, so we needed to drop it from our data. Then, we checked if there was any missing value or duplicated observation in our data. If so, we decided to drop the rows or observations that have missing values or is duplicated. Fortunately, we did not find any missing value or duplicated observation. Then, we checked if all feature columns have the desired data type. Finally, because our chosen classification models only accept numerical response variable, which is <code class="docutils literal notranslate"><span class="pre">diagnosis</span></code> in our data, we have to one-hot encode <code class="docutils literal notranslate"><span class="pre">diagnosis</span></code> to convert it to <code class="docutils literal notranslate"><span class="pre">1</span></code>s and <code class="docutils literal notranslate"><span class="pre">0</span></code>s, which would allow us to run our classification model. The diagnosis is read as follows: 0 for benign and 1 for malignant.</p>
+<p>After cleaning the data, we splitted the data into training, validation, and testing sets, which is a common principle in building statistical models. We will use the training set to fit different models, use the validation set to compare and select the final one from our models, and then use testing set to evaluate the final performance of our model.</p>
+<p>Here we load the training, validation, and testing set splitted from the cleaned data.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">train</span><span class="p">,</span> <span class="n">val</span><span class="p">,</span> <span class="n">test</span> <span class="o">=</span> <span class="n">diagnosis</span><span class="o">.</span><span class="n">load_data</span><span class="p">(</span><span class="s1">&#39;data/raw_data.csv&#39;</span><span class="p">,</span> <span class="n">val_size</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.15</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">159</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">train</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">val</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">test</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(386, 32) (97, 32) (86, 32)
+</pre></div>
+</div>
+</div>
+</div>
+<p>More details can be found in <code class="docutils literal notranslate"><span class="pre">codes/data_prepare.ipynb</span></code>.</p>
+</div>
+<div class="section" id="data-visualization">
+<h3>Data Visualization<a class="headerlink" href="#data-visualization" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">clean_data</span> <span class="o">=</span> <span class="n">diagnosis</span><span class="o">.</span><span class="n">clean_data</span><span class="p">(</span><span class="n">raw_data</span><span class="p">,</span> <span class="n">enc_columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;diagnosis&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>After having the clean data, we conducted data visualization on the clean data to understand our data. Note that we visualized the entire data before splitting.</p>
+<div class="section" id="general">
+<h4>General<a class="headerlink" href="#general" title="Permalink to this headline">¶</a></h4>
+<p>We first checked what exact features we have in the data</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">clean_data</span><span class="o">.</span><span class="n">columns</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Index([&#39;id&#39;, &#39;diagnosis&#39;, &#39;radius_mean&#39;, &#39;texture_mean&#39;, &#39;perimeter_mean&#39;,
+       &#39;area_mean&#39;, &#39;smoothness_mean&#39;, &#39;compactness_mean&#39;, &#39;concavity_mean&#39;,
+       &#39;concave points_mean&#39;, &#39;symmetry_mean&#39;, &#39;fractal_dimension_mean&#39;,
+       &#39;radius_se&#39;, &#39;texture_se&#39;, &#39;perimeter_se&#39;, &#39;area_se&#39;, &#39;smoothness_se&#39;,
+       &#39;compactness_se&#39;, &#39;concavity_se&#39;, &#39;concave points_se&#39;, &#39;symmetry_se&#39;,
+       &#39;fractal_dimension_se&#39;, &#39;radius_worst&#39;, &#39;texture_worst&#39;,
+       &#39;perimeter_worst&#39;, &#39;area_worst&#39;, &#39;smoothness_worst&#39;,
+       &#39;compactness_worst&#39;, &#39;concavity_worst&#39;, &#39;concave points_worst&#39;,
+       &#39;symmetry_worst&#39;, &#39;fractal_dimension_worst&#39;],
+      dtype=&#39;object&#39;)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Besides the feature <code class="docutils literal notranslate"><span class="pre">id</span></code> and the response variable <code class="docutils literal notranslate"><span class="pre">diagnosis</span></code>, there are 30 features in total, which can be splited into three groups - mean (<code class="docutils literal notranslate"><span class="pre">mean</span></code>), standard error (<code class="docutils literal notranslate"><span class="pre">se</span></code>), and “worst” or largest (<code class="docutils literal notranslate"><span class="pre">worst</span></code>). In each group, we have <code class="docutils literal notranslate"><span class="pre">radius</span></code>, <code class="docutils literal notranslate"><span class="pre">texture</span></code>, <code class="docutils literal notranslate"><span class="pre">perimeter</span></code>, <code class="docutils literal notranslate"><span class="pre">area</span></code>, <code class="docutils literal notranslate"><span class="pre">smoothness</span></code>, <code class="docutils literal notranslate"><span class="pre">compactness</span></code>, <code class="docutils literal notranslate"><span class="pre">concavity</span></code>, <code class="docutils literal notranslate"><span class="pre">concave</span> <span class="pre">points</span></code>, <code class="docutils literal notranslate"><span class="pre">symmetry</span></code>, and <code class="docutils literal notranslate"><span class="pre">fractal</span> <span class="pre">dimension</span></code>.</p>
+<p>Since the three groups of features describe similar things, we inspected the collinearity between each pair of features by computing the correlation matrix of all the features.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">clean_data</span> <span class="o">=</span> <span class="n">clean_data</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s2">&quot;id&quot;</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">clean_data</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s2">&quot;diagnosis&quot;</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">corr</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>radius_mean</th>
+      <th>texture_mean</th>
+      <th>perimeter_mean</th>
+      <th>area_mean</th>
+      <th>smoothness_mean</th>
+      <th>compactness_mean</th>
+      <th>concavity_mean</th>
+      <th>concave points_mean</th>
+      <th>symmetry_mean</th>
+      <th>fractal_dimension_mean</th>
+      <th>...</th>
       <th>radius_worst</th>
       <th>texture_worst</th>
       <th>perimeter_worst</th>
@@ -496,139 +738,1208 @@
   </thead>
   <tbody>
     <tr>
-      <th>0</th>
-      <td>842302</td>
-      <td>1.0</td>
-      <td>17.99</td>
-      <td>10.38</td>
-      <td>122.80</td>
-      <td>1001.0</td>
-      <td>0.11840</td>
-      <td>0.27760</td>
-      <td>0.3001</td>
-      <td>0.14710</td>
+      <th>radius_mean</th>
+      <td>1.000000</td>
+      <td>0.323782</td>
+      <td>0.997855</td>
+      <td>0.987357</td>
+      <td>0.170581</td>
+      <td>0.506124</td>
+      <td>0.676764</td>
+      <td>0.822529</td>
+      <td>0.147741</td>
+      <td>-0.311631</td>
       <td>...</td>
-      <td>25.38</td>
-      <td>17.33</td>
-      <td>184.60</td>
-      <td>2019.0</td>
-      <td>0.1622</td>
-      <td>0.6656</td>
-      <td>0.7119</td>
-      <td>0.2654</td>
-      <td>0.4601</td>
-      <td>0.11890</td>
+      <td>0.969539</td>
+      <td>0.297008</td>
+      <td>0.965137</td>
+      <td>0.941082</td>
+      <td>0.119616</td>
+      <td>0.413463</td>
+      <td>0.526911</td>
+      <td>0.744214</td>
+      <td>0.163953</td>
+      <td>0.007066</td>
     </tr>
     <tr>
-      <th>1</th>
-      <td>842517</td>
-      <td>1.0</td>
-      <td>20.57</td>
-      <td>17.77</td>
-      <td>132.90</td>
-      <td>1326.0</td>
-      <td>0.08474</td>
-      <td>0.07864</td>
-      <td>0.0869</td>
-      <td>0.07017</td>
+      <th>texture_mean</th>
+      <td>0.323782</td>
+      <td>1.000000</td>
+      <td>0.329533</td>
+      <td>0.321086</td>
+      <td>-0.023389</td>
+      <td>0.236702</td>
+      <td>0.302418</td>
+      <td>0.293464</td>
+      <td>0.071401</td>
+      <td>-0.076437</td>
       <td>...</td>
-      <td>24.99</td>
-      <td>23.41</td>
-      <td>158.80</td>
-      <td>1956.0</td>
-      <td>0.1238</td>
-      <td>0.1866</td>
-      <td>0.2416</td>
-      <td>0.1860</td>
-      <td>0.2750</td>
-      <td>0.08902</td>
+      <td>0.352573</td>
+      <td>0.912045</td>
+      <td>0.358040</td>
+      <td>0.343546</td>
+      <td>0.077503</td>
+      <td>0.277830</td>
+      <td>0.301025</td>
+      <td>0.295316</td>
+      <td>0.105008</td>
+      <td>0.119205</td>
     </tr>
     <tr>
-      <th>2</th>
-      <td>84300903</td>
-      <td>1.0</td>
-      <td>19.69</td>
-      <td>21.25</td>
-      <td>130.00</td>
-      <td>1203.0</td>
-      <td>0.10960</td>
-      <td>0.15990</td>
-      <td>0.1974</td>
-      <td>0.12790</td>
+      <th>perimeter_mean</th>
+      <td>0.997855</td>
+      <td>0.329533</td>
+      <td>1.000000</td>
+      <td>0.986507</td>
+      <td>0.207278</td>
+      <td>0.556936</td>
+      <td>0.716136</td>
+      <td>0.850977</td>
+      <td>0.183027</td>
+      <td>-0.261477</td>
       <td>...</td>
-      <td>23.57</td>
-      <td>25.53</td>
-      <td>152.50</td>
-      <td>1709.0</td>
-      <td>0.1444</td>
-      <td>0.4245</td>
-      <td>0.4504</td>
-      <td>0.2430</td>
-      <td>0.3613</td>
-      <td>0.08758</td>
+      <td>0.969476</td>
+      <td>0.303038</td>
+      <td>0.970387</td>
+      <td>0.941550</td>
+      <td>0.150549</td>
+      <td>0.455774</td>
+      <td>0.563879</td>
+      <td>0.771241</td>
+      <td>0.189115</td>
+      <td>0.051019</td>
     </tr>
     <tr>
-      <th>3</th>
-      <td>84348301</td>
-      <td>1.0</td>
-      <td>11.42</td>
-      <td>20.38</td>
-      <td>77.58</td>
-      <td>386.1</td>
-      <td>0.14250</td>
-      <td>0.28390</td>
-      <td>0.2414</td>
-      <td>0.10520</td>
+      <th>area_mean</th>
+      <td>0.987357</td>
+      <td>0.321086</td>
+      <td>0.986507</td>
+      <td>1.000000</td>
+      <td>0.177028</td>
+      <td>0.498502</td>
+      <td>0.685983</td>
+      <td>0.823269</td>
+      <td>0.151293</td>
+      <td>-0.283110</td>
       <td>...</td>
-      <td>14.91</td>
-      <td>26.50</td>
-      <td>98.87</td>
-      <td>567.7</td>
-      <td>0.2098</td>
-      <td>0.8663</td>
-      <td>0.6869</td>
-      <td>0.2575</td>
-      <td>0.6638</td>
-      <td>0.17300</td>
+      <td>0.962746</td>
+      <td>0.287489</td>
+      <td>0.959120</td>
+      <td>0.959213</td>
+      <td>0.123523</td>
+      <td>0.390410</td>
+      <td>0.512606</td>
+      <td>0.722017</td>
+      <td>0.143570</td>
+      <td>0.003738</td>
     </tr>
     <tr>
-      <th>4</th>
-      <td>84358402</td>
-      <td>1.0</td>
-      <td>20.29</td>
-      <td>14.34</td>
-      <td>135.10</td>
-      <td>1297.0</td>
-      <td>0.10030</td>
-      <td>0.13280</td>
-      <td>0.1980</td>
-      <td>0.10430</td>
+      <th>smoothness_mean</th>
+      <td>0.170581</td>
+      <td>-0.023389</td>
+      <td>0.207278</td>
+      <td>0.177028</td>
+      <td>1.000000</td>
+      <td>0.659123</td>
+      <td>0.521984</td>
+      <td>0.553695</td>
+      <td>0.557775</td>
+      <td>0.584792</td>
       <td>...</td>
-      <td>22.54</td>
-      <td>16.67</td>
-      <td>152.20</td>
-      <td>1575.0</td>
-      <td>0.1374</td>
-      <td>0.2050</td>
-      <td>0.4000</td>
-      <td>0.1625</td>
-      <td>0.2364</td>
-      <td>0.07678</td>
+      <td>0.213120</td>
+      <td>0.036072</td>
+      <td>0.238853</td>
+      <td>0.206718</td>
+      <td>0.805324</td>
+      <td>0.472468</td>
+      <td>0.434926</td>
+      <td>0.503053</td>
+      <td>0.394309</td>
+      <td>0.499316</td>
+    </tr>
+    <tr>
+      <th>compactness_mean</th>
+      <td>0.506124</td>
+      <td>0.236702</td>
+      <td>0.556936</td>
+      <td>0.498502</td>
+      <td>0.659123</td>
+      <td>1.000000</td>
+      <td>0.883121</td>
+      <td>0.831135</td>
+      <td>0.602641</td>
+      <td>0.565369</td>
+      <td>...</td>
+      <td>0.535315</td>
+      <td>0.248133</td>
+      <td>0.590210</td>
+      <td>0.509604</td>
+      <td>0.565541</td>
+      <td>0.865809</td>
+      <td>0.816275</td>
+      <td>0.815573</td>
+      <td>0.510223</td>
+      <td>0.687382</td>
+    </tr>
+    <tr>
+      <th>concavity_mean</th>
+      <td>0.676764</td>
+      <td>0.302418</td>
+      <td>0.716136</td>
+      <td>0.685983</td>
+      <td>0.521984</td>
+      <td>0.883121</td>
+      <td>1.000000</td>
+      <td>0.921391</td>
+      <td>0.500667</td>
+      <td>0.336783</td>
+      <td>...</td>
+      <td>0.688236</td>
+      <td>0.299879</td>
+      <td>0.729565</td>
+      <td>0.675987</td>
+      <td>0.448822</td>
+      <td>0.754968</td>
+      <td>0.884103</td>
+      <td>0.861323</td>
+      <td>0.409464</td>
+      <td>0.514930</td>
+    </tr>
+    <tr>
+      <th>concave points_mean</th>
+      <td>0.822529</td>
+      <td>0.293464</td>
+      <td>0.850977</td>
+      <td>0.823269</td>
+      <td>0.553695</td>
+      <td>0.831135</td>
+      <td>0.921391</td>
+      <td>1.000000</td>
+      <td>0.462497</td>
+      <td>0.166917</td>
+      <td>...</td>
+      <td>0.830318</td>
+      <td>0.292752</td>
+      <td>0.855923</td>
+      <td>0.809630</td>
+      <td>0.452753</td>
+      <td>0.667454</td>
+      <td>0.752399</td>
+      <td>0.910155</td>
+      <td>0.375744</td>
+      <td>0.368661</td>
+    </tr>
+    <tr>
+      <th>symmetry_mean</th>
+      <td>0.147741</td>
+      <td>0.071401</td>
+      <td>0.183027</td>
+      <td>0.151293</td>
+      <td>0.557775</td>
+      <td>0.602641</td>
+      <td>0.500667</td>
+      <td>0.462497</td>
+      <td>1.000000</td>
+      <td>0.479921</td>
+      <td>...</td>
+      <td>0.185728</td>
+      <td>0.090651</td>
+      <td>0.219169</td>
+      <td>0.177193</td>
+      <td>0.426675</td>
+      <td>0.473200</td>
+      <td>0.433721</td>
+      <td>0.430297</td>
+      <td>0.699826</td>
+      <td>0.438413</td>
+    </tr>
+    <tr>
+      <th>fractal_dimension_mean</th>
+      <td>-0.311631</td>
+      <td>-0.076437</td>
+      <td>-0.261477</td>
+      <td>-0.283110</td>
+      <td>0.584792</td>
+      <td>0.565369</td>
+      <td>0.336783</td>
+      <td>0.166917</td>
+      <td>0.479921</td>
+      <td>1.000000</td>
+      <td>...</td>
+      <td>-0.253691</td>
+      <td>-0.051269</td>
+      <td>-0.205151</td>
+      <td>-0.231854</td>
+      <td>0.504942</td>
+      <td>0.458798</td>
+      <td>0.346234</td>
+      <td>0.175325</td>
+      <td>0.334019</td>
+      <td>0.767297</td>
+    </tr>
+    <tr>
+      <th>radius_se</th>
+      <td>0.679090</td>
+      <td>0.275869</td>
+      <td>0.691765</td>
+      <td>0.732562</td>
+      <td>0.301467</td>
+      <td>0.497473</td>
+      <td>0.631925</td>
+      <td>0.698050</td>
+      <td>0.303379</td>
+      <td>0.000111</td>
+      <td>...</td>
+      <td>0.715065</td>
+      <td>0.194799</td>
+      <td>0.719684</td>
+      <td>0.751548</td>
+      <td>0.141919</td>
+      <td>0.287103</td>
+      <td>0.380585</td>
+      <td>0.531062</td>
+      <td>0.094543</td>
+      <td>0.049559</td>
+    </tr>
+    <tr>
+      <th>texture_se</th>
+      <td>-0.097317</td>
+      <td>0.386358</td>
+      <td>-0.086761</td>
+      <td>-0.066280</td>
+      <td>0.068406</td>
+      <td>0.046205</td>
+      <td>0.076218</td>
+      <td>0.021480</td>
+      <td>0.128053</td>
+      <td>0.164174</td>
+      <td>...</td>
+      <td>-0.111690</td>
+      <td>0.409003</td>
+      <td>-0.102242</td>
+      <td>-0.083195</td>
+      <td>-0.073658</td>
+      <td>-0.092439</td>
+      <td>-0.068956</td>
+      <td>-0.119638</td>
+      <td>-0.128215</td>
+      <td>-0.045655</td>
+    </tr>
+    <tr>
+      <th>perimeter_se</th>
+      <td>0.674172</td>
+      <td>0.281673</td>
+      <td>0.693135</td>
+      <td>0.726628</td>
+      <td>0.296092</td>
+      <td>0.548905</td>
+      <td>0.660391</td>
+      <td>0.710650</td>
+      <td>0.313893</td>
+      <td>0.039830</td>
+      <td>...</td>
+      <td>0.697201</td>
+      <td>0.200371</td>
+      <td>0.721031</td>
+      <td>0.730713</td>
+      <td>0.130054</td>
+      <td>0.341919</td>
+      <td>0.418899</td>
+      <td>0.554897</td>
+      <td>0.109930</td>
+      <td>0.085433</td>
+    </tr>
+    <tr>
+      <th>area_se</th>
+      <td>0.735864</td>
+      <td>0.259845</td>
+      <td>0.744983</td>
+      <td>0.800086</td>
+      <td>0.246552</td>
+      <td>0.455653</td>
+      <td>0.617427</td>
+      <td>0.690299</td>
+      <td>0.223970</td>
+      <td>-0.090170</td>
+      <td>...</td>
+      <td>0.757373</td>
+      <td>0.196497</td>
+      <td>0.761213</td>
+      <td>0.811408</td>
+      <td>0.125389</td>
+      <td>0.283257</td>
+      <td>0.385100</td>
+      <td>0.538166</td>
+      <td>0.074126</td>
+      <td>0.017539</td>
+    </tr>
+    <tr>
+      <th>smoothness_se</th>
+      <td>-0.222600</td>
+      <td>0.006614</td>
+      <td>-0.202694</td>
+      <td>-0.166777</td>
+      <td>0.332375</td>
+      <td>0.135299</td>
+      <td>0.098564</td>
+      <td>0.027653</td>
+      <td>0.187321</td>
+      <td>0.401964</td>
+      <td>...</td>
+      <td>-0.230691</td>
+      <td>-0.074743</td>
+      <td>-0.217304</td>
+      <td>-0.182195</td>
+      <td>0.314457</td>
+      <td>-0.055558</td>
+      <td>-0.058298</td>
+      <td>-0.102007</td>
+      <td>-0.107342</td>
+      <td>0.101480</td>
+    </tr>
+    <tr>
+      <th>compactness_se</th>
+      <td>0.206000</td>
+      <td>0.191975</td>
+      <td>0.250744</td>
+      <td>0.212583</td>
+      <td>0.318943</td>
+      <td>0.738722</td>
+      <td>0.670279</td>
+      <td>0.490424</td>
+      <td>0.421659</td>
+      <td>0.559837</td>
+      <td>...</td>
+      <td>0.204607</td>
+      <td>0.143003</td>
+      <td>0.260516</td>
+      <td>0.199371</td>
+      <td>0.227394</td>
+      <td>0.678780</td>
+      <td>0.639147</td>
+      <td>0.483208</td>
+      <td>0.277878</td>
+      <td>0.590973</td>
+    </tr>
+    <tr>
+      <th>concavity_se</th>
+      <td>0.194204</td>
+      <td>0.143293</td>
+      <td>0.228082</td>
+      <td>0.207660</td>
+      <td>0.248396</td>
+      <td>0.570517</td>
+      <td>0.691270</td>
+      <td>0.439167</td>
+      <td>0.342627</td>
+      <td>0.446630</td>
+      <td>...</td>
+      <td>0.186904</td>
+      <td>0.100241</td>
+      <td>0.226680</td>
+      <td>0.188353</td>
+      <td>0.168481</td>
+      <td>0.484858</td>
+      <td>0.662564</td>
+      <td>0.440472</td>
+      <td>0.197788</td>
+      <td>0.439329</td>
+    </tr>
+    <tr>
+      <th>concave points_se</th>
+      <td>0.376169</td>
+      <td>0.163851</td>
+      <td>0.407217</td>
+      <td>0.372320</td>
+      <td>0.380676</td>
+      <td>0.642262</td>
+      <td>0.683260</td>
+      <td>0.615634</td>
+      <td>0.393298</td>
+      <td>0.341198</td>
+      <td>...</td>
+      <td>0.358127</td>
+      <td>0.086741</td>
+      <td>0.394999</td>
+      <td>0.342271</td>
+      <td>0.215351</td>
+      <td>0.452888</td>
+      <td>0.549592</td>
+      <td>0.602450</td>
+      <td>0.143116</td>
+      <td>0.310655</td>
+    </tr>
+    <tr>
+      <th>symmetry_se</th>
+      <td>-0.104321</td>
+      <td>0.009127</td>
+      <td>-0.081629</td>
+      <td>-0.072497</td>
+      <td>0.200774</td>
+      <td>0.229977</td>
+      <td>0.178009</td>
+      <td>0.095351</td>
+      <td>0.449137</td>
+      <td>0.345007</td>
+      <td>...</td>
+      <td>-0.128121</td>
+      <td>-0.077473</td>
+      <td>-0.103753</td>
+      <td>-0.110343</td>
+      <td>-0.012662</td>
+      <td>0.060255</td>
+      <td>0.037119</td>
+      <td>-0.030413</td>
+      <td>0.389402</td>
+      <td>0.078079</td>
+    </tr>
+    <tr>
+      <th>fractal_dimension_se</th>
+      <td>-0.042641</td>
+      <td>0.054458</td>
+      <td>-0.005523</td>
+      <td>-0.019887</td>
+      <td>0.283607</td>
+      <td>0.507318</td>
+      <td>0.449301</td>
+      <td>0.257584</td>
+      <td>0.331786</td>
+      <td>0.688132</td>
+      <td>...</td>
+      <td>-0.037488</td>
+      <td>-0.003195</td>
+      <td>-0.001000</td>
+      <td>-0.022736</td>
+      <td>0.170568</td>
+      <td>0.390159</td>
+      <td>0.379975</td>
+      <td>0.215204</td>
+      <td>0.111094</td>
+      <td>0.591328</td>
+    </tr>
+    <tr>
+      <th>radius_worst</th>
+      <td>0.969539</td>
+      <td>0.352573</td>
+      <td>0.969476</td>
+      <td>0.962746</td>
+      <td>0.213120</td>
+      <td>0.535315</td>
+      <td>0.688236</td>
+      <td>0.830318</td>
+      <td>0.185728</td>
+      <td>-0.253691</td>
+      <td>...</td>
+      <td>1.000000</td>
+      <td>0.359921</td>
+      <td>0.993708</td>
+      <td>0.984015</td>
+      <td>0.216574</td>
+      <td>0.475820</td>
+      <td>0.573975</td>
+      <td>0.787424</td>
+      <td>0.243529</td>
+      <td>0.093492</td>
+    </tr>
+    <tr>
+      <th>texture_worst</th>
+      <td>0.297008</td>
+      <td>0.912045</td>
+      <td>0.303038</td>
+      <td>0.287489</td>
+      <td>0.036072</td>
+      <td>0.248133</td>
+      <td>0.299879</td>
+      <td>0.292752</td>
+      <td>0.090651</td>
+      <td>-0.051269</td>
+      <td>...</td>
+      <td>0.359921</td>
+      <td>1.000000</td>
+      <td>0.365098</td>
+      <td>0.345842</td>
+      <td>0.225429</td>
+      <td>0.360832</td>
+      <td>0.368366</td>
+      <td>0.359755</td>
+      <td>0.233027</td>
+      <td>0.219122</td>
+    </tr>
+    <tr>
+      <th>perimeter_worst</th>
+      <td>0.965137</td>
+      <td>0.358040</td>
+      <td>0.970387</td>
+      <td>0.959120</td>
+      <td>0.238853</td>
+      <td>0.590210</td>
+      <td>0.729565</td>
+      <td>0.855923</td>
+      <td>0.219169</td>
+      <td>-0.205151</td>
+      <td>...</td>
+      <td>0.993708</td>
+      <td>0.365098</td>
+      <td>1.000000</td>
+      <td>0.977578</td>
+      <td>0.236775</td>
+      <td>0.529408</td>
+      <td>0.618344</td>
+      <td>0.816322</td>
+      <td>0.269493</td>
+      <td>0.138957</td>
+    </tr>
+    <tr>
+      <th>area_worst</th>
+      <td>0.941082</td>
+      <td>0.343546</td>
+      <td>0.941550</td>
+      <td>0.959213</td>
+      <td>0.206718</td>
+      <td>0.509604</td>
+      <td>0.675987</td>
+      <td>0.809630</td>
+      <td>0.177193</td>
+      <td>-0.231854</td>
+      <td>...</td>
+      <td>0.984015</td>
+      <td>0.345842</td>
+      <td>0.977578</td>
+      <td>1.000000</td>
+      <td>0.209145</td>
+      <td>0.438296</td>
+      <td>0.543331</td>
+      <td>0.747419</td>
+      <td>0.209146</td>
+      <td>0.079647</td>
+    </tr>
+    <tr>
+      <th>smoothness_worst</th>
+      <td>0.119616</td>
+      <td>0.077503</td>
+      <td>0.150549</td>
+      <td>0.123523</td>
+      <td>0.805324</td>
+      <td>0.565541</td>
+      <td>0.448822</td>
+      <td>0.452753</td>
+      <td>0.426675</td>
+      <td>0.504942</td>
+      <td>...</td>
+      <td>0.216574</td>
+      <td>0.225429</td>
+      <td>0.236775</td>
+      <td>0.209145</td>
+      <td>1.000000</td>
+      <td>0.568187</td>
+      <td>0.518523</td>
+      <td>0.547691</td>
+      <td>0.493838</td>
+      <td>0.617624</td>
+    </tr>
+    <tr>
+      <th>compactness_worst</th>
+      <td>0.413463</td>
+      <td>0.277830</td>
+      <td>0.455774</td>
+      <td>0.390410</td>
+      <td>0.472468</td>
+      <td>0.865809</td>
+      <td>0.754968</td>
+      <td>0.667454</td>
+      <td>0.473200</td>
+      <td>0.458798</td>
+      <td>...</td>
+      <td>0.475820</td>
+      <td>0.360832</td>
+      <td>0.529408</td>
+      <td>0.438296</td>
+      <td>0.568187</td>
+      <td>1.000000</td>
+      <td>0.892261</td>
+      <td>0.801080</td>
+      <td>0.614441</td>
+      <td>0.810455</td>
+    </tr>
+    <tr>
+      <th>concavity_worst</th>
+      <td>0.526911</td>
+      <td>0.301025</td>
+      <td>0.563879</td>
+      <td>0.512606</td>
+      <td>0.434926</td>
+      <td>0.816275</td>
+      <td>0.884103</td>
+      <td>0.752399</td>
+      <td>0.433721</td>
+      <td>0.346234</td>
+      <td>...</td>
+      <td>0.573975</td>
+      <td>0.368366</td>
+      <td>0.618344</td>
+      <td>0.543331</td>
+      <td>0.518523</td>
+      <td>0.892261</td>
+      <td>1.000000</td>
+      <td>0.855434</td>
+      <td>0.532520</td>
+      <td>0.686511</td>
+    </tr>
+    <tr>
+      <th>concave points_worst</th>
+      <td>0.744214</td>
+      <td>0.295316</td>
+      <td>0.771241</td>
+      <td>0.722017</td>
+      <td>0.503053</td>
+      <td>0.815573</td>
+      <td>0.861323</td>
+      <td>0.910155</td>
+      <td>0.430297</td>
+      <td>0.175325</td>
+      <td>...</td>
+      <td>0.787424</td>
+      <td>0.359755</td>
+      <td>0.816322</td>
+      <td>0.747419</td>
+      <td>0.547691</td>
+      <td>0.801080</td>
+      <td>0.855434</td>
+      <td>1.000000</td>
+      <td>0.502528</td>
+      <td>0.511114</td>
+    </tr>
+    <tr>
+      <th>symmetry_worst</th>
+      <td>0.163953</td>
+      <td>0.105008</td>
+      <td>0.189115</td>
+      <td>0.143570</td>
+      <td>0.394309</td>
+      <td>0.510223</td>
+      <td>0.409464</td>
+      <td>0.375744</td>
+      <td>0.699826</td>
+      <td>0.334019</td>
+      <td>...</td>
+      <td>0.243529</td>
+      <td>0.233027</td>
+      <td>0.269493</td>
+      <td>0.209146</td>
+      <td>0.493838</td>
+      <td>0.614441</td>
+      <td>0.532520</td>
+      <td>0.502528</td>
+      <td>1.000000</td>
+      <td>0.537848</td>
+    </tr>
+    <tr>
+      <th>fractal_dimension_worst</th>
+      <td>0.007066</td>
+      <td>0.119205</td>
+      <td>0.051019</td>
+      <td>0.003738</td>
+      <td>0.499316</td>
+      <td>0.687382</td>
+      <td>0.514930</td>
+      <td>0.368661</td>
+      <td>0.438413</td>
+      <td>0.767297</td>
+      <td>...</td>
+      <td>0.093492</td>
+      <td>0.219122</td>
+      <td>0.138957</td>
+      <td>0.079647</td>
+      <td>0.617624</td>
+      <td>0.810455</td>
+      <td>0.686511</td>
+      <td>0.511114</td>
+      <td>0.537848</td>
+      <td>1.000000</td>
     </tr>
   </tbody>
 </table>
-<p>5 rows × 32 columns</p>
+<p>30 rows × 30 columns</p>
 </div></div></div>
 </div>
-<div class="section" id="exploratory-data-analysis">
-<h3>Exploratory Data Analysis<a class="headerlink" href="#exploratory-data-analysis" title="Permalink to this headline">¶</a></h3>
+<p>This is a giant table since we computed pairwise correlations between 30 features, but we could clearly see some pairs of features have relatively high correlation, such as <code class="docutils literal notranslate"><span class="pre">radius_mean</span></code> vs <code class="docutils literal notranslate"><span class="pre">radius_worst</span></code> and <code class="docutils literal notranslate"><span class="pre">perimeter_mean</span></code> vs <code class="docutils literal notranslate"><span class="pre">radius_mean</span></code>. This warned us that there could be variability and numerical stability issues for later computation and statistical analysis, and we should be aware of that.</p>
+<p>Then, we printed out some statistics of each column or feature.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">clean_data</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+</pre></div>
 </div>
-<div class="section" id="data-analysis">
-<h3>Data Analysis<a class="headerlink" href="#data-analysis" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>diagnosis</th>
+      <th>radius_mean</th>
+      <th>texture_mean</th>
+      <th>perimeter_mean</th>
+      <th>area_mean</th>
+      <th>smoothness_mean</th>
+      <th>compactness_mean</th>
+      <th>concavity_mean</th>
+      <th>concave points_mean</th>
+      <th>symmetry_mean</th>
+      <th>...</th>
+      <th>radius_worst</th>
+      <th>texture_worst</th>
+      <th>perimeter_worst</th>
+      <th>area_worst</th>
+      <th>smoothness_worst</th>
+      <th>compactness_worst</th>
+      <th>concavity_worst</th>
+      <th>concave points_worst</th>
+      <th>symmetry_worst</th>
+      <th>fractal_dimension_worst</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>count</th>
+      <td>569.000000</td>
+      <td>569.000000</td>
+      <td>569.000000</td>
+      <td>569.000000</td>
+      <td>569.000000</td>
+      <td>569.000000</td>
+      <td>569.000000</td>
+      <td>569.000000</td>
+      <td>569.000000</td>
+      <td>569.000000</td>
+      <td>...</td>
+      <td>569.000000</td>
+      <td>569.000000</td>
+      <td>569.000000</td>
+      <td>569.000000</td>
+      <td>569.000000</td>
+      <td>569.000000</td>
+      <td>569.000000</td>
+      <td>569.000000</td>
+      <td>569.000000</td>
+      <td>569.000000</td>
+    </tr>
+    <tr>
+      <th>mean</th>
+      <td>0.372583</td>
+      <td>14.127292</td>
+      <td>19.289649</td>
+      <td>91.969033</td>
+      <td>654.889104</td>
+      <td>0.096360</td>
+      <td>0.104341</td>
+      <td>0.088799</td>
+      <td>0.048919</td>
+      <td>0.181162</td>
+      <td>...</td>
+      <td>16.269190</td>
+      <td>25.677223</td>
+      <td>107.261213</td>
+      <td>880.583128</td>
+      <td>0.132369</td>
+      <td>0.254265</td>
+      <td>0.272188</td>
+      <td>0.114606</td>
+      <td>0.290076</td>
+      <td>0.083946</td>
+    </tr>
+    <tr>
+      <th>std</th>
+      <td>0.483918</td>
+      <td>3.524049</td>
+      <td>4.301036</td>
+      <td>24.298981</td>
+      <td>351.914129</td>
+      <td>0.014064</td>
+      <td>0.052813</td>
+      <td>0.079720</td>
+      <td>0.038803</td>
+      <td>0.027414</td>
+      <td>...</td>
+      <td>4.833242</td>
+      <td>6.146258</td>
+      <td>33.602542</td>
+      <td>569.356993</td>
+      <td>0.022832</td>
+      <td>0.157336</td>
+      <td>0.208624</td>
+      <td>0.065732</td>
+      <td>0.061867</td>
+      <td>0.018061</td>
+    </tr>
+    <tr>
+      <th>min</th>
+      <td>0.000000</td>
+      <td>6.981000</td>
+      <td>9.710000</td>
+      <td>43.790000</td>
+      <td>143.500000</td>
+      <td>0.052630</td>
+      <td>0.019380</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.106000</td>
+      <td>...</td>
+      <td>7.930000</td>
+      <td>12.020000</td>
+      <td>50.410000</td>
+      <td>185.200000</td>
+      <td>0.071170</td>
+      <td>0.027290</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.156500</td>
+      <td>0.055040</td>
+    </tr>
+    <tr>
+      <th>25%</th>
+      <td>0.000000</td>
+      <td>11.700000</td>
+      <td>16.170000</td>
+      <td>75.170000</td>
+      <td>420.300000</td>
+      <td>0.086370</td>
+      <td>0.064920</td>
+      <td>0.029560</td>
+      <td>0.020310</td>
+      <td>0.161900</td>
+      <td>...</td>
+      <td>13.010000</td>
+      <td>21.080000</td>
+      <td>84.110000</td>
+      <td>515.300000</td>
+      <td>0.116600</td>
+      <td>0.147200</td>
+      <td>0.114500</td>
+      <td>0.064930</td>
+      <td>0.250400</td>
+      <td>0.071460</td>
+    </tr>
+    <tr>
+      <th>50%</th>
+      <td>0.000000</td>
+      <td>13.370000</td>
+      <td>18.840000</td>
+      <td>86.240000</td>
+      <td>551.100000</td>
+      <td>0.095870</td>
+      <td>0.092630</td>
+      <td>0.061540</td>
+      <td>0.033500</td>
+      <td>0.179200</td>
+      <td>...</td>
+      <td>14.970000</td>
+      <td>25.410000</td>
+      <td>97.660000</td>
+      <td>686.500000</td>
+      <td>0.131300</td>
+      <td>0.211900</td>
+      <td>0.226700</td>
+      <td>0.099930</td>
+      <td>0.282200</td>
+      <td>0.080040</td>
+    </tr>
+    <tr>
+      <th>75%</th>
+      <td>1.000000</td>
+      <td>15.780000</td>
+      <td>21.800000</td>
+      <td>104.100000</td>
+      <td>782.700000</td>
+      <td>0.105300</td>
+      <td>0.130400</td>
+      <td>0.130700</td>
+      <td>0.074000</td>
+      <td>0.195700</td>
+      <td>...</td>
+      <td>18.790000</td>
+      <td>29.720000</td>
+      <td>125.400000</td>
+      <td>1084.000000</td>
+      <td>0.146000</td>
+      <td>0.339100</td>
+      <td>0.382900</td>
+      <td>0.161400</td>
+      <td>0.317900</td>
+      <td>0.092080</td>
+    </tr>
+    <tr>
+      <th>max</th>
+      <td>1.000000</td>
+      <td>28.110000</td>
+      <td>39.280000</td>
+      <td>188.500000</td>
+      <td>2501.000000</td>
+      <td>0.163400</td>
+      <td>0.345400</td>
+      <td>0.426800</td>
+      <td>0.201200</td>
+      <td>0.304000</td>
+      <td>...</td>
+      <td>36.040000</td>
+      <td>49.540000</td>
+      <td>251.200000</td>
+      <td>4254.000000</td>
+      <td>0.222600</td>
+      <td>1.058000</td>
+      <td>1.252000</td>
+      <td>0.291000</td>
+      <td>0.663800</td>
+      <td>0.207500</td>
+    </tr>
+  </tbody>
+</table>
+<p>8 rows × 31 columns</p>
+</div></div></div>
+</div>
+<p>We could see that the column <code class="docutils literal notranslate"><span class="pre">diagnosis</span></code> has the mean <span class="math notranslate nohighlight">\(0.3726\)</span>. Since we used <code class="docutils literal notranslate"><span class="pre">0</span></code> and <code class="docutils literal notranslate"><span class="pre">1</span></code> to represent <code class="docutils literal notranslate"><span class="pre">belign</span></code> and <code class="docutils literal notranslate"><span class="pre">malignant</span></code> cancer, the mean implied that around <span class="math notranslate nohighlight">\(37.26\%\)</span> of the cancers in our data are <code class="docutils literal notranslate"><span class="pre">malignant</span></code>.</p>
+<p>Since the features are numerical, we could also observe their distritbuions. By the central limit theorem in statistics, some of our features should have a approximately normal distribution.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">file_list_lg</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;figures/smoothness_mean_distr.png&#39;</span><span class="p">,</span> <span class="s1">&#39;figures/compactness_se_distr.png&#39;</span><span class="p">,</span> <span class="s1">&#39;figures/area_worst_distr.png&#39;</span><span class="p">]</span>
+<span class="n">diagnosis</span><span class="o">.</span><span class="n">plot_three_figs_horizontally</span><span class="p">(</span><span class="n">file_list_lg</span><span class="p">)</span>
+</pre></div>
 </div>
 </div>
-<div class="section" id="prediction">
-<h2>Prediction<a class="headerlink" href="#prediction" title="Permalink to this headline">¶</a></h2>
+<div class="cell_output docutils container">
+<img alt="_images/main_25_0.png" src="_images/main_25_0.png" />
+</div>
+</div>
+<p>The three figures above are some examples. After plotting the distributions of all the features, we found that the majority of the <code class="docutils literal notranslate"><span class="pre">mean</span></code> features are roughly symmetric or normal whereas the majority of the <code class="docutils literal notranslate"><span class="pre">se</span></code> and <code class="docutils literal notranslate"><span class="pre">worst</span></code> features are relatively right-skewed.</p>
+</div>
+<div class="section" id="belign-vs-malignant">
+<h4>Belign vs Malignant<a class="headerlink" href="#belign-vs-malignant" title="Permalink to this headline">¶</a></h4>
+<p>Since we were interested in studying the difference between belign and malignant cancers, it might be helpful to analyze and compute the statistics of two populations separately and then compare.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">belign</span> <span class="o">=</span> <span class="n">clean_data</span><span class="p">[</span><span class="n">clean_data</span><span class="p">[</span><span class="s1">&#39;diagnosis&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">]</span>
+<span class="n">malignant</span> <span class="o">=</span> <span class="n">clean_data</span><span class="p">[</span><span class="n">clean_data</span><span class="p">[</span><span class="s1">&#39;diagnosis&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We first compared the means of each feature in two populations.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">clean_data</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;diagnosis&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">transpose</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>diagnosis</th>
+      <th>0.0</th>
+      <th>1.0</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>radius_mean</th>
+      <td>12.146524</td>
+      <td>17.462830</td>
+    </tr>
+    <tr>
+      <th>texture_mean</th>
+      <td>17.914762</td>
+      <td>21.604906</td>
+    </tr>
+    <tr>
+      <th>perimeter_mean</th>
+      <td>78.075406</td>
+      <td>115.365377</td>
+    </tr>
+    <tr>
+      <th>area_mean</th>
+      <td>462.790196</td>
+      <td>978.376415</td>
+    </tr>
+    <tr>
+      <th>smoothness_mean</th>
+      <td>0.092478</td>
+      <td>0.102898</td>
+    </tr>
+    <tr>
+      <th>compactness_mean</th>
+      <td>0.080085</td>
+      <td>0.145188</td>
+    </tr>
+    <tr>
+      <th>concavity_mean</th>
+      <td>0.046058</td>
+      <td>0.160775</td>
+    </tr>
+    <tr>
+      <th>concave points_mean</th>
+      <td>0.025717</td>
+      <td>0.087990</td>
+    </tr>
+    <tr>
+      <th>symmetry_mean</th>
+      <td>0.174186</td>
+      <td>0.192909</td>
+    </tr>
+    <tr>
+      <th>fractal_dimension_mean</th>
+      <td>0.062867</td>
+      <td>0.062680</td>
+    </tr>
+    <tr>
+      <th>radius_se</th>
+      <td>0.284082</td>
+      <td>0.609083</td>
+    </tr>
+    <tr>
+      <th>texture_se</th>
+      <td>1.220380</td>
+      <td>1.210915</td>
+    </tr>
+    <tr>
+      <th>perimeter_se</th>
+      <td>2.000321</td>
+      <td>4.323929</td>
+    </tr>
+    <tr>
+      <th>area_se</th>
+      <td>21.135148</td>
+      <td>72.672406</td>
+    </tr>
+    <tr>
+      <th>smoothness_se</th>
+      <td>0.007196</td>
+      <td>0.006780</td>
+    </tr>
+    <tr>
+      <th>compactness_se</th>
+      <td>0.021438</td>
+      <td>0.032281</td>
+    </tr>
+    <tr>
+      <th>concavity_se</th>
+      <td>0.025997</td>
+      <td>0.041824</td>
+    </tr>
+    <tr>
+      <th>concave points_se</th>
+      <td>0.009858</td>
+      <td>0.015060</td>
+    </tr>
+    <tr>
+      <th>symmetry_se</th>
+      <td>0.020584</td>
+      <td>0.020472</td>
+    </tr>
+    <tr>
+      <th>fractal_dimension_se</th>
+      <td>0.003636</td>
+      <td>0.004062</td>
+    </tr>
+    <tr>
+      <th>radius_worst</th>
+      <td>13.379801</td>
+      <td>21.134811</td>
+    </tr>
+    <tr>
+      <th>texture_worst</th>
+      <td>23.515070</td>
+      <td>29.318208</td>
+    </tr>
+    <tr>
+      <th>perimeter_worst</th>
+      <td>87.005938</td>
+      <td>141.370330</td>
+    </tr>
+    <tr>
+      <th>area_worst</th>
+      <td>558.899440</td>
+      <td>1422.286321</td>
+    </tr>
+    <tr>
+      <th>smoothness_worst</th>
+      <td>0.124959</td>
+      <td>0.144845</td>
+    </tr>
+    <tr>
+      <th>compactness_worst</th>
+      <td>0.182673</td>
+      <td>0.374824</td>
+    </tr>
+    <tr>
+      <th>concavity_worst</th>
+      <td>0.166238</td>
+      <td>0.450606</td>
+    </tr>
+    <tr>
+      <th>concave points_worst</th>
+      <td>0.074444</td>
+      <td>0.182237</td>
+    </tr>
+    <tr>
+      <th>symmetry_worst</th>
+      <td>0.270246</td>
+      <td>0.323468</td>
+    </tr>
+    <tr>
+      <th>fractal_dimension_worst</th>
+      <td>0.079442</td>
+      <td>0.091530</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Obviously, most of the features have different averages in two populations, but it is hard to tell whether such differences are significant or not. To assess this, we could compare the distributions of features in each population.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">file_list_lg</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;figures/smoothness_mean_distr_two_popu.png&#39;</span><span class="p">,</span> <span class="s1">&#39;figures/compactness_se_distr_two_popu.png&#39;</span><span class="p">,</span> <span class="s1">&#39;figures/area_worst_distr_two_popu.png&#39;</span><span class="p">]</span>
+<span class="n">diagnosis</span><span class="o">.</span><span class="n">plot_three_figs_horizontally</span><span class="p">(</span><span class="n">file_list_lg</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/main_33_0.png" src="_images/main_33_0.png" />
+</div>
+</div>
+<p>We chose the same three features we plotted before. We saw that although <code class="docutils literal notranslate"><span class="pre">belign</span></code> and <code class="docutils literal notranslate"><span class="pre">malignant</span></code> had different distributions in all the plots, it was still hard to judge whether it was due to the randomness since two populations have different size (as showed clearly in <code class="docutils literal notranslate"><span class="pre">smoothness_mean</span></code> feature). Thus, we should conduct some more rigorous statistical hypothesis testing, such as two-sample t-test, to judge this. And this would be shown in a later section.</p>
+<p>More details can be found in <code class="docutils literal notranslate"><span class="pre">codes/data_visual.ipynb</span></code>.</p>
+</div>
+</div>
+</div>
+<div class="section" id="prediction-model-construction">
+<h2>Prediction Model Construction<a class="headerlink" href="#prediction-model-construction" title="Permalink to this headline">¶</a></h2>
 <p>In our research, we wish to build a model that can identify whether the cancer is benign or malignant. To build a model with the best predictive power, we tried both parametric and nonparametric models, including Logistic Regression, Decision Tree, and Random Forest. Before develop models, we split our data into the training, validation, and test sets, and the breakdown is 68% for training, 17% for validation ,and 15% for testing.</p>
 <p>After training models, we used validation data to obtain metrics that measure models’ performance. We used the following metrics:</p>
 <ul class="simple">
@@ -649,12 +1960,12 @@
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">file_list_lg</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;figures/confusion_matrix_logistic.png&#39;</span><span class="p">,</span> <span class="s1">&#39;figures/precision_recall_curve_logistic.png&#39;</span><span class="p">,</span> <span class="s1">&#39;figures/roc_curve_logistic.png&#39;</span><span class="p">]</span>
-<span class="n">plot_three_metrics_horizontally</span><span class="p">(</span><span class="n">file_list_lg</span><span class="p">)</span>
+<span class="n">diagnosis</span><span class="o">.</span><span class="n">plot_three_figs_horizontally</span><span class="p">(</span><span class="n">file_list_lg</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/main_19_0.png" src="_images/main_19_0.png" />
+<img alt="_images/main_45_0.png" src="_images/main_45_0.png" />
 </div>
 </div>
 <p>Evaluation: The classifier seems to performing well with a very few false positive (falsely classifying cancer as malignant) and false negatives (falsely classfying the cancer as benign). In addition, the AUC of the classifier is 0.92, which means that the classifier is getting the correct answer 92% of the time.</p>
@@ -667,12 +1978,12 @@
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">file_list_dt</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;figures/confusion_matrix_dt.png&#39;</span><span class="p">,</span> <span class="s1">&#39;figures/precision_recall_curve_dt.png&#39;</span><span class="p">,</span> <span class="s1">&#39;figures/roc_curve_dt.png&#39;</span><span class="p">]</span>
-<span class="n">plot_three_metrics_horizontally</span><span class="p">(</span><span class="n">file_list_dt</span><span class="p">)</span>
+<span class="n">diagnosis</span><span class="o">.</span><span class="n">plot_three_figs_horizontally</span><span class="p">(</span><span class="n">file_list_dt</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/main_24_0.png" src="_images/main_24_0.png" />
+<img alt="_images/main_50_0.png" src="_images/main_50_0.png" />
 </div>
 </div>
 </div>
@@ -683,14 +1994,17 @@
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">file_list_rf</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;figures/confusion_matrix_rf.png&#39;</span><span class="p">,</span> <span class="s1">&#39;figures/precision_recall_curve_rf.png&#39;</span><span class="p">,</span> <span class="s1">&#39;figures/roc_curve_rf.png&#39;</span><span class="p">]</span>
-<span class="n">plot_three_metrics_horizontally</span><span class="p">(</span><span class="n">file_list_rf</span><span class="p">)</span>
+<span class="n">diagnosis</span><span class="o">.</span><span class="n">plot_three_figs_horizontally</span><span class="p">(</span><span class="n">file_list_rf</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/main_27_0.png" src="_images/main_27_0.png" />
+<img alt="_images/main_53_0.png" src="_images/main_53_0.png" />
 </div>
 </div>
+</div>
+<div class="section" id="model-selection-and-final-model-evaluation">
+<h3>Model Selection and Final Model Evaluation<a class="headerlink" href="#model-selection-and-final-model-evaluation" title="Permalink to this headline">¶</a></h3>
 </div>
 <div class="section" id="final-model">
 <h3>Final Model<a class="headerlink" href="#final-model" title="Permalink to this headline">¶</a></h3>
@@ -772,19 +2086,16 @@
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">file_list_final</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;figures/confusion_matrix_final.png&#39;</span><span class="p">,</span> <span class="s1">&#39;figures/precision_recall_curve_final.png&#39;</span><span class="p">,</span> <span class="s1">&#39;figures/roc_curve_final.png&#39;</span><span class="p">]</span>
-<span class="n">plot_three_metrics_horizontally</span><span class="p">(</span><span class="n">file_list_final</span><span class="p">)</span>
+<span class="n">diagnosis</span><span class="o">.</span><span class="n">plot_three_figs_horizontally</span><span class="p">(</span><span class="n">file_list_final</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/main_31_0.png" src="_images/main_31_0.png" />
+<img alt="_images/main_58_0.png" src="_images/main_58_0.png" />
 </div>
 </div>
 <p>The accuracy of final model is 0.9535, and the F1 score is 0.9412. Overall, we are able to build a prediction model that has high accuracy and balances precision and recall. One notable thing of our model is that it has a relatively higher False Negative Rate than False Positive Rate, which means it is more likely to identifiy a patient who actually has benign breast cancer as having malignant breast cancer. In future studies, we might focus on how to lower the FNR when building the predictive model.</p>
 </div>
-</div>
-<div class="section" id="assess-significance-of-features-using-lr">
-<h2>Assess significance of features using LR<a class="headerlink" href="#assess-significance-of-features-using-lr" title="Permalink to this headline">¶</a></h2>
 </div>
 <div class="section" id="hypothesis-testing">
 <h2>Hypothesis testing<a class="headerlink" href="#hypothesis-testing" title="Permalink to this headline">¶</a></h2>
@@ -856,9 +2167,10 @@ $<span class="math notranslate nohighlight">\(H_0: \mu_0 = \mu_1\)</span>$</p>
 </div>
 <div class="section" id="author-contributions">
 <h2>Author Contributions<a class="headerlink" href="#author-contributions" title="Permalink to this headline">¶</a></h2>
-<p>Jiaji Wu: created decision_tree_and_random_forest.ipynb and final_model_selection.ipynb to construct the decision tree and random forest and select the final model; contributed on the Prediction section in main.ipynb; added helper functions in <a class="reference external" href="http://modelmake.py">modelmake.py</a> and corresponding testing functions.</p>
-<p>Kshitij Chauhan (TJ): Created the logistic_reg.ipynb notebook to conduct logistic regression analysis and tests in test_logistic_reg.py file to test the functions. Also did the introduction, data description and logistic regression sections of this notebook.</p>
-<p>Neha Haq: Created the two_populations_analysis.ipynb notebook to conduct the parametric Two Sample T Tests and the non-parametric Wilcoxon Rank Sum Test. Set up the diagnosis python package. Wrote the methods in <a class="reference external" href="http://twosample.py">twosample.py</a> and the tests in the test_twosample.py. Created the Jupyter Book and the Github actions. Wrote the hypothesis tests section of the main.ipynb. Wrote the root <a class="reference external" href="http://README.md">README.md</a>.</p>
+<p>Jiaji Wu: Created <code class="docutils literal notranslate"><span class="pre">decision_tree_and_random_forest.ipynb</span></code> and <code class="docutils literal notranslate"><span class="pre">final_model_selection.ipynb</span></code> to construct the decision tree and random forest and select the final model; contributed on the Prediction Model Construction section in <code class="docutils literal notranslate"><span class="pre">main.ipynb</span></code>; added helper functions in <a class="reference external" href="http://modelmake.py">modelmake.py</a> and corresponding testing functions.</p>
+<p>Kshitij Chauhan (TJ): Created the <code class="docutils literal notranslate"><span class="pre">logistic_reg.ipynb</span> <span class="pre">notebook</span></code> to conduct logistic regression analysis and tests in test_logistic_reg.py file to test the functions. Also did the introduction, data description and logistic regression sections of this <code class="docutils literal notranslate"><span class="pre">main.ipynb</span></code> notebook.</p>
+<p>Neha Haq: Created the <code class="docutils literal notranslate"><span class="pre">two_populations_analysis.ipynb</span> <span class="pre">notebook</span></code> to conduct the parametric Two Sample T Tests and the non-parametric Wilcoxon Rank Sum Test. Set up the diagnosis python package. Wrote the methods in <code class="docutils literal notranslate"><span class="pre">twosample.py</span></code> and the tests in the <code class="docutils literal notranslate"><span class="pre">test_twosample.py</span></code>. Created the Jupyter Book and the Github actions. Wrote the hypothesis tests section of the <code class="docutils literal notranslate"><span class="pre">main.ipynb</span></code>. Wrote the root <code class="docutils literal notranslate"><span class="pre">README.md</span></code>.</p>
+<p>Wenhao Pan: Created <code class="docutils literal notranslate"><span class="pre">data_prepare.ipynb</span></code> and <code class="docutils literal notranslate"><span class="pre">data_visual.ipynb</span></code> notebooks and corresponding helper functions and testing functions in our local package <code class="docutils literal notranslate"><span class="pre">diagnosis</span></code>; created environment configuration files (<code class="docutils literal notranslate"><span class="pre">Makefile</span></code>, <code class="docutils literal notranslate"><span class="pre">environment.yml</span></code>, <code class="docutils literal notranslate"><span class="pre">requirements.txt</span></code>, and <code class="docutils literal notranslate"><span class="pre">*.sh</span></code>); designed the repository structure; responsible for most pull requests; coordinate the group meetings</p>
 </div>
 </div>
 
@@ -894,10 +2206,10 @@ $<span class="math notranslate nohighlight">\(H_0: \mu_0 = \mu_1\)</span>$</p>
             <p class="prev-next-title">A Study of a Breast Cancer Dataset</p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="codes/prepare.html" title="next page">
+    <a class='right-next' id="next-link" href="codes/logistic_reg.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Data Preparation</p>
+        <p class="prev-next-title">Logistic Regression</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>

@@ -52,7 +52,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Decision Tree and Random Forest" href="decision_tree_and_random_forest.html" />
-    <link rel="prev" title="Data Preparation" href="prepare.html" />
+    <link rel="prev" title="Breast Cancer Wisconsin (Diagnostic) Data Set" href="../main.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -100,11 +100,6 @@
  <li class="toctree-l1">
   <a class="reference internal" href="../main.html">
    Breast Cancer Wisconsin (Diagnostic) Data Set
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="prepare.html">
-   Data Preparation
   </a>
  </li>
  <li class="toctree-l1 current active">
@@ -232,56 +227,44 @@
             <nav id="bd-toc-nav" aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#in-this-notebook-we-will-perform-logistic-regression-and-then-evaluate-the-model-s-performance">
-   In this notebook, we will perform logistic regression and then evaluate the model’s performance.
+  <a class="reference internal nav-link" href="#import-necessary-packages">
+   Import necessary packages
   </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#logistic-regression-is-a-method-used-for-classification-of-data-it-estimates-posterior-probabilities-the-probability-that-the-data-point-belongs-to-a-class-and-based-on-that-it-classifies-the-data-point">
-     Logistic Regression is a method used for classification of data. It estimates posterior probabilities (the probability that the data point belongs to a class) and based on that it classifies the data point.
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#import-necessary-packages">
-     Import necessary packages
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#load-the-data">
-     Load the data
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#preparing-for-training-and-validation">
-     Preparing for training and validation
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#built-the-model-and-training">
-     Built the model and training
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#function-for-all-the-measured-metrics">
-     Function for all the measured metrics
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#creating-confusion-matrix-and-saving-it">
-     Creating confusion matrix and Saving it
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#create-the-roc-curve-and-saving-it">
-     Create the ROC Curve and Saving it
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#create-precision-recall-curve-and-saving-it">
-     Create Precision Recall Curve and Saving it
-    </a>
-   </li>
-  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#load-the-data">
+   Load the data
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#preparing-for-training-and-validation">
+   Preparing for training and validation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#built-the-model-and-training">
+   Built the model and training
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#function-for-all-the-measured-metrics">
+   Function for all the measured metrics
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#creating-confusion-matrix-and-saving-it">
+   Creating confusion matrix and Saving it
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#create-the-roc-curve-and-saving-it">
+   Create the ROC Curve and Saving it
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#create-precision-recall-curve-and-saving-it">
+   Create Precision Recall Curve and Saving it
+  </a>
  </li>
 </ul>
 
@@ -304,56 +287,44 @@
                         <nav aria-label="Page">
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#in-this-notebook-we-will-perform-logistic-regression-and-then-evaluate-the-model-s-performance">
-   In this notebook, we will perform logistic regression and then evaluate the model’s performance.
+  <a class="reference internal nav-link" href="#import-necessary-packages">
+   Import necessary packages
   </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#logistic-regression-is-a-method-used-for-classification-of-data-it-estimates-posterior-probabilities-the-probability-that-the-data-point-belongs-to-a-class-and-based-on-that-it-classifies-the-data-point">
-     Logistic Regression is a method used for classification of data. It estimates posterior probabilities (the probability that the data point belongs to a class) and based on that it classifies the data point.
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#import-necessary-packages">
-     Import necessary packages
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#load-the-data">
-     Load the data
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#preparing-for-training-and-validation">
-     Preparing for training and validation
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#built-the-model-and-training">
-     Built the model and training
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#function-for-all-the-measured-metrics">
-     Function for all the measured metrics
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#creating-confusion-matrix-and-saving-it">
-     Creating confusion matrix and Saving it
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#create-the-roc-curve-and-saving-it">
-     Create the ROC Curve and Saving it
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#create-precision-recall-curve-and-saving-it">
-     Create Precision Recall Curve and Saving it
-    </a>
-   </li>
-  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#load-the-data">
+   Load the data
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#preparing-for-training-and-validation">
+   Preparing for training and validation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#built-the-model-and-training">
+   Built the model and training
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#function-for-all-the-measured-metrics">
+   Function for all the measured metrics
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#creating-confusion-matrix-and-saving-it">
+   Creating confusion matrix and Saving it
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#create-the-roc-curve-and-saving-it">
+   Create the ROC Curve and Saving it
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#create-precision-recall-curve-and-saving-it">
+   Create Precision Recall Curve and Saving it
+  </a>
  </li>
 </ul>
 
@@ -366,13 +337,10 @@
                 
   <div class="tex2jax_ignore mathjax_ignore section" id="logistic-regression">
 <h1>Logistic Regression<a class="headerlink" href="#logistic-regression" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="in-this-notebook-we-will-perform-logistic-regression-and-then-evaluate-the-model-s-performance">
-<h2>In this notebook, we will perform logistic regression and then evaluate the model’s performance.<a class="headerlink" href="#in-this-notebook-we-will-perform-logistic-regression-and-then-evaluate-the-model-s-performance" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="logistic-regression-is-a-method-used-for-classification-of-data-it-estimates-posterior-probabilities-the-probability-that-the-data-point-belongs-to-a-class-and-based-on-that-it-classifies-the-data-point">
-<h3>Logistic Regression is a method used for classification of data. It estimates posterior probabilities (the probability that the data point belongs to a class) and based on that it classifies the data point.<a class="headerlink" href="#logistic-regression-is-a-method-used-for-classification-of-data-it-estimates-posterior-probabilities-the-probability-that-the-data-point-belongs-to-a-class-and-based-on-that-it-classifies-the-data-point" title="Permalink to this headline">¶</a></h3>
-</div>
+<p>In this notebook, we will perform logistic regression and then evaluate the model’s performance.</p>
+<p>Logistic Regression is a method used for classification of data. It estimates posterior probabilities (the probability that the data point belongs to a class) and based on that it classifies the data point.</p>
 <div class="section" id="import-necessary-packages">
-<h3>Import necessary packages<a class="headerlink" href="#import-necessary-packages" title="Permalink to this headline">¶</a></h3>
+<h2>Import necessary packages<a class="headerlink" href="#import-necessary-packages" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
@@ -387,7 +355,7 @@
 </div>
 </div>
 <div class="section" id="load-the-data">
-<h3>Load the data<a class="headerlink" href="#load-the-data" title="Permalink to this headline">¶</a></h3>
+<h2>Load the data<a class="headerlink" href="#load-the-data" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">train_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;../data/train.csv&#39;</span><span class="p">)</span>
@@ -399,7 +367,7 @@
 </div>
 </div>
 <div class="section" id="preparing-for-training-and-validation">
-<h3>Preparing for training and validation<a class="headerlink" href="#preparing-for-training-and-validation" title="Permalink to this headline">¶</a></h3>
+<h2>Preparing for training and validation<a class="headerlink" href="#preparing-for-training-and-validation" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">preprocessing</span><span class="p">(</span><span class="n">train_data</span><span class="p">,</span><span class="n">val_data</span><span class="p">):</span>
@@ -430,7 +398,7 @@
 </div>
 </div>
 <div class="section" id="built-the-model-and-training">
-<h3>Built the model and training<a class="headerlink" href="#built-the-model-and-training" title="Permalink to this headline">¶</a></h3>
+<h2>Built the model and training<a class="headerlink" href="#built-the-model-and-training" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model</span> <span class="o">=</span> <span class="n">LogisticRegression</span><span class="p">(</span><span class="n">max_iter</span> <span class="o">=</span> <span class="mi">5000</span><span class="p">)</span>
@@ -473,7 +441,7 @@
 </div>
 </div>
 <div class="section" id="function-for-all-the-measured-metrics">
-<h3>Function for all the measured metrics<a class="headerlink" href="#function-for-all-the-measured-metrics" title="Permalink to this headline">¶</a></h3>
+<h2>Function for all the measured metrics<a class="headerlink" href="#function-for-all-the-measured-metrics" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_metrics</span><span class="p">(</span><span class="n">y_preds</span><span class="p">,</span><span class="n">y_val</span><span class="p">):</span>
@@ -512,7 +480,7 @@ F1 score is: 0.8985507246376812
 </div>
 </div>
 <div class="section" id="creating-confusion-matrix-and-saving-it">
-<h3>Creating confusion matrix and Saving it<a class="headerlink" href="#creating-confusion-matrix-and-saving-it" title="Permalink to this headline">¶</a></h3>
+<h2>Creating confusion matrix and Saving it<a class="headerlink" href="#creating-confusion-matrix-and-saving-it" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ConfusionMatrixDisplay</span><span class="o">.</span><span class="n">from_predictions</span><span class="p">(</span><span class="n">y_val</span><span class="p">,</span><span class="n">y_preds</span><span class="p">);</span>
@@ -526,7 +494,7 @@ F1 score is: 0.8985507246376812
 </div>
 </div>
 <div class="section" id="create-the-roc-curve-and-saving-it">
-<h3>Create the ROC Curve and Saving it<a class="headerlink" href="#create-the-roc-curve-and-saving-it" title="Permalink to this headline">¶</a></h3>
+<h2>Create the ROC Curve and Saving it<a class="headerlink" href="#create-the-roc-curve-and-saving-it" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">RocCurveDisplay</span><span class="o">.</span><span class="n">from_predictions</span><span class="p">(</span><span class="n">y_preds</span><span class="p">,</span><span class="n">y_val</span><span class="p">);</span>
@@ -540,7 +508,7 @@ F1 score is: 0.8985507246376812
 </div>
 </div>
 <div class="section" id="create-precision-recall-curve-and-saving-it">
-<h3>Create Precision Recall Curve and Saving it<a class="headerlink" href="#create-precision-recall-curve-and-saving-it" title="Permalink to this headline">¶</a></h3>
+<h2>Create Precision Recall Curve and Saving it<a class="headerlink" href="#create-precision-recall-curve-and-saving-it" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">PrecisionRecallDisplay</span><span class="o">.</span><span class="n">from_predictions</span><span class="p">(</span><span class="n">y_preds</span><span class="p">,</span><span class="n">y_val</span><span class="p">);</span>
@@ -558,7 +526,6 @@ F1 score is: 0.8985507246376812
 <span class="n">filename</span> <span class="o">=</span> <span class="s1">&#39;lg_model.sav&#39;</span>
 <span class="n">pickle</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s1">&#39;wb&#39;</span><span class="p">))</span>
 </pre></div>
-</div>
 </div>
 </div>
 </div>
@@ -590,11 +557,11 @@ F1 score is: 0.8985507246376812
             
                 <!-- Previous / next buttons -->
 <div class='prev-next-area'> 
-    <a class='left-prev' id="prev-link" href="prepare.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="../main.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Data Preparation</p>
+            <p class="prev-next-title">Breast Cancer Wisconsin (Diagnostic) Data Set</p>
         </div>
     </a>
     <a class='right-next' id="next-link" href="decision_tree_and_random_forest.html" title="next page">

@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Exploratory Data Analysis (EDA) &#8212; My STAT 159 Homework 7 Book</title>
+    <title>Data Visualization &#8212; My STAT 159 Homework 7 Book</title>
     
   <link href="../_static/css/theme.css" rel="stylesheet">
   <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
@@ -103,11 +103,6 @@
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="prepare.html">
-   Data Preparation
-  </a>
- </li>
- <li class="toctree-l1">
   <a class="reference internal" href="logistic_reg.html">
    Logistic Regression
   </a>
@@ -168,7 +163,7 @@
         <!-- ipynb file if we had a myst markdown file -->
         
         <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../_sources/codes/EDA.ipynb"><button type="button"
+        <a class="dropdown-buttons" href="../_sources/codes/data_visual.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
                 data-placement="left">.ipynb</button></a>
         <!-- Download PDF via print -->
@@ -188,7 +183,7 @@
                 data-toggle="tooltip" data-placement="left" title="Source repository"><i
                     class="fab fa-github"></i>repository</button></a>
         <a class="issues-button"
-            href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fcodes/EDA.html&body=Your%20issue%20content%20here."><button
+            href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fcodes/data_visual.html&body=Your%20issue%20content%20here."><button
                 type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
                 title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
         
@@ -209,7 +204,7 @@
         aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
     <div class="dropdown-buttons">
         
-        <a class="binder-button" href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/docs/codes/EDA.ipynb"><button type="button"
+        <a class="binder-button" href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/docs/codes/data_visual.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
                 data-placement="left"><img class="binder-button-logo"
                     src="../_static/images/logo_binder.svg"
@@ -263,7 +258,7 @@
         <div class="col-12 col-md-9 pl-md-3 pr-md-0">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Exploratory Data Analysis (EDA)</h1>
+                <h1>Data Visualization</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -304,9 +299,9 @@
             
               <div>
                 
-  <div class="tex2jax_ignore mathjax_ignore section" id="exploratory-data-analysis-eda">
-<h1>Exploratory Data Analysis (EDA)<a class="headerlink" href="#exploratory-data-analysis-eda" title="Permalink to this headline">¶</a></h1>
-<p>In this notebook, we conduct an exploratory data analysis on the clean data.</p>
+  <div class="tex2jax_ignore mathjax_ignore section" id="data-visualization">
+<h1>Data Visualization<a class="headerlink" href="#data-visualization" title="Permalink to this headline">¶</a></h1>
+<p>In this notebook, we conduct data visulization on the clean data.</p>
 <div class="section" id="load-the-data">
 <h2>Load the data<a class="headerlink" href="#load-the-data" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
@@ -523,11 +518,11 @@
 </div>
 </div>
 </div>
-<p>Besides the feature <code class="docutils literal notranslate"><span class="pre">id</span></code>, there are 30 features in total, which can be splited into three groups - mean, standard error, and “worst” or largest. In each group, we have <code class="docutils literal notranslate"><span class="pre">radius</span></code>, <code class="docutils literal notranslate"><span class="pre">texture</span></code>, <code class="docutils literal notranslate"><span class="pre">perimeter</span></code>, <code class="docutils literal notranslate"><span class="pre">area</span></code>, <code class="docutils literal notranslate"><span class="pre">smoothness</span></code>, <code class="docutils literal notranslate"><span class="pre">compactness</span></code>, <code class="docutils literal notranslate"><span class="pre">concavity</span></code>, <code class="docutils literal notranslate"><span class="pre">concave</span> <span class="pre">points</span></code>, <code class="docutils literal notranslate"><span class="pre">symmetry</span></code>, and <code class="docutils literal notranslate"><span class="pre">fractal</span> <span class="pre">dimension</span></code>.</p>
+<p>Besides the feature <code class="docutils literal notranslate"><span class="pre">id</span></code> and the response variable <code class="docutils literal notranslate"><span class="pre">diagnosis</span></code>, there are 30 features in total, which can be splited into three groups - mean, standard error, and “worst” or largest. In each group, we have <code class="docutils literal notranslate"><span class="pre">radius</span></code>, <code class="docutils literal notranslate"><span class="pre">texture</span></code>, <code class="docutils literal notranslate"><span class="pre">perimeter</span></code>, <code class="docutils literal notranslate"><span class="pre">area</span></code>, <code class="docutils literal notranslate"><span class="pre">smoothness</span></code>, <code class="docutils literal notranslate"><span class="pre">compactness</span></code>, <code class="docutils literal notranslate"><span class="pre">concavity</span></code>, <code class="docutils literal notranslate"><span class="pre">concave</span> <span class="pre">points</span></code>, <code class="docutils literal notranslate"><span class="pre">symmetry</span></code>, and <code class="docutils literal notranslate"><span class="pre">fractal</span> <span class="pre">dimension</span></code>.</p>
 <p>Since the three groups of features describe similar things, we might want to inspect the collinearity between each pair of features by computing the correlation matrix.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">clean_data</span><span class="o">.</span><span class="n">corr</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">clean_data</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s2">&quot;diagnosis&quot;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">corr</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -550,7 +545,6 @@
   <thead>
     <tr style="text-align: right;">
       <th></th>
-      <th>diagnosis</th>
       <th>radius_mean</th>
       <th>texture_mean</th>
       <th>perimeter_mean</th>
@@ -560,6 +554,7 @@
       <th>concavity_mean</th>
       <th>concave points_mean</th>
       <th>symmetry_mean</th>
+      <th>fractal_dimension_mean</th>
       <th>...</th>
       <th>radius_worst</th>
       <th>texture_worst</th>
@@ -575,32 +570,7 @@
   </thead>
   <tbody>
     <tr>
-      <th>diagnosis</th>
-      <td>1.000000</td>
-      <td>0.730029</td>
-      <td>0.415185</td>
-      <td>0.742636</td>
-      <td>0.708984</td>
-      <td>0.358560</td>
-      <td>0.596534</td>
-      <td>0.696360</td>
-      <td>0.776614</td>
-      <td>0.330499</td>
-      <td>...</td>
-      <td>0.776454</td>
-      <td>0.456903</td>
-      <td>0.782914</td>
-      <td>0.733825</td>
-      <td>0.421465</td>
-      <td>0.590998</td>
-      <td>0.659610</td>
-      <td>0.793566</td>
-      <td>0.416294</td>
-      <td>0.323872</td>
-    </tr>
-    <tr>
       <th>radius_mean</th>
-      <td>0.730029</td>
       <td>1.000000</td>
       <td>0.323782</td>
       <td>0.997855</td>
@@ -610,6 +580,7 @@
       <td>0.676764</td>
       <td>0.822529</td>
       <td>0.147741</td>
+      <td>-0.311631</td>
       <td>...</td>
       <td>0.969539</td>
       <td>0.297008</td>
@@ -624,7 +595,6 @@
     </tr>
     <tr>
       <th>texture_mean</th>
-      <td>0.415185</td>
       <td>0.323782</td>
       <td>1.000000</td>
       <td>0.329533</td>
@@ -634,6 +604,7 @@
       <td>0.302418</td>
       <td>0.293464</td>
       <td>0.071401</td>
+      <td>-0.076437</td>
       <td>...</td>
       <td>0.352573</td>
       <td>0.912045</td>
@@ -648,7 +619,6 @@
     </tr>
     <tr>
       <th>perimeter_mean</th>
-      <td>0.742636</td>
       <td>0.997855</td>
       <td>0.329533</td>
       <td>1.000000</td>
@@ -658,6 +628,7 @@
       <td>0.716136</td>
       <td>0.850977</td>
       <td>0.183027</td>
+      <td>-0.261477</td>
       <td>...</td>
       <td>0.969476</td>
       <td>0.303038</td>
@@ -672,7 +643,6 @@
     </tr>
     <tr>
       <th>area_mean</th>
-      <td>0.708984</td>
       <td>0.987357</td>
       <td>0.321086</td>
       <td>0.986507</td>
@@ -682,6 +652,7 @@
       <td>0.685983</td>
       <td>0.823269</td>
       <td>0.151293</td>
+      <td>-0.283110</td>
       <td>...</td>
       <td>0.962746</td>
       <td>0.287489</td>
@@ -696,7 +667,6 @@
     </tr>
     <tr>
       <th>smoothness_mean</th>
-      <td>0.358560</td>
       <td>0.170581</td>
       <td>-0.023389</td>
       <td>0.207278</td>
@@ -706,6 +676,7 @@
       <td>0.521984</td>
       <td>0.553695</td>
       <td>0.557775</td>
+      <td>0.584792</td>
       <td>...</td>
       <td>0.213120</td>
       <td>0.036072</td>
@@ -720,7 +691,6 @@
     </tr>
     <tr>
       <th>compactness_mean</th>
-      <td>0.596534</td>
       <td>0.506124</td>
       <td>0.236702</td>
       <td>0.556936</td>
@@ -730,6 +700,7 @@
       <td>0.883121</td>
       <td>0.831135</td>
       <td>0.602641</td>
+      <td>0.565369</td>
       <td>...</td>
       <td>0.535315</td>
       <td>0.248133</td>
@@ -744,7 +715,6 @@
     </tr>
     <tr>
       <th>concavity_mean</th>
-      <td>0.696360</td>
       <td>0.676764</td>
       <td>0.302418</td>
       <td>0.716136</td>
@@ -754,6 +724,7 @@
       <td>1.000000</td>
       <td>0.921391</td>
       <td>0.500667</td>
+      <td>0.336783</td>
       <td>...</td>
       <td>0.688236</td>
       <td>0.299879</td>
@@ -768,7 +739,6 @@
     </tr>
     <tr>
       <th>concave points_mean</th>
-      <td>0.776614</td>
       <td>0.822529</td>
       <td>0.293464</td>
       <td>0.850977</td>
@@ -778,6 +748,7 @@
       <td>0.921391</td>
       <td>1.000000</td>
       <td>0.462497</td>
+      <td>0.166917</td>
       <td>...</td>
       <td>0.830318</td>
       <td>0.292752</td>
@@ -792,7 +763,6 @@
     </tr>
     <tr>
       <th>symmetry_mean</th>
-      <td>0.330499</td>
       <td>0.147741</td>
       <td>0.071401</td>
       <td>0.183027</td>
@@ -802,6 +772,7 @@
       <td>0.500667</td>
       <td>0.462497</td>
       <td>1.000000</td>
+      <td>0.479921</td>
       <td>...</td>
       <td>0.185728</td>
       <td>0.090651</td>
@@ -816,7 +787,6 @@
     </tr>
     <tr>
       <th>fractal_dimension_mean</th>
-      <td>-0.012838</td>
       <td>-0.311631</td>
       <td>-0.076437</td>
       <td>-0.261477</td>
@@ -826,6 +796,7 @@
       <td>0.336783</td>
       <td>0.166917</td>
       <td>0.479921</td>
+      <td>1.000000</td>
       <td>...</td>
       <td>-0.253691</td>
       <td>-0.051269</td>
@@ -840,7 +811,6 @@
     </tr>
     <tr>
       <th>radius_se</th>
-      <td>0.567134</td>
       <td>0.679090</td>
       <td>0.275869</td>
       <td>0.691765</td>
@@ -850,6 +820,7 @@
       <td>0.631925</td>
       <td>0.698050</td>
       <td>0.303379</td>
+      <td>0.000111</td>
       <td>...</td>
       <td>0.715065</td>
       <td>0.194799</td>
@@ -864,7 +835,6 @@
     </tr>
     <tr>
       <th>texture_se</th>
-      <td>-0.008303</td>
       <td>-0.097317</td>
       <td>0.386358</td>
       <td>-0.086761</td>
@@ -874,6 +844,7 @@
       <td>0.076218</td>
       <td>0.021480</td>
       <td>0.128053</td>
+      <td>0.164174</td>
       <td>...</td>
       <td>-0.111690</td>
       <td>0.409003</td>
@@ -888,7 +859,6 @@
     </tr>
     <tr>
       <th>perimeter_se</th>
-      <td>0.556141</td>
       <td>0.674172</td>
       <td>0.281673</td>
       <td>0.693135</td>
@@ -898,6 +868,7 @@
       <td>0.660391</td>
       <td>0.710650</td>
       <td>0.313893</td>
+      <td>0.039830</td>
       <td>...</td>
       <td>0.697201</td>
       <td>0.200371</td>
@@ -912,7 +883,6 @@
     </tr>
     <tr>
       <th>area_se</th>
-      <td>0.548236</td>
       <td>0.735864</td>
       <td>0.259845</td>
       <td>0.744983</td>
@@ -922,6 +892,7 @@
       <td>0.617427</td>
       <td>0.690299</td>
       <td>0.223970</td>
+      <td>-0.090170</td>
       <td>...</td>
       <td>0.757373</td>
       <td>0.196497</td>
@@ -936,7 +907,6 @@
     </tr>
     <tr>
       <th>smoothness_se</th>
-      <td>-0.067016</td>
       <td>-0.222600</td>
       <td>0.006614</td>
       <td>-0.202694</td>
@@ -946,6 +916,7 @@
       <td>0.098564</td>
       <td>0.027653</td>
       <td>0.187321</td>
+      <td>0.401964</td>
       <td>...</td>
       <td>-0.230691</td>
       <td>-0.074743</td>
@@ -960,7 +931,6 @@
     </tr>
     <tr>
       <th>compactness_se</th>
-      <td>0.292999</td>
       <td>0.206000</td>
       <td>0.191975</td>
       <td>0.250744</td>
@@ -970,6 +940,7 @@
       <td>0.670279</td>
       <td>0.490424</td>
       <td>0.421659</td>
+      <td>0.559837</td>
       <td>...</td>
       <td>0.204607</td>
       <td>0.143003</td>
@@ -984,7 +955,6 @@
     </tr>
     <tr>
       <th>concavity_se</th>
-      <td>0.253730</td>
       <td>0.194204</td>
       <td>0.143293</td>
       <td>0.228082</td>
@@ -994,6 +964,7 @@
       <td>0.691270</td>
       <td>0.439167</td>
       <td>0.342627</td>
+      <td>0.446630</td>
       <td>...</td>
       <td>0.186904</td>
       <td>0.100241</td>
@@ -1008,7 +979,6 @@
     </tr>
     <tr>
       <th>concave points_se</th>
-      <td>0.408042</td>
       <td>0.376169</td>
       <td>0.163851</td>
       <td>0.407217</td>
@@ -1018,6 +988,7 @@
       <td>0.683260</td>
       <td>0.615634</td>
       <td>0.393298</td>
+      <td>0.341198</td>
       <td>...</td>
       <td>0.358127</td>
       <td>0.086741</td>
@@ -1032,7 +1003,6 @@
     </tr>
     <tr>
       <th>symmetry_se</th>
-      <td>-0.006522</td>
       <td>-0.104321</td>
       <td>0.009127</td>
       <td>-0.081629</td>
@@ -1042,6 +1012,7 @@
       <td>0.178009</td>
       <td>0.095351</td>
       <td>0.449137</td>
+      <td>0.345007</td>
       <td>...</td>
       <td>-0.128121</td>
       <td>-0.077473</td>
@@ -1056,7 +1027,6 @@
     </tr>
     <tr>
       <th>fractal_dimension_se</th>
-      <td>0.077972</td>
       <td>-0.042641</td>
       <td>0.054458</td>
       <td>-0.005523</td>
@@ -1066,6 +1036,7 @@
       <td>0.449301</td>
       <td>0.257584</td>
       <td>0.331786</td>
+      <td>0.688132</td>
       <td>...</td>
       <td>-0.037488</td>
       <td>-0.003195</td>
@@ -1080,7 +1051,6 @@
     </tr>
     <tr>
       <th>radius_worst</th>
-      <td>0.776454</td>
       <td>0.969539</td>
       <td>0.352573</td>
       <td>0.969476</td>
@@ -1090,6 +1060,7 @@
       <td>0.688236</td>
       <td>0.830318</td>
       <td>0.185728</td>
+      <td>-0.253691</td>
       <td>...</td>
       <td>1.000000</td>
       <td>0.359921</td>
@@ -1104,7 +1075,6 @@
     </tr>
     <tr>
       <th>texture_worst</th>
-      <td>0.456903</td>
       <td>0.297008</td>
       <td>0.912045</td>
       <td>0.303038</td>
@@ -1114,6 +1084,7 @@
       <td>0.299879</td>
       <td>0.292752</td>
       <td>0.090651</td>
+      <td>-0.051269</td>
       <td>...</td>
       <td>0.359921</td>
       <td>1.000000</td>
@@ -1128,7 +1099,6 @@
     </tr>
     <tr>
       <th>perimeter_worst</th>
-      <td>0.782914</td>
       <td>0.965137</td>
       <td>0.358040</td>
       <td>0.970387</td>
@@ -1138,6 +1108,7 @@
       <td>0.729565</td>
       <td>0.855923</td>
       <td>0.219169</td>
+      <td>-0.205151</td>
       <td>...</td>
       <td>0.993708</td>
       <td>0.365098</td>
@@ -1152,7 +1123,6 @@
     </tr>
     <tr>
       <th>area_worst</th>
-      <td>0.733825</td>
       <td>0.941082</td>
       <td>0.343546</td>
       <td>0.941550</td>
@@ -1162,6 +1132,7 @@
       <td>0.675987</td>
       <td>0.809630</td>
       <td>0.177193</td>
+      <td>-0.231854</td>
       <td>...</td>
       <td>0.984015</td>
       <td>0.345842</td>
@@ -1176,7 +1147,6 @@
     </tr>
     <tr>
       <th>smoothness_worst</th>
-      <td>0.421465</td>
       <td>0.119616</td>
       <td>0.077503</td>
       <td>0.150549</td>
@@ -1186,6 +1156,7 @@
       <td>0.448822</td>
       <td>0.452753</td>
       <td>0.426675</td>
+      <td>0.504942</td>
       <td>...</td>
       <td>0.216574</td>
       <td>0.225429</td>
@@ -1200,7 +1171,6 @@
     </tr>
     <tr>
       <th>compactness_worst</th>
-      <td>0.590998</td>
       <td>0.413463</td>
       <td>0.277830</td>
       <td>0.455774</td>
@@ -1210,6 +1180,7 @@
       <td>0.754968</td>
       <td>0.667454</td>
       <td>0.473200</td>
+      <td>0.458798</td>
       <td>...</td>
       <td>0.475820</td>
       <td>0.360832</td>
@@ -1224,7 +1195,6 @@
     </tr>
     <tr>
       <th>concavity_worst</th>
-      <td>0.659610</td>
       <td>0.526911</td>
       <td>0.301025</td>
       <td>0.563879</td>
@@ -1234,6 +1204,7 @@
       <td>0.884103</td>
       <td>0.752399</td>
       <td>0.433721</td>
+      <td>0.346234</td>
       <td>...</td>
       <td>0.573975</td>
       <td>0.368366</td>
@@ -1248,7 +1219,6 @@
     </tr>
     <tr>
       <th>concave points_worst</th>
-      <td>0.793566</td>
       <td>0.744214</td>
       <td>0.295316</td>
       <td>0.771241</td>
@@ -1258,6 +1228,7 @@
       <td>0.861323</td>
       <td>0.910155</td>
       <td>0.430297</td>
+      <td>0.175325</td>
       <td>...</td>
       <td>0.787424</td>
       <td>0.359755</td>
@@ -1272,7 +1243,6 @@
     </tr>
     <tr>
       <th>symmetry_worst</th>
-      <td>0.416294</td>
       <td>0.163953</td>
       <td>0.105008</td>
       <td>0.189115</td>
@@ -1282,6 +1252,7 @@
       <td>0.409464</td>
       <td>0.375744</td>
       <td>0.699826</td>
+      <td>0.334019</td>
       <td>...</td>
       <td>0.243529</td>
       <td>0.233027</td>
@@ -1296,7 +1267,6 @@
     </tr>
     <tr>
       <th>fractal_dimension_worst</th>
-      <td>0.323872</td>
       <td>0.007066</td>
       <td>0.119205</td>
       <td>0.051019</td>
@@ -1306,6 +1276,7 @@
       <td>0.514930</td>
       <td>0.368661</td>
       <td>0.438413</td>
+      <td>0.767297</td>
       <td>...</td>
       <td>0.093492</td>
       <td>0.219122</td>
@@ -1320,7 +1291,7 @@
     </tr>
   </tbody>
 </table>
-<p>31 rows × 31 columns</p>
+<p>30 rows × 30 columns</p>
 </div></div></div>
 </div>
 <p>We can see some pairs of features have relatively high correlation, such as <code class="docutils literal notranslate"><span class="pre">radius_mean</span></code> vs <code class="docutils literal notranslate"><span class="pre">radius_worst</span></code> and <code class="docutils literal notranslate"><span class="pre">perimeter_mean</span></code> vs <code class="docutils literal notranslate"><span class="pre">radius_mean</span></code>. This can give us a warning about variability and stability for later computation and statistical analysis.</p>
@@ -1579,26 +1550,32 @@
 <span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">clean_data</span><span class="p">[</span><span class="s1">&#39;smoothness_mean&#39;</span><span class="p">])</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;smoothness_mean&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;count&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Distribution of smoothness_mean&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s2">&quot;../figures/smoothness_mean_distr&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">clean_data</span><span class="p">[</span><span class="s1">&#39;compactness_se&#39;</span><span class="p">])</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;compactness_se&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;count&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Distribution of compactness_se&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s2">&quot;../figures/compactness_se_distr&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">clean_data</span><span class="p">[</span><span class="s1">&#39;area_worst&#39;</span><span class="p">])</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;area_worst&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;count&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Distribution of area_worst&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s2">&quot;../figures/area_worst_distr&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/EDA_15_0.png" src="../_images/EDA_15_0.png" />
-<img alt="../_images/EDA_15_1.png" src="../_images/EDA_15_1.png" />
-<img alt="../_images/EDA_15_2.png" src="../_images/EDA_15_2.png" />
+<img alt="../_images/data_visual_15_0.png" src="../_images/data_visual_15_0.png" />
+<img alt="../_images/data_visual_15_1.png" src="../_images/data_visual_15_1.png" />
+<img alt="../_images/data_visual_15_2.png" src="../_images/data_visual_15_2.png" />
 </div>
 </div>
 <p>After plotting the distributions of all the features, we found that the majority of the <code class="docutils literal notranslate"><span class="pre">mean</span></code> features are roughly symmetric or normal whereas the majority of the <code class="docutils literal notranslate"><span class="pre">se</span></code> and <code class="docutils literal notranslate"><span class="pre">worst</span></code> features are relatively right-skewed.</p>
@@ -1608,8 +1585,8 @@
 <p>Since we are interested in studying the difference between belign and malignant cancers, it might be helpful to analyze and compute the statistics of two populations separately and then compare.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">belign</span> <span class="o">=</span> <span class="n">clean_data</span><span class="p">[</span><span class="n">clean_data</span><span class="p">[</span><span class="s1">&#39;diagnosis&#39;</span><span class="p">]</span><span class="o">==</span><span class="mi">0</span><span class="p">]</span>
-<span class="n">malignant</span> <span class="o">=</span> <span class="n">clean_data</span><span class="p">[</span><span class="n">clean_data</span><span class="p">[</span><span class="s1">&#39;diagnosis&#39;</span><span class="p">]</span><span class="o">==</span><span class="mi">1</span><span class="p">]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">belign</span> <span class="o">=</span> <span class="n">clean_data</span><span class="p">[</span><span class="n">clean_data</span><span class="p">[</span><span class="s1">&#39;diagnosis&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">]</span>
+<span class="n">malignant</span> <span class="o">=</span> <span class="n">clean_data</span><span class="p">[</span><span class="n">clean_data</span><span class="p">[</span><span class="s1">&#39;diagnosis&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
@@ -1808,33 +1785,38 @@
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;smoothness_mean&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;count&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Distributions of smoothness_mean in two populations&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s2">&quot;../figures/smoothness_mean_distr_two_popu&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">belign</span><span class="p">[</span><span class="s1">&#39;smoothness_se&#39;</span><span class="p">],</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;belign&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">malignant</span><span class="p">[</span><span class="s1">&#39;smoothness_se&#39;</span><span class="p">],</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;malignant&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;smoothness_se&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">belign</span><span class="p">[</span><span class="s1">&#39;compactness_se&#39;</span><span class="p">],</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;belign&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">malignant</span><span class="p">[</span><span class="s1">&#39;compactness_se&#39;</span><span class="p">],</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;malignant&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;compactness_se&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;count&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Distributions of compactness_se in two populations&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s2">&quot;../figures/compactness_se_distr_two_popu&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">belign</span><span class="p">[</span><span class="s1">&#39;smoothness_worst&#39;</span><span class="p">],</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;belign&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">malignant</span><span class="p">[</span><span class="s1">&#39;smoothness_worst&#39;</span><span class="p">],</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;malignant&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;smoothness_worst&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">belign</span><span class="p">[</span><span class="s1">&#39;area_worst&#39;</span><span class="p">],</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;belign&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">malignant</span><span class="p">[</span><span class="s1">&#39;area_worst&#39;</span><span class="p">],</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;malignant&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;area_worst&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;count&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Distributions of area_worse in two populations&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s2">&quot;../figures/area_worst_distr_two_popu&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/EDA_23_0.png" src="../_images/EDA_23_0.png" />
-<img alt="../_images/EDA_23_1.png" src="../_images/EDA_23_1.png" />
-<img alt="../_images/EDA_23_2.png" src="../_images/EDA_23_2.png" />
+<img alt="../_images/data_visual_23_0.png" src="../_images/data_visual_23_0.png" />
+<img alt="../_images/data_visual_23_1.png" src="../_images/data_visual_23_1.png" />
+<img alt="../_images/data_visual_23_2.png" src="../_images/data_visual_23_2.png" />
 </div>
 </div>
-<p>We choose three features related to <code class="docutils literal notranslate"><span class="pre">smoothness</span></code> to plot over here. We can see that although <code class="docutils literal notranslate"><span class="pre">belign</span></code> and <code class="docutils literal notranslate"><span class="pre">malignant</span></code> have different distributions in all the plots, it is still hard to judge whether it is due to the randomness since two populations have different size (as showed clearly in <code class="docutils literal notranslate"><span class="pre">smoothness_mean</span></code> feature). Thus, we should conduct some more rigorous statistical hypothesis testing, such as two-sample t-test, to judge this. And this will be done in a separate notebook called <code class="docutils literal notranslate"><span class="pre">two-populations-analysis.ipynb</span></code>.</p>
+<p>We chose the same three features we plotted before. We can see that although <code class="docutils literal notranslate"><span class="pre">belign</span></code> and <code class="docutils literal notranslate"><span class="pre">malignant</span></code> have different distributions in all the plots, it is still hard to judge whether it is due to the randomness since two populations have different size (as showed clearly in <code class="docutils literal notranslate"><span class="pre">smoothness_mean</span></code> feature). Thus, we should conduct some more rigorous statistical hypothesis testing, such as two-sample t-test, to judge this. And this will be done in a separate notebook called <code class="docutils literal notranslate"><span class="pre">two-populations-analysis.ipynb</span></code>.</p>
 </div>
 </div>
 </div>

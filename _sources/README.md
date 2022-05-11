@@ -70,3 +70,7 @@ Run `make env` to setup the conda environment and install the required dependenc
 - `clean` clean up the generated figures, tables and _build folders.
 - `all` run all the notebooks
 
+## Notes
+
+- When using `pytest` to test the functions in the package, you need to call `pytest diagnosis` in the root directory. 
+
