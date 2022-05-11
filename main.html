@@ -1984,7 +1984,6 @@
 <h3>Decision Tree<a class="headerlink" href="#decision-tree" title="Permalink to this headline">¶</a></h3>
 <p>The Decision tree algorithm is a supervised learning algorithm that continuously splits data points to form predictions. Every decision tree includes a root node, branches, and leaf nodes. The internal leaf nodes are decision points that describe various test cases whereas the branches represent the outcomes of those decisions. The very bottom nodes in a decision tree give prediction values to the data. A decision tree is an appropriate model for this data as it can be used to solve classification problems such as this one where we are trying to identify whether the cancer is benign or malignant.</p>
 <p>The accuracy of the Decision Tree model is about 0.9381, and its F1 score is about 0.9143. The  confusion matrix, ROC curve, and Precision Recall Curve are below.</p>
-<p>The accuracy of the Decision Tree model is about 0.9381, and its F1 score is about 0.9143. The  confusion matrix, ROC curve, and Precision Recall Curve are below.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">file_list_dt</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;figures/confusion_matrix_dt.png&#39;</span><span class="p">,</span> <span class="s1">&#39;figures/precision_recall_curve_dt.png&#39;</span><span class="p">,</span> <span class="s1">&#39;figures/roc_curve_dt.png&#39;</span><span class="p">]</span>
@@ -1993,7 +1992,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/main_50_0.png" src="_images/main_50_0.png" />
+<img alt="_images/main_49_0.png" src="_images/main_49_0.png" />
 </div>
 </div>
 </div>
@@ -2009,7 +2008,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/main_53_0.png" src="_images/main_53_0.png" />
+<img alt="_images/main_52_0.png" src="_images/main_52_0.png" />
 </div>
 </div>
 </div>
@@ -2101,7 +2100,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/main_58_0.png" src="_images/main_58_0.png" />
+<img alt="_images/main_57_0.png" src="_images/main_57_0.png" />
 </div>
 </div>
 <p>The accuracy of final model is 0.9535, and the F1 score is 0.9412. Overall, we are able to build a prediction model that has high accuracy and balances precision and recall. One notable thing of our model is that it has a relatively higher False Negative Rate than False Positive Rate, which means it is more likely to identifiy a patient who actually has benign breast cancer as having malignant breast cancer. In future studies, we might focus on how to lower the FNR when building the predictive model.</p>
