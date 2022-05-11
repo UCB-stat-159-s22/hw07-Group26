@@ -31,4 +31,4 @@ clean:
 # run all the notebooks
 .PHONY: all
 all:
-	
+	jupyter execute codes/* --kernel_name=hw07
