@@ -966,7 +966,7 @@ Name: texture_se, dtype: float64
 </div>
 </div>
 <p>We are perforrming the below hypothesis tests with an alpha of 0.05.</p>
-<p>We see that the two sample t test for ‘area worst’ is statistically highly significant at alpha = 0.05 with a p-value very close to zero. More so, the non-parametric Wilcoxian rank sum test agrees with the outcome of the parametriic test. This means that we reject the null hypothesis that the two populations have a different area worst mean, which means that doctors may utilize this variable as an indicator of benign vs malignant cancer.</p>
+<p>We see that the two sample t test for ‘area worst’ is statistically highly significant at alpha = 0.05 with a p-value very close to zero. More so, the non-parametric Wilcoxian rank sum test agrees with the outcome of the parametric test. This means that we reject the null hypothesis that the two populations have a different area worst mean, which means that doctors may utilize this variable as an indicator of benign vs malignant cancer.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">area_worst_ht_p</span> <span class="o">=</span> <span class="n">two_sample_t_test</span><span class="p">(</span><span class="n">dat</span><span class="p">,</span> <span class="s2">&quot;diagnosis&quot;</span><span class="p">,</span> <span class="s2">&quot;area_worst&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
