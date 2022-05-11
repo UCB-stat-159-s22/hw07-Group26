@@ -7,5 +7,6 @@ chapters:
 - file: main.ipynb
 - file: codes/prepare.ipynb
 - file: codes/logistic_reg.ipynb
+- file: codes/decision_tree_and_random_forest.ipynb
+- file: codes/final_model_selection.ipynb
 - file: codes/two_populations_analysis.ipynb
-#- file: codes/decision_tree_and_random_forest.ipynb
