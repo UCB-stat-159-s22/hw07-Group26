@@ -5,7 +5,8 @@ format: jb-book
 root: README.md
 chapters:
 - file: main.ipynb
-- file: codes/prepare.ipynb
+- file: codes/data_prepare.ipynb
+- file: codes/data_visual.ipynb
 - file: codes/logistic_reg.ipynb
 - file: codes/decision_tree_and_random_forest.ipynb
 - file: codes/final_model_selection.ipynb
