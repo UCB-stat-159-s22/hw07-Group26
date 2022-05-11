@@ -4,7 +4,7 @@ import numpy as np
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import OneHotEncoder
 
-def clean_data(data, enc_columns=[]):
+def clean_data(data, enc_columns=['diagnosis']):
     """
     Clean the data and one-hot encode the columns/features
     ---
@@ -39,7 +39,7 @@ def clean_data(data, enc_columns=[]):
 
 def load_data(file_path, enc_columns=[], val_size=0.2, test_size=0.15, random_state=159):
     """
-    Read, clean, and split the breast cancer data. Then save the edited datasets.
+    Read, clean, and split the breast cancer data.
     ---
     Arguments:
     file_path (str): the path to the data we want to load
@@ -59,10 +59,5 @@ def load_data(file_path, enc_columns=[], val_size=0.2, test_size=0.15, random_st
     # train-val-test split of the data
     train_val, test = train_test_split(clean, test_size=test_size, random_state=random_state)
     train, val = train_test_split(train_val, test_size=val_size, random_state=random_state)
-    
-    clean.to_csv('../data/clean.csv', index=False)
-    train.to_csv('../data/train.csv', index=False)
-    val.to_csv('../data/val.csv', index=False)
-    test.to_csv('../data/test.csv', index=False)
     
     return train, val, test

@@ -46,4 +46,4 @@ TODO
 
 ## Notes
 
-TODO
+- When using `pytest` to test the functions in the package, you need to call `pytest diagnosis` in the root directory. Otherwise, it will cause `FileNotFoundError` error. 
