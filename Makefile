@@ -26,10 +26,13 @@ html-hub:
 # clean up the generated figures, tables and _build folders.
 .PHONY: clean
 clean:
-	rm -rf figures/* tables/* _build/*
+	rm -rf figures/* tables/* _build/* models/*
+	cd figures && touch .gitkeep   
+	cd tables && touch .gitkeep   
+	cd _build && touch .gitkeep   
+	cd models && touch .gitkeep   
 
 # run all the notebooks
 .PHONY: all
 all:
-	jupyter execute codes/* --kernel_name=hw07
-	jupyter execute main.ipynb --kernel_name=hw07
+	bash -i run_codes.sh
