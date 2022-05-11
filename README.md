@@ -39,7 +39,7 @@ Run `make env` to setup the conda environment and install the required dependenc
   - `pyproj.tml` required to create python package
   - `setup.cfg` required to create python package
   - `LICENSE` info of package
-  - `diagnsis/` contains content of package
+  - `diagnosis/` contains content of package
     - `tests/` tests for created methods
     - `__init__.py` required to create python package
     - `modelmake.py` methods for decision tree modeling

@@ -28,6 +28,7 @@ def decision_tree(X_train, y_train, X_val, seed_value = 10):
     y_pred_val = model.predict(X_val)
     return model, y_pred_train, y_pred_val
 
+
 # function to fit Random Forest model
 def random_forest(X_train, y_train, X_val, max_feature, seed_value = 10):
     """

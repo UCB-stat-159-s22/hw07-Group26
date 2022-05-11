@@ -32,3 +32,4 @@ clean:
 .PHONY: all
 all:
 	jupyter execute codes/* --kernel_name=hw07
+	jupyter execute main.ipynb --kernel_name=hw07
