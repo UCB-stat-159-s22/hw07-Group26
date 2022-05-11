@@ -1,6 +1,11 @@
+LICENSE
+README.md
 setup.cfg
 setup.py
 diagnosis/__init__.py
+diagnosis/main.py
+diagnosis/modelmake.py
+diagnosis/prepare.py
 diagnosis/twosample.py
 diagnosis.egg-info/PKG-INFO
 diagnosis.egg-info/SOURCES.txt
@@ -9,4 +14,6 @@ diagnosis.egg-info/requires.txt
 diagnosis.egg-info/top_level.txt
 diagnosis/tests/__init__.py
 diagnosis/tests/test_logistic_reg.py
+diagnosis/tests/test_modelmake.py
+diagnosis/tests/test_prepare.py
 diagnosis/tests/test_twosample.py
