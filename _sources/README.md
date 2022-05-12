@@ -78,7 +78,7 @@ Run `make env` to setup the conda environment and install the required dependenc
 - `html` build the JupyterBook normally
 - `html-hub` build the JupyterBook so that you can view it on the hub with the URL proxy trick: https://stat159.datahub.berkeley.edu/user-redirect/proxy/8000/index.html
 - `clean` clean up the generated figures, tables, data, and _build folders.
-- `all` run all the notebooks
+- `all` run all the notebooks (`*.ipynb` in `codes/` and `main.ipynb`)
 
 ## Notes
 
