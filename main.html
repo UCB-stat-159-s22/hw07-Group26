@@ -239,6 +239,11 @@
             <nav id="bd-toc-nav" aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#table-of-contents">
+   Table of Contents
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#introduction">
    Introduction
   </a>
@@ -297,17 +302,12 @@
      Random Forest
     </a>
    </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#model-selection-and-final-model-evaluation">
-     Model Selection and Final Model Evaluation
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#final-model">
-     Final Model
-    </a>
-   </li>
   </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#model-selection-and-final-model-evaluation">
+   Model Selection and Final Model Evaluation
+  </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#hypothesis-testing">
@@ -345,6 +345,11 @@
                         <nav aria-label="Page">
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#table-of-contents">
+   Table of Contents
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#introduction">
    Introduction
   </a>
@@ -403,17 +408,12 @@
      Random Forest
     </a>
    </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#model-selection-and-final-model-evaluation">
-     Model Selection and Final Model Evaluation
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#final-model">
-     Final Model
-    </a>
-   </li>
   </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#model-selection-and-final-model-evaluation">
+   Model Selection and Final Model Evaluation
+  </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#hypothesis-testing">
@@ -451,6 +451,30 @@
 </pre></div>
 </div>
 </div>
+</div>
+<div class="section" id="table-of-contents">
+<h2>Table of Contents<a class="headerlink" href="#table-of-contents" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="#Introduction">Introduction</a></p></li>
+<li><p><a class="reference external" href="#Data-Description">Data Description</a></p></li>
+<li><p><a class="reference external" href="#Exploratory-Data-Analysis">Exploratory Data Analysis</a></p>
+<ul>
+<li><p><a class="reference external" href="#Data-Preparation">Data Preparation</a></p></li>
+<li><p><a class="reference external" href="#Data-Visualization">Data Visualization</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference external" href="#Model-Construction">Model Construction</a></p>
+<ul>
+<li><p><a class="reference external" href="#Logistic-Regression">Logistic Regression</a></p></li>
+<li><p><a class="reference external" href="#Decision-Tree">Decision Tree</a></p></li>
+<li><p><a class="reference external" href="#Random-Forest">Random Forest</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference external" href="#Model-Selection-and-Final-Model-Evaluation">Model Selection and Final Model Evaluation</a></p></li>
+<li><p><a class="reference external" href="#Hypothesis-testing">Hypothesis testing</a></p></li>
+<li><p><a class="reference external" href="#Discussion-&amp;-Conclusion">Discussion &amp; Conclusion</a></p></li>
+<li><p><a class="reference external" href="#Author-Contributions">Author Contributions</a></p></li>
+</ul>
 </div>
 <div class="section" id="introduction">
 <h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
@@ -1730,7 +1754,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/main_25_0.png" src="_images/main_25_0.png" />
+<img alt="_images/main_26_0.png" src="_images/main_26_0.png" />
 </div>
 </div>
 <p>The three figures above are some examples. After plotting the distributions of all the features, we found that the majority of the <code class="docutils literal notranslate"><span class="pre">mean</span></code> features are roughly symmetric or normal whereas the majority of the <code class="docutils literal notranslate"><span class="pre">se</span></code> and <code class="docutils literal notranslate"><span class="pre">worst</span></code> features are relatively right-skewed.</p>
@@ -1940,7 +1964,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/main_33_0.png" src="_images/main_33_0.png" />
+<img alt="_images/main_34_0.png" src="_images/main_34_0.png" />
 </div>
 </div>
 <p>We chose the same three features we plotted before. We saw that although <code class="docutils literal notranslate"><span class="pre">belign</span></code> and <code class="docutils literal notranslate"><span class="pre">malignant</span></code> had different distributions in all the plots, it was still hard to judge whether it was due to the randomness since two populations have different size (as showed clearly in <code class="docutils literal notranslate"><span class="pre">smoothness_mean</span></code> feature). Thus, we should conduct some more rigorous statistical hypothesis testing, such as two-sample t-test, to judge this. And this would be shown in a later section.</p>
@@ -1975,7 +1999,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/main_45_0.png" src="_images/main_45_0.png" />
+<img alt="_images/main_46_0.png" src="_images/main_46_0.png" />
 </div>
 </div>
 <p>Evaluation: The classifier seems to performing well with a very few false positive (falsely classifying cancer as malignant) and false negatives (falsely classfying the cancer as benign). In addition, the AUC of the classifier is 0.92, which means that the classifier is getting the correct answer 92% of the time.</p>
@@ -1992,7 +2016,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/main_49_0.png" src="_images/main_49_0.png" />
+<img alt="_images/main_50_0.png" src="_images/main_50_0.png" />
 </div>
 </div>
 </div>
@@ -2008,15 +2032,13 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/main_52_0.png" src="_images/main_52_0.png" />
+<img alt="_images/main_53_0.png" src="_images/main_53_0.png" />
+</div>
 </div>
 </div>
 </div>
 <div class="section" id="model-selection-and-final-model-evaluation">
-<h3>Model Selection and Final Model Evaluation<a class="headerlink" href="#model-selection-and-final-model-evaluation" title="Permalink to this headline">¶</a></h3>
-</div>
-<div class="section" id="final-model">
-<h3>Final Model<a class="headerlink" href="#final-model" title="Permalink to this headline">¶</a></h3>
+<h2>Model Selection and Final Model Evaluation<a class="headerlink" href="#model-selection-and-final-model-evaluation" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_metrics</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_pickle</span><span class="p">(</span><span class="s1">&#39;tables/metrics_df.pkl&#39;</span><span class="p">)</span>
@@ -2104,7 +2126,6 @@
 </div>
 </div>
 <p>The accuracy of final model is 0.9535, and the F1 score is 0.9412. Overall, we are able to build a prediction model that has high accuracy and balances precision and recall. One notable thing of our model is that it has a relatively higher False Negative Rate than False Positive Rate, which means it is more likely to identifiy a patient who actually has benign breast cancer as having malignant breast cancer. In future studies, we might focus on how to lower the FNR when building the predictive model.</p>
-</div>
 </div>
 <div class="section" id="hypothesis-testing">
 <h2>Hypothesis testing<a class="headerlink" href="#hypothesis-testing" title="Permalink to this headline">¶</a></h2>
