@@ -3,6 +3,7 @@
 [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/UCB-stat-159-s22/hw07-Group26/main?labpath=main.ipynb)
 
 Github Pages [here](https://ucb-stat-159-s22.github.io/hw07-Group26/)
+
 Authors: Kshitij (TJ) Chauhan, Neha Haq, Wenhao Pan, Jiaji Wu
 
 ## Introduction
@@ -25,15 +26,19 @@ Run `make env` to setup the conda environment and install the required dependenc
   - `train.csv` is the training dataset 
   - `val.csv` is the validation dataset
   - `test.csv` is the testing dataset
-- `figures/` contains generated figures from running`codes/`
-- `tables/` contains generated tables from runninng `codes/`
-- `codes/` contains codes for data analysis
-  - `prepare.ipynb` prepares the data for later analysis
-  - `EDA.ipynb` conducts EDA
-  - `logistic-reg.ipynb` conducts logistic regression analysis
+- `figures/` contains generated figures from running the notebooks in `codes/`
+- `tables/` contains generated tables from running the notebooks in `codes/`
+- `codes/` contains the jupyter notebooks for data analysis
+  - `data_prepare.ipynb` prepares the data for later analysis
+  - `data_visual.ipynb` conducts EDA
+  - `logistic_reg.ipynb` conducts logistic regression analysis
   - `decision_tree_and_random_forest.ipynb` conducts decision tree and random forest modeling and comparison
   - `final_model_selection.ipynb` chooses final model between LR and RF
   - `two_populations_analysis.ipynb` conducts two sample hypothesis testing
+- `models/` contains different fitted models from running the notebooks in `codes/`
+  - `dt_model.sav` is the fitted decesion tree model
+  - `rf_model.sav` is the fitted random forest model
+  - `lg_model.sav` is the fitted logistic regression model
 - `diagnosis/` contains required files for package creation purposes.
   - `README.md` info of package
   - `setup.py` required to create python package
@@ -47,14 +52,16 @@ Run `make env` to setup the conda environment and install the required dependenc
     - `twosample.py` methods for hypothesis testing
 - `_config.yml` required for JupyterBook
 - `conf.py` required for JupyterBook
-- `_toc.yml` TOC for JupyterBook
+- `_toc.yml` is the table of contents for JupyterBook
 - `book-requirements.txt` packages for the book build in Github Actions
 - `environment.yml` hw07 conda environment installation
-- `envsetup.sh` utilized by make env
-- `envupdate.sh` utilized by make update
-- `envremove.sh` utilized by make remove
+- `envsetup.sh` utilized by `make env`
+- `envupdate.sh` utilized by `make update`
+- `envremove.sh` utilized by `make remove`
+- `run_codes.sh` utilized by `make all`
 - `html_hub.sh` build JupyterBook to view it on the hub with the URL proxy trick 
 - `Makefile` make commands for easy execution
+- `LICENSE` contains the license used by the repo
 - `README.md` current document
 - `requirements.txt` command to install diagnosis python package
 - `main.ipynb` summarizes and discusses the findings and outcomes of our analysis
@@ -68,11 +75,10 @@ Run `make env` to setup the conda environment and install the required dependenc
 - `update-env` update the environment
 - `html` build the JupyterBook normally
 - `html-hub` build the JupyterBook so that you can view it on the hub with the URL proxy trick: https://stat159.datahub.berkeley.edu/user-redirect/proxy/8000/index.html
-
-- `clean` clean up the generated figures, tables and _build folders.
+- `clean` clean up the generated figures, tables, data, and _build folders.
 - `all` run all the notebooks
 
 ## Notes
 
-- When using `pytest` to test the functions in the package, you need to call `pytest diagnosis` in the root directory. 
+- When using `pytest` to test the functions in the package, you need to call `pytest diagnosis` in the root directory, i.e., in `hw07-Group26`, run `pytest diagnosis` in the terminal. Also, since our testing functions use some generated data, make sure running `make all` to generated all neccessary files before testing.
 

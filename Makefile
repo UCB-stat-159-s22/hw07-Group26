@@ -28,9 +28,9 @@ html-hub:
 clean:
 	rm -rf figures/* tables/* _build/* models/*
 	cd figures && touch .gitkeep   
-	cd tables && touch .gitkeep   
-	cd _build && touch .gitkeep   
+	cd tables && touch .gitkeep
 	cd models && touch .gitkeep   
+	cd data && rm clean.csv && rm train.csv && rm val.csv && rm test.csv     
 
 # run all the notebooks
 .PHONY: all
