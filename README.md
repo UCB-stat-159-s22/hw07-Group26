@@ -30,10 +30,10 @@ Run `make env` to setup the conda environment and install the required dependenc
 - `tables/` contains generated tables from running the notebooks in `codes/`
 - `codes/` contains the jupyter notebooks for data analysis
   - `data_prepare.ipynb` prepares the data for later analysis
-  - `data_visual.ipynb` conducts EDA
+  - `data_visual.ipynb` conducts data visualization
   - `logistic_reg.ipynb` conducts logistic regression analysis
   - `decision_tree_and_random_forest.ipynb` conducts decision tree and random forest modeling and comparison
-  - `final_model_selection.ipynb` chooses final model between LR and RF
+  - `final_model_selection.ipynb` chooses the final model between logistic regression, decision tree, and random forest
   - `two_populations_analysis.ipynb` conducts two sample hypothesis testing
 - `models/` contains different fitted models from running the notebooks in `codes/`
   - `dt_model.sav` is the fitted decesion tree model
@@ -48,7 +48,7 @@ Run `make env` to setup the conda environment and install the required dependenc
   - `diagnosis/` contains content of package
     - `tests/` tests for created methods
     - `__init__.py` required to create python package
-    - `modelmake.py` methods for decision tree modeling
+    - `modelmake.py` methods for classification modeling
     - `twosample.py` methods for hypothesis testing
     - `main.py` methods for plotting figures
     - `prepare.py` methods for preparing the datad
@@ -65,7 +65,7 @@ Run `make env` to setup the conda environment and install the required dependenc
 - `Makefile` make commands for easy execution
 - `LICENSE` contains the license used by the repo
 - `README.md` current document
-- `requirements.txt` command to install diagnosis python package
+- `requirements.txt` contains the names of the packages installed through pypi
 - `main.ipynb` summarizes and discusses the findings and outcomes of our analysis
 - `hw07-description.ipynb` Stat 159 HW7 assignment desctiption
 
