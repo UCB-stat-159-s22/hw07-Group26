@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>A Study of a Breast Cancer Dataset &#8212; My STAT 159 Homework 7 Book</title>
+    <title>A Study of a Breast Cancer Dataset &#8212; Breast Cancer Data Study</title>
     
   <link href="_static/css/theme.css" rel="stylesheet">
   <link href="_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
@@ -80,7 +80,7 @@
       <img src="_static/logo.png" class="logo" alt="logo">
       
       
-      <h1 class="site-logo" id="site-title">My STAT 159 Homework 7 Book</h1>
+      <h1 class="site-logo" id="site-title">Breast Cancer Data Study</h1>
       
     </a>
 </div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
@@ -300,8 +300,8 @@
   <div class="tex2jax_ignore mathjax_ignore section" id="a-study-of-a-breast-cancer-dataset">
 <h1>A Study of a Breast Cancer Dataset<a class="headerlink" href="#a-study-of-a-breast-cancer-dataset" title="Permalink to this headline">¶</a></h1>
 <p><a class="reference external" href="https://mybinder.org/v2/gh/UCB-stat-159-s22/hw07-Group26/main?labpath=main.ipynb"><img alt="Binder" src="https://mybinder.org/badge_logo.svg" /></a></p>
-<p>Github Pages <a class="reference external" href="https://ucb-stat-159-s22.github.io/hw07-Group26/">here</a>
-Authors: Kshitij (TJ) Chauhan, Neha Haq, Wenhao Pan, Jiaji Wu</p>
+<p>Github Pages <a class="reference external" href="https://ucb-stat-159-s22.github.io/hw07-Group26/">here</a></p>
+<p>Authors: Kshitij (TJ) Chauhan, Neha Haq, Wenhao Pan, Jiaji Wu</p>
 <div class="section" id="introduction">
 <h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
 <p>This repository includes a study of a breast bancer dataset that is downloaded from <a class="reference external" href="https://www.kaggle.com/datasets/uciml/breast-cancer-wisconsin-data">Kaggle</a></p>
@@ -324,16 +324,23 @@ Authors: Kshitij (TJ) Chauhan, Neha Haq, Wenhao Pan, Jiaji Wu</p>
 <li><p><code class="docutils literal notranslate"><span class="pre">test.csv</span></code> is the testing dataset</p></li>
 </ul>
 </li>
-<li><p><code class="docutils literal notranslate"><span class="pre">figures/</span></code> contains generated figures from running<code class="docutils literal notranslate"><span class="pre">codes/</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">tables/</span></code> contains generated tables from runninng <code class="docutils literal notranslate"><span class="pre">codes/</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">codes/</span></code> contains codes for data analysis</p>
+<li><p><code class="docutils literal notranslate"><span class="pre">figures/</span></code> contains generated figures from running the notebooks in <code class="docutils literal notranslate"><span class="pre">codes/</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">tables/</span></code> contains generated tables from running the notebooks in <code class="docutils literal notranslate"><span class="pre">codes/</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">codes/</span></code> contains the jupyter notebooks for data analysis</p>
 <ul>
-<li><p><code class="docutils literal notranslate"><span class="pre">prepare.ipynb</span></code> prepares the data for later analysis</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">EDA.ipynb</span></code> conducts EDA</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">logistic-reg.ipynb</span></code> conducts logistic regression analysis</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">data_prepare.ipynb</span></code> prepares the data for later analysis</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">data_visual.ipynb</span></code> conducts EDA</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">logistic_reg.ipynb</span></code> conducts logistic regression analysis</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">decision_tree_and_random_forest.ipynb</span></code> conducts decision tree and random forest modeling and comparison</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">final_model_selection.ipynb</span></code> chooses final model between LR and RF</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">two_populations_analysis.ipynb</span></code> conducts two sample hypothesis testing</p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">models/</span></code> contains different fitted models from running the notebooks in <code class="docutils literal notranslate"><span class="pre">codes/</span></code></p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">dt_model.sav</span></code> is the fitted decesion tree model</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">rf_model.sav</span></code> is the fitted random forest model</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">lg_model.sav</span></code> is the fitted logistic regression model</p></li>
 </ul>
 </li>
 <li><p><code class="docutils literal notranslate"><span class="pre">diagnosis/</span></code> contains required files for package creation purposes.</p>
@@ -355,14 +362,16 @@ Authors: Kshitij (TJ) Chauhan, Neha Haq, Wenhao Pan, Jiaji Wu</p>
 </li>
 <li><p><code class="docutils literal notranslate"><span class="pre">_config.yml</span></code> required for JupyterBook</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">conf.py</span></code> required for JupyterBook</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">_toc.yml</span></code> TOC for JupyterBook</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">_toc.yml</span></code> is the table of contents for JupyterBook</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">book-requirements.txt</span></code> packages for the book build in Github Actions</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">environment.yml</span></code> hw07 conda environment installation</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">envsetup.sh</span></code> utilized by make env</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">envupdate.sh</span></code> utilized by make update</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">envremove.sh</span></code> utilized by make remove</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">envsetup.sh</span></code> utilized by <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">env</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">envupdate.sh</span></code> utilized by <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">update</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">envremove.sh</span></code> utilized by <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">remove</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">run_codes.sh</span></code> utilized by <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">all</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">html_hub.sh</span></code> build JupyterBook to view it on the hub with the URL proxy trick</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">Makefile</span></code> make commands for easy execution</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">LICENSE</span></code> contains the license used by the repo</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">README.md</span></code> current document</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">requirements.txt</span></code> command to install diagnosis python package</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">main.ipynb</span></code> summarizes and discusses the findings and outcomes of our analysis</p></li>
@@ -378,14 +387,14 @@ Authors: Kshitij (TJ) Chauhan, Neha Haq, Wenhao Pan, Jiaji Wu</p>
 <li><p><code class="docutils literal notranslate"><span class="pre">update-env</span></code> update the environment</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">html</span></code> build the JupyterBook normally</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">html-hub</span></code> build the JupyterBook so that you can view it on the hub with the URL proxy trick: <a class="reference external" href="https://stat159.datahub.berkeley.edu/user-redirect/proxy/8000/index.html">https://stat159.datahub.berkeley.edu/user-redirect/proxy/8000/index.html</a></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">clean</span></code> clean up the generated figures, tables and _build folders.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">clean</span></code> clean up the generated figures, tables, data, and _build folders.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">all</span></code> run all the notebooks</p></li>
 </ul>
 </div>
 <div class="section" id="notes">
 <h2>Notes<a class="headerlink" href="#notes" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li><p>When using <code class="docutils literal notranslate"><span class="pre">pytest</span></code> to test the functions in the package, you need to call <code class="docutils literal notranslate"><span class="pre">pytest</span> <span class="pre">diagnosis</span></code> in the root directory.</p></li>
+<li><p>When using <code class="docutils literal notranslate"><span class="pre">pytest</span></code> to test the functions in the package, you need to call <code class="docutils literal notranslate"><span class="pre">pytest</span> <span class="pre">diagnosis</span></code> in the root directory, i.e., in <code class="docutils literal notranslate"><span class="pre">hw07-Group26</span></code>, run <code class="docutils literal notranslate"><span class="pre">pytest</span> <span class="pre">diagnosis</span></code> in the terminal. Also, since our testing functions use some generated data, make sure running <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">all</span></code> to generated all neccessary files before testing.</p></li>
 </ul>
 </div>
 <div class="toctree-wrapper compound">
