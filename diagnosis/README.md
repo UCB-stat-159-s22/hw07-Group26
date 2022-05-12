@@ -14,7 +14,9 @@ We have created tests to properly test the functionality of our methods. Please 
 - `setup.cfg` required to create python package
 - `LICENSE` info of package
 - `diagnosis/` contains content of package
-   - `tests/` tests for created methods
-   - `__init__.py` required to create python package
-   - `modelmake.py` methods for decision tree modeling
-   - `twosample.py` methods for hypothesis testing
+  - `tests/` tests for created methods
+  - `__init__.py` required to create python package
+  - `modelmake.py` methods for decision tree modeling
+  - `twosample.py` methods for hypothesis testing
+  - `main.py` methods for plotting figures
+  - `prepare.py` methods for preparing the datad
