@@ -82,5 +82,5 @@ Run `make env` to setup the conda environment and install the required dependenc
 
 ## Notes
 
-- When using `pytest` to test the functions in the package, you need to call `pytest diagnosis` in the root directory, i.e., in `hw07-Group26`, run `pytest diagnosis` in the terminal. Also, since our testing functions use some generated data, make sure running `make all` to generated all neccessary files before testing.
+- When using `pytest` to test the functions in the package, we need to call `pytest diagnosis` in the root directory, i.e., in `hw07-Group26`, run `pytest diagnosis` in the terminal. Also, since our testing functions use some generated data, make sure running `make all` to generated all neccessary files before testing.
 
