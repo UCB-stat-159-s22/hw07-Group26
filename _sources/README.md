@@ -50,6 +50,8 @@ Run `make env` to setup the conda environment and install the required dependenc
     - `__init__.py` required to create python package
     - `modelmake.py` methods for decision tree modeling
     - `twosample.py` methods for hypothesis testing
+    - `main.py` methods for plotting figures
+    - `prepare.py` methods for preparing the datad
 - `_config.yml` required for JupyterBook
 - `conf.py` required for JupyterBook
 - `_toc.yml` is the table of contents for JupyterBook
